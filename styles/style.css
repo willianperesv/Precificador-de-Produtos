@@ -4,18 +4,34 @@ body, html {
 body {
   padding: 0;
   margin: 0;
-   background-color: rgba(102, 105, 104, 0.9);
-   background-image: radial-gradient(farthest-side ellipse at 10% 0,rgba(41, 117, 145, 0.89), rgba(102, 105, 104, 0.9), rgba(160, 174, 150, 0.9));
+  background:linear-gradient(135deg, #172a74, #21a9af);
    height: 100%; 
-   width: 100%;
+   width: 100vw;
    background-size: cover cover;
+  
 
 }
 
+.btn-ajuste{
+  max-height: 2.2rem;
+}
+
+.rs-input{
+  border-radius: 6px 0 0 6px!important;
+}
+
+.calcula-lista {
+ 
+  display:flex;
+  justify-content:baseline;
+  align-items: end;
+  padding-right: 0 !important;
+  margin-bottom:0.1rem;
+  
+}
+
 .header-blue {
-  background:linear-gradient(135deg, #172a74, #21a9af);
-  background-color:#184e8e;
-  padding-bottom:80px;
+
   font-family:'Source Sans Pro', sans-serif;
 }
 
@@ -253,10 +269,31 @@ body {
   float:left;
 }
 
+.boardInsumos{
+
+  margin-top: 1rem !important; 
+  padding: 0.8rem;
+  margin-left: 0.05rem !important;
+  margin-right: 0.05rem !important;
+  border-radius: 10px; 
+  background-color: rgba(147, 149, 150, 0.164); 
+  
+}
+
+.accordion-lista-insumos{
+  background-color: #e1e3ebe3 !important;
+}
+
+
+
+.produtos-calculados-container{
+  background-color: rgba(147, 149, 150, 0.164); 
+}
+
 .radius-left{
-   border-top-left-radius:8px ;
+   border-top-left-radius:6px ;
 }
 
 .radius-right{
-  border-top-right-radius:8px ;
+  border-top-right-radius:6px ;
 }

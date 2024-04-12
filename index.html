@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cálculadora de Preços</title>
+    <title>Calculadora de Preços</title>
     <link rel="stylesheet" href="styles/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-xrRi+3oJ4zDZqIrc5nvpz6D+2q+jFfDZPnU5Zw3h+9tPUi+yjLcUVbUjaIFCkw7I3ONOpY0L2BRcNSpd7pMIJ2g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-xrRi+3oJ4zDZqIrc5nvpz6D+2q+jFfDZPnU5Zw3h+9tPUi+yjLcUVbUjaIFCkw7I3ONOpY0L2BRcNSpd7pMIJ2g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/1a49e8198f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mask.js"></script>
     <script src="https://cdn.rawgit.com/plentz/jquery-maskmoney/master/dist/jquery.maskMoney.min.js"></script>
-   
- 
+
+
     <!-----------------------------------------Arquivos------------------------------------------------------------>
 
     <script src="scripts/MetodosGerais.js"></script>
     <script src="scripts/AdicionaInsumo.js"></script>
     <script src="scripts/CalculaLista.js"></script>
 </head>
+
 <body>
     <div class="header-blue">
         <nav class="navbar navbar-dark navbar-expand-md navigation-clean-search">
@@ -30,160 +35,237 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navcol-1" style="margin-left:650px;">
-                    <span class="navbar-text"> 
+                    <span class="navbar-text">
                         <a href="#" class="login">Entrar</a>
                     </span>
                     <a class="btn btn-light action-button" role="button" href="#">Cadastrar</a>
                 </div>
             </div>
         </nav>
+    </div>
         <div class="container mt-2">
             <div class="row justify-content-center">
-                
-                <div class="col-md-3" style="padding-left: 0px;">
-                   
-                    <form id="formAdicionaInsumo"style="margin-top: 3px; border-radius: 10px; background-color: rgba(255, 255, 255, 0.8); padding: 20px;">
-                        <h2 class="">Adição de Insumo</h2>
-                        <div class="form-group" style="margin-top:8px">
-                            <label class="form-label" for="inpNomeInsumo">Nome</label>
-                            <input id="inpNomeInsumo" type="text" class="form-control" name="nomeInsumo" placeholder="Insira o nome...">
-                        </div>
-                        <div class="form-group" style="margin-top: 8px">
-                            <label class="form-label" for="slctTipoMedidaInsumo">Tipo de Medida</label>
-                            <select  class="form-control" id="slctTipoMedidaInsumo" name="tipoMedida">
-                                <option value="" disabled selected hidden>Selecione a medida...</option>
-                                <option value="Unidade">Unidade</option>
-                                <option value="kg">Quilograma (kg)</option>
-                                <option value="m">Metro (m)</option>
-                                <option value="litros">Litros</option>
-                            </select>
-                        </div>
-                        <div class="form-group" style="margin-top:8px">
-                            <label class="form-label" for="inpQuantidadeEmbalagem">Quantidade Embalagem</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" id="inpQuantidadeEmbalagem" name="quantidadeEmbalagem" placeholder="Insira a quantidade...">
-                            </div>
-                        </div>
-                        <div class="form-group" style="margin-top:8px">
-                            <label class="form-label" for="inpMinimoProducao">Mínimo Para Produção</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" id="inpMinimoProducao" name="minimoProducao" placeholder="Insira o mínimo para produção...">
-                            </div>
-                        </div>
-                        <div class="form-group" style="margin-top:8px">
-                            <label class="form-label" for="inpValorInsumo">Valor</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">R$</span>
+                <div class="col-md-12 form-group" style="padding-left: 0px;">
+                    <form id="formAdicionaInsumo"
+                        style="margin-top: 3px; border-radius: 10px; background-color: rgba(255, 255, 255, 0.8); padding: 20px;">
+
+                        <div class="container-insumos boardInsumos">
+                            <h4 class="">Adicione os insumos</h4>
+
+                            <div class="row ">
+                                <div class="form-group col-md-8" style="margin-top:8px">
+                                    <label class="form-label" for="inpNomeInsumo">Nome</label>
+                                    <input id="inpNomeInsumo" type="text" class="form-control" name="nomeInsumo"
+                                        placeholder="Insira o nome...">
                                 </div>
-                                <input type="number" class="form-control" id="inpValorInsumo" name="valorInsumo" placeholder="Insira o valor...">
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-2" style="margin-top: 8px">
+                                    <label class="form-label" for="slctTipoMedidaInsumo">Tipo de Medida</label>
+                                    <select class="form-control" id="slctTipoMedidaInsumo" name="tipoMedida">
+                                        <option value="" disabled selected hidden>Selecione a medida...</option>
+                                        <option value="Unidade">Unidade</option>
+                                        <option value="kg">Quilograma (kg)</option>
+                                        <option value="m">Metro (m)</option>
+                                        <option value="litros">Litros</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2" style="margin-top:8px">
+                                    <label class="form-label" for="inpQuantidadeEmbalagem">Quantidade Embalagem</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="inpQuantidadeEmbalagem"
+                                            name="quantidadeEmbalagem" placeholder="Insira a quantidade...">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2" style="margin-top:8px">
+                                    <label class="form-label" for="inpMinimoProducao">Mínimo Para Produção</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="inpMinimoProducao"
+                                            name="minimoProducao" placeholder="Insira o mínimo para produção...">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2" style="margin-top:8px">
+                                    <label class="form-label" for="inpValorInsumo">Valor</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend ">
+                                            <span class="input-group-text rs-input">R$</span>
+                                        </div>
+                                        <input type="number" class="form-control" id="inpValorInsumo" name="valorInsumo"
+                                            placeholder="Insira o valor...">
+                                    </div>
+                                </div>
+                                <div class="col-md-2  calcula-lista">
+                                    <button type="button" class="btn btn-primary btn-ajuste"
+                                        onclick="AdicionaInsumo()">Adicionar
+                                        Insumo <i class="fas fa-arrow-right"></i></button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="accordion mt-4 aco-header " id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item ">
+                                <h2 class="accordion-header " id="panelsStayOpen-headingOne">
+                                    <button class="accordion-button  " type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                        aria-controls="panelsStayOpen-collapseOne">
+                                        <strong>Lista de Insumos (<span id="totListaInsumo"></span>)</strong>
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseOne"
+                                    class="accordion-collapse collapse show accordion-lista-insumos "
+                                    aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="accordion-body ">
+                                        <div class="row boardInsumos">
+                                            <div class="form-group col-md-12">
+                                                <div class="col-md-12 d-flex justify-content-between mt-1 mb-2">
+                                                    <h5 class="">Insumos Adicionados</h5>
+                                                    <button id="ExcluiListaInsumo" type="button" class="btn btn-danger "
+                                                        style="margin-bottom: 5px">Excluir Lista <i
+                                                            class="fas fa-trash-alt"></i></button>
+                                                </div>
+
+                                                <table id="hdListaInsumos"
+                                                    class="table mt-3 table-striped-columns tableInsumos">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="radius-left" style="width:170px;">Nome</th>
+                                                            <th style="width:20px;">Tipo Medida</th>
+                                                            <th style="width:90px;">Qtd. Embalagem</th>
+                                                            <th style="width:130px;">Mínimo Para Produção</th>
+                                                            <th style="width:20px;">Valor</th>
+                                                            <th class="radius-right" style="width:30px;"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tbListaInsumos">
+                                                    </tbody>
+                                                </table>
+
+                                                <div class="row mt-3" style="padding-right: 16px;">
+                                                    <div class="col-md-6">
+                                                        <label for="NomeProduto" class="form-label">Nome do
+                                                            Produto</label>
+                                                        <input type="text" class="form-control" id="NomeProduto"
+                                                            placeholder="Insira o nome do seu produto aqui...">
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label for="inpMargemImposto" class="form-label">Margem de
+                                                            Impostos</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">%</span>
+                                                            <input id="inpMargemImposto" type="number"
+                                                                class="form-control" placeholder="Impostos...">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label for="inpMargemLucro" class="form-label">Margem de
+                                                            Lucro</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text">%</span>
+                                                            <input id="inpMargemLucro" type="number"
+                                                                class="form-control" placeholder="Lucro...">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 d-flex justify-content-end calcula-lista">
+                                                        <button type="button" class="btn btn-primary btn-ajuste"
+                                                            onclick="CalculaCustoComposto()">Precificar
+                                                            Produto <i class="fas fa-calculator mr-3"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-12 mt-4 d-flex justify-content-end"> 
-                            <button type="button" class="btn btn-primary" onclick="AdicionaInsumo()">Adicionar Insumo <i class="fas fa-arrow-right"></i></button>
+
+                        <div class="accordion mt-4 aco-header " id="accordionListaInsumos">
+                            <div class="accordion-item ">
+                                <h2 class="accordion-header " id="panelsStayOpen-headingOne">
+                                    <button class="accordion-button  " type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                        aria-controls="panelsStayOpen-collapseOne">
+                                        <strong>Lista de Insumos (<span id="totListaInsumo"></span>)</strong>
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseOne"
+                                    class="accordion-collapse collapse show accordion-lista-insumos "
+                                    aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="accordion-body ">
+                                        <div class="container mt-1  ">
+                                            <div class=" row justify-content-center ">
+                                                <div class="container mt-4 vitrificado produtos-calculados-container p-3"
+                                                    style="margin-top: 3px; border-radius: 10px;">
+
+                                                    <div class="row mt-3">
+                                                        <div class="col-md-6">
+                                                            <h4 class="">Produtos Calculados</h4>
+                                                        </div>
+
+                                                        </row>
+                                                        <div class="row mt-3">
+                                                            <div class="col-md-12" style="padding-right: 0px;">
+                                                                <table id="tabListaValoresProduto"
+                                                                    class="table table-striped-columns">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th class="radius-left" scope="col"
+                                                                                style="width:200px;">
+                                                                                Produto</th>
+                                                                            <th scope="col" style="width:50px;">Valor de
+                                                                                Produção</th>
+                                                                            <th scope="col" style="width:50px;">Valor C/
+                                                                                Impostos</th>
+                                                                            <th scope="col" style="width:50px;">Valor C/
+                                                                                Lucro</th>
+                                                                            <th scope="col" style="width:50px;">Valor
+                                                                                Sugerido</th>
+                                                                            <th class="radius-right" scope="col"
+                                                                                class="text-center" style="width:50px;">
+                                                                            </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="tbListaProdutos">
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+
+
                     </form>
                 </div>
-                <div class="col-md-12" style="width: 963.9px; height: 530.891px; margin-top: 3px; border-radius: 10px; background-color: rgba(255, 255, 255, 0.8); padding: 20px;">
-                    <div class="col-md-12 d-flex mt-1 mb-2">
-                        <h2 class="">Insumos Adicionados</h2>
-                        <button id="ExcluiListaInsumo" type="button" class="btn btn-primary ms-auto" style="margin-bottom: 5px">Excluir Lista <i class="fas fa-trash-alt"></i></button>
-                    </div>
-                    <table id="hdListaInsumos" class="table table-striped-columns tableInsumos" >
-                        <thead >
-                            <tr>
-                                <th class="radius-left" style="width:170px;">Nome</th>
-                                <th style="width:20px;">Tipo Medida</th>
-                                <th style="width:90px;">Qtd. Embalagem</th>
-                                <th style="width:130px;">Mínimo Para Produção</th>
-                                <th style="width:20px;">Valor</th>
-                                <th class="radius-right" style="width:30px;"></th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbListaInsumos">
-                        </tbody>
-                    </table>
-                </div>
             </div>
-            <div class="container mt-1 ">
-                <div class=" row justify-content-center " >
-                    <div class="container mt-4 vitrificado" style="margin-top: 3px; border-radius: 10px; background-color: rgba(255, 255, 255, 0.8); padding: 20px;">
-                        <div class="row ">
-                            <div class="col-md-12 ">
-                                <h2>Calcular Lista de Insumos</h2>
-                            </div>
-                        </div>
-                        <div class="row mt-3" style="padding-right: 16px;">
-                            <div class="col-md-8">
-                                <label for="NomeProduto" class="form-label">Nome do Produto</label>
-                                <input type="text" class="form-control" id="NomeProduto"  placeholder="Insira o nome do seu produto aqui...">
-                            </div>
-                            <div class="col-md-2">
-                                <label for="inpMargemImposto" class="form-label" >Margem de Impostos</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">%</span>
-                                    <input id="inpMargemImposto"type="number" class="form-control" placeholder="Impostos..."> 
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <label for="inpMargemLucro" class="form-label" >Margem de Lucro</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">%</span>
-                                    <input id="inpMargemLucro" type="number" class="form-control" placeholder="Lucro...">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                        <div class="col-md-6">
-                            <h4 class="">Produtos Calculados</h4>
-                        </div>
-                        <div class="col-md-6 mt-1 d-flex justify-content-end" style="padding-right: 27px;"> 
-                            <button type="button" class="btn btn-primary" onclick="CalculaCustoComposto()">Calcular Lista <i class="fas fa-calculator mr-3"></i></button>
-                        </div>
-                        </row>
-                        <div class="row mt-3">
-                            <div class="col-md-12" style="padding-right: 0px;">
-                                <table id="tabListaValoresProduto"class="table table-striped-columns">
-                                    <thead>
-                                        <tr>
-                                            <th class="radius-left" scope="col" style="width:200px;">Produto</th>
-                                            <th scope="col" style="width:50px;">Valor de Produção</th>
-                                            <th scope="col" style="width:50px;">Valor C/ Impostos</th>
-                                            <th scope="col" style="width:50px;">Valor C/ Lucro</th>
-                                            <th scope="col" style="width:50px;">Valor Sugerido</th>
-                                            <th class="radius-right" scope="col" class="text-center"style="width:50px;"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbListaProdutos">
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-</div>
-<footer class="footer fixed-bottom text-center py-3">
-    Desenvolvido por Willian Vieira Peres, RU: 3730987, Análise e Desenvolvimento de Sistemas - Uninter 2023.
-</footer>
- 
+        </div>
+        <!-- <footer class="footer fixed-bottom text-center py-3">
+            Desenvolvido por Willian Vieira Peres, RU: 3730987, Análise e Desenvolvimento de Sistemas - Uninter 2023.
+        </footer> -->
+    
 </body>
 <script>
 
-     //======================Eventos===============================//
+    //======================Eventos===============================//
 
-$(function() {
-    $(document).on('click', '.btn-remover', RemoverLinha);
-});
-$(document).ready(function() {
-    $('#maskValorInsumo').maskMoney();
-});
-document.addEventListener('DOMContentLoaded', FormatarCampoMonetario);
-     
+    $(function () {
+        $(document).on('click', '.btn-remover', RemoverLinha);
+    });
+    $(document).ready(function () {
+        $('#maskValorInsumo').maskMoney();
+    });
+    document.addEventListener('DOMContentLoaded', FormatarCampoMonetario);
+
 
 </script>
 </div>
 </body>
+
 </html>

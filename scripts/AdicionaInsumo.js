@@ -9,7 +9,7 @@ function MontaDadosInsumo(){
     dadosInsumo = {
         NomeInsumo: document.getElementById('inpNomeInsumo').value,
         TipoMedidaInsumo: document.getElementById('slctTipoMedidaInsumo').value,
-        QuantidadeEmbalagem: parseFloat(document.getElementById('inpQuantidadeEmbalagem').value),
+        QuantidadeEmbalagem: parseFloat($('#inpQuantidadeEmbalagem').value),
         MinimoProducao: parseFloat(document.getElementById('inpMinimoProducao').value),
         ValorInsumo: parseFloat(document.getElementById('inpValorInsumo').value)        
     }
