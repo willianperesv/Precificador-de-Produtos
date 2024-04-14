@@ -1,12 +1,21 @@
-body, html {
-  margin: 0;
+*{
   padding: 0;
+  margin:0;
+}
+
+html {
   height: 100%;
 }
 
 body {
   background-image: url('../styles/background.jpg');
+  background-repeat:repeat;
+  background-size: 100% 100%;
+  background-position: center;
   font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 header {
@@ -16,6 +25,8 @@ header {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   text-align: start;
   background-color: rgba(43, 88, 73, 0.158);
+  padding:1rem;
+  width:100%
  
 }
 
@@ -30,8 +41,8 @@ main{
   justify-content: center;
   align-items: center;
   width: 70rem;
-  margin: auto;
-  margin-top: 1rem;
+  max-width: 90%;
+ 
 }
 
 form{
@@ -39,12 +50,14 @@ form{
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 70rem;
-  margin:auto;
+  width:65rem;
+  max-width: 95%;
+
 }
 
 
 .btn-ajuste{
+  margin-top: 1rem;
   max-height: 2.2rem;
 }
 
@@ -63,13 +76,6 @@ form{
 }
 
 
-.vidro {
-  background-color: rgba(255, 255, 255, 0.178); /* Cor do vidro com transparência */
-  backdrop-filter: blur(100px); /* Desfoque aplicado ao fundo */
-  border: 1px solid rgba(255, 255, 255, 0.144); /* Borda com transparência para destacar o efeito de vidro */
-  padding: 10px;
-}
-
 .footer {
   background-color: #f8f9fa71; /* Cor de fundo do footer */
   color: #0b0c0c; /* Cor do texto do footer */
@@ -83,10 +89,10 @@ form{
   float:left;
 }
 
-.boardInsumos{
+.containerDefault{
 
   margin-top: 1rem !important; 
-  padding: 0.8rem;
+  padding:1rem 2rem;
   margin-left: 0.05rem !important;
   margin-right: 0.05rem !important;
   border-radius: 10px; 
@@ -94,14 +100,11 @@ form{
   
 }
 
-.accordion-lista-insumos{
-  background-color: #e1e3eb59 !important;
-}
 
+.btn-container{
+  display:flex;
+  justify-content: space-between;
 
-
-.produtos-calculados-container{
-  background-color: rgba(147, 149, 150, 0.164); 
 }
 
 .radius-left{
@@ -111,3 +114,5 @@ form{
 .radius-right{
   border-top-right-radius:6px ;
 }
+
+

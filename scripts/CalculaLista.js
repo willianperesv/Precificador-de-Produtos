@@ -5,6 +5,7 @@ function CalculaCustoComposto() {
     var valorMargemImposto= parseFloat($('#inpMargemImposto').val())
     var custoTotal = null;
     var custoCalculado = null;
+   
 
     linhas.forEach(function (linha) {
         var qtdEmbalagem = parseFloat(linha.cells[2].textContent.trim().replace(",", "."));

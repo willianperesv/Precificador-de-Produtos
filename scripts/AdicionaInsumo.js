@@ -1,4 +1,17 @@
+var TotalInsumosAdicionados = 0;
+
+function ComporValor(){
+    $('#btnComporValor').removeClass('btn-primary')
+    $('#btnComporValor').css('color', 'white')
+    $('#btnComporValor').addClass('btn-warning')
+}
+
 function AdicionaInsumo(){
+    if(TotalInsumosAdicionados == 0){
+        console.log('passou')
+        $("#btnAdicionarInsumo").removeAttr('data-bs-toggle');
+        TotalInsumosAdicionados++
+    }
     AdicionaInsumoLista(MontaDadosInsumo());
     LimpaCamposAdicionaInsumo();
 }
