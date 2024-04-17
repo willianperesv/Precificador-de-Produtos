@@ -21,7 +21,7 @@
 
 
     <!-----------------------------------------Arquivos------------------------------------------------------------>
-
+    <script src="scripts/CriadorDeProduto.js"></script>
     <script src="scripts/MetodosGerais.js"></script>
     <script src="scripts/AdicionaInsumo.js"></script>
     <script src="scripts/CalculaLista.js"></script>
@@ -34,57 +34,78 @@
         <h1>Precificador de Produtos</h1>
     </header>
 
-    <main>
-        <form id="formAdicionaInsumo"
-            style="margin-top: 3px; border-radius: 10px; background-color: rgba(255, 255, 255, 0.856); padding: 1.5rem;">
-            <div class="container-insumos containerDefault col-md-12">
-                <div class="row">
-                    <h4>Insira nome e margens ao seu produto</h4>
+    <main >
+        <form class="formPrincipal scrollable" id="formAdicionaInsumo">
+            <div class="container-criador-de-produto col-md-12" >
+                <div class="row "id="divCriadorDeProdutos">
+                    <h4>Crie Seu Produto</h4>
                     <div class="form-group col-lg-12">
-                        <label for="NomeProduto" class="form-label">Nome do
+                        <label for="inputProdutoNome" class="form-label">Nome do
                             Produto</label>
-                        <input type="text" class="form-control" id="NomeProduto"
+                        <input type="text" class="form-control" id="inputProdutoNome"
                             placeholder="Insira o nome do seu produto aqui...">
                     </div>
                     <div class="form-group col-md-6 col-lg-3 mt-2">
-                        <label for="inpMargemImposto" class="form-label">Margem de
+                        <label for="inputProdutoMargemImposto" class="form-label">Margem de
                             Impostos</label>
                         <div class="input-group">
                             <span class="input-group-text">%</span>
-                            <input id="inpMargemImposto" type="number" class="form-control" placeholder="Impostos...">
+                            <input id="inputProdutoMargemImposto" type="number" class="form-control"
+                                placeholder="Impostos...">
                         </div>
                     </div>
                     <div class="form-group col-md-6 col-lg-3 mt-2">
-                        <label for="inpMargemLucro" class="form-label">Margem de
+                        <label for="inputProdutoMargemLucro" class="form-label">Margem de
                             Lucro</label>
                         <div class="input-group">
                             <span class="input-group-text">%</span>
-                            <input id="inpMargemLucro" type="number" class="form-control" placeholder="Lucro...">
+                            <input id="inputProdutoMargemLucro" type="number" class="form-control"
+                                placeholder="Lucro...">
                         </div>
                     </div>
                     <div class="form-group d-flex justify-content-end col-lg-6 mt-4">
-                        <button id="btnComporValor" class="btn btn-primary btn-ajuste" type="button"
+                        <button id="btnCriarProduto" class="btn btn-primary btn-ajuste" type="button"
                             data-bs-toggle="collapse" data-bs-target="#collapseAddInsumos" aria-expanded="false"
-                            aria-controls="collapseAddInsumos" onclick="CalculaCustoComposto()">
-                            Adicionar Insumos <i class="fas fa-arrow-right mr-3"></i></button>
+                            aria-controls="collapseAddInsumos" onclick="CriarProduto()">
+                            Criar Produto <i class="fas fa-arrow-right mr-3"></i></button>
 
                     </div>
                 </div>
             </div>
 
-            <div class="collapse multi-collapse container-insumos containerDefault" id="collapseAddInsumos">
+            <div class="collapse multi-collapse mt-2 containerDefault" id="collapseAddInsumos">
                 <div class="card-body">
-                    <h4 class="">Adicione os insumos</h4>
-                    <div class="row">
-                        <div class="form-group col-sm-12 col-md-12 col-lg-9 mt-3">
-                            <label class="form-label" for="inpNomeInsumo">Nome</label>
-                            <input id="inpNomeInsumo" type="text" class="form-control" name="nomeInsumo"
+                    <div class="header-listaInsumos">
+                        <h5 class="">Adicione Insumos a Seu Produto</h5>
+                        <button id="btnHeaderAddInsumos" type="button"
+                        role="button" data-bs-target="#collapseInsumosAddCampos" aria-expanded="false"
+                        aria-controls="collapseInsumosAddCampos" onclick="HideCollapseInsumosAddCampos(false)">
+                        
+                        <svg id="btnCloseHeaderAddInsumosDown" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16" display="none">
+                            <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                            <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                        </svg>
+                        <svg id="btnCloseHeaderAddInsumosUp" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708z"/>
+                            <path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
+                          </svg>
+                        
+                    </button>
+                         
+                        </button>
+                    </div>
+                    
+                    <div class="row" id="collapseInsumosAddCampos">
+                        
+                        <div class="form-group col-sm-12 col-md-12 col-lg-12 col-xl-9 mt-3">
+                            <label class="form-label" for="inputInsumoNome">Nome</label>
+                            <input id="inputInsumoNome" type="text" class="form-control" name="inputInsumoNome"
                                 placeholder="...salsicha, molho, alface ">
                         </div>
-                        <div class="form-group col-md-4 col-lg-3 mt-3" style="margin-top: 8px">
-                            <label class="form-label" for="slctTipoMedidaInsumo">Tipo de
+                        <div class="form-group col-md-6 col-lg-4 col-xl-3 mt-3">
+                            <label class="form-label" for="selectInsumoTipoMedida">Tipo de
                                 Medida</label>
-                            <select class="form-control" id="slctTipoMedidaInsumo" name="tipoMedida"
+                            <select class="form-control" id="selectInsumoTipoMedida" name="selectInsumoTipoMedida"
                                 placeholder="kg, unidade, metro, litros.">
                                 <option value="" disabled selected hidden>Selecione a
                                     medida...</option>
@@ -94,120 +115,126 @@
                                 <option value="litros">Litros</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-4 col-lg-3 mt-3">
-                            <label class="form-label" for="inpQuantidadeEmbalagem">Quantidade Embalagem</label>
+                        <div class="form-group col-md-6 col-lg-4 col-xl-3 mt-3">
+                            <label class="form-label" for="inputInsumoQuantidadeEmbalagem">Quantidade Embalagem</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" id="inpQuantidadeE8mbalagem"
-                                    name="quantidadeEmbalagem" placeholder="ex: 0.300(kg), 0.65(metros), 1 (unidade) ">
+                                <input type="number" class="form-control" id="inputInsumoQuantidadeEmbalagem"
+                                    name="inputInsumoQuantidadeEmbalagem"
+                                    placeholder="ex: 0.300(kg), 0.65(metros), 1 (unidade) ">
                             </div>
                         </div>
-                        <div class="form-group col-md-4 col-lg-3 mt-3">
-                            <label class="form-label" for="inpMinimoProducao">Porção
-                                Utilizada</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" id="inpMinimoProducao" name="minimoProducao"
-                                    placeholder="ex: 0.200(kg), 0.6(m), .">
-                            </div>
-                        </div>
-                        <div class="form-group col-md-4 col-lg-3 mt-3">
-                            <label class="form-label" for="inpValorInsumo">Valor</label>
+                        <div class="form-group col-md-6 col-lg-4 col-xl-3  mt-3">
+                            <label class="form-label" for="inpInsumoValor">Valor</label>
                             <div class="input-group">
                                 <div class="input-group-prepend ">
                                     <span class="input-group-text rs-input">R$</span>
                                 </div>
-                                <input type="number" class="form-control" id="inpValorInsumo" name="valorInsumo"
+                                <input type="number" class="form-control" id="inpInsumoValor" name="inpInsumoValor"
                                     placeholder="Insira o valor...">
                             </div>
                         </div>
-                        <div class="form-group  d-flex justify-content-end col-lg-3 offset-lg-0   calcula-lista mt-3">
-                            <button id="btnAdicionarInsumo" class="btn btn-success btn-ajuste" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapseListaAdicionados" aria-expanded="false"
-                                aria-controls="collapseListaAdicionados" onclick="AdicionaInsumo()">
+                        <div class="form-group col-md-6 col-lg-4 col-xl-3  mt-3">
+                            <label class="form-label" for="inputInsumoPorcao">Porção
+                                Utilizada</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="inputInsumoPorcao"
+                                    name="inputInsumoPorcao" placeholder="ex: 0.200(kg), 0.6(m), .">
+                            </div>
+                        </div>
+                        <div class="form-group  d-flex justify-content-end col-sm-6 col-md-6 col-lg-4 col-xl-3 offset-sm-6 offset-md-6 offset-lg-4 offset-xl-0    calcula-lista mt-3">
+                            <button id="btnInsumoAdicionar" class="btn btn-success btn-ajuste" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapseListaAdicionados"
+                                aria-expanded="false" aria-controls="collapseListaAdicionados"
+                                onclick="AdicionaInsumo()">
                                 Adicionar
                                 <i class="fas fa-plus"></i>
                             </button>
                         </div>
+                    </div>
 
+                        <div class="row  multi-collapse table-adicionados mt-3" id="collapseListaAdicionados"
+                            style='display:none;'>
+                            <hr>
+                            <div class="col-md-12 d-flex justify-content-between btn-container mt-0">
+                                <h5 class="btn-ajuste">Lista de Insumos</h5>
+                                <button id="btnHeaderAddInsumos" type="button"
+                                role="button" data-bs-target="#collapseInsumosLista" aria-expanded="false"
+                                aria-controls="collapseInsumosLista" onclick="HideCollapseInsumosAddCampos(true)">
+                                <svg id="btnCloseHeaderInsumoLista" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16" display="none">
+                                    <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                                    <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                                </svg>
+                                <svg id="btnCloseHeaderInsumoLista" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708z"/>
+                                    <path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
+                                  </svg>
+                                </button>
+                            </div>
 
-                        <div class="row  collapse multi-collapse table-adicionados" id="collapseListaAdicionados">
-                          
-                                <div class="col-md-12 d-flex justify-content-between ">
-                                    <h5 class="">Insumos Adicionados</h5>
+                            <table id="collapseInsumosLista" class="table mt-3 table-gray table-striped-columns ">
+                                <thead>
+                                    <tr>
+                                        <th class="radius-left" style="width:170px;">Nome</th>
+                                        <th style="width:20px;">Tipo Medida</th>
+                                        <th style="width:90px;">Qtd. Embalagem</th>
+                                        <th style="width:130px;">Porção</th>
+                                        <th style="width:20px;">Valor</th>
+                                        <th class="radius-right" style="width:30px;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbListaInsumos">
+                                </tbody>
+                            </table>
+                            <div class="col-md-12 d-flex justify-content-end btn-container">
+                            <button id="ExcluiListaInsumo" type="button" class="btn btn-danger btn-ajuste"
+                            style="margin-bottom: 5px">Excluir Lista <i class="fas fa-trash-alt"></i></button>
+                            </div>
+                            <hr>
+                            <div class="row btn-container">
+                                <div class="form-group col-md-6 col-lg-3 d-flex justify-content-end p-0">
+                                    <button id="btnCalcularProduto" class="btn btn-primary btn-ajuste" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapseProdutosCalculadosLista"
+                                        aria-expanded="false" aria-controls="collapseProdutosCalculadosLista"
+                                        onclick="CalcularProduto()">
+                                        Precificar Produto <i class="fas fa-calculator mr-3"></i>
                                 </div>
-
-                                <table id="hdListaInsumos" class="table mt-3 table-striped-column ">
-                                    <thead>
-                                        <tr>
-                                            <th class="radius-left" style="width:170px;">Nome</th>
-                                            <th style="width:20px;">Tipo Medida</th>
-                                            <th style="width:90px;">Qtd. Embalagem</th>
-                                            <th style="width:130px;">Porção</th>
-                                            <th style="width:20px;">Valor</th>
-                                            <th class="radius-right" style="width:30px;"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbListaInsumos">
-                                    </tbody>
-                                </table>
-
-                                <div class="row btn-container">
-                                    <div
-                                        class="form-group col-md-6 col-lg-3 d-flex justify-content-start calcula-lista">
-                                        <button id="btnComporValor" class="btn btn-primary btn-ajuste" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseComporValor"
-                                            aria-expanded="false" aria-controls="collapseComporValor"
-                                            onclick="ComporValor()">
-                                            Compor Valor <i class="fas fa-plus mr-3"></i>
-                                    </div>
-                                    <div class="form-group col-md-6 col-lg-3 d-flex justify-content-end calcula-lista">
-                                        <button id="ExcluiListaInsumo" type="button" class="btn btn-danger "
-                                            style="margin-bottom: 5px">Excluir Lista <i
-                                                class="fas fa-trash-alt"></i></button>
-                                    </div>
-                                </div>
-                        
+                            </div>
                         </div>
                     </div>
                 </div>
 
 
+            </div>
 
-                <div class="container-insumos containerDefault col-md-12 collapse multi-collapse" id="collapseCalculados">
-                    <div class="row mt-3 card-body">
-                        <div class="col-md-6">
-                            <h4 class="">Produtos Calculados</h4>
-                        </div>
-
-
-                        </row>
-                        <div class="row mt-3">
-                            <div class="col-md-12" style="padding-right: 0px;">
-                                <table id="tabListaValoresProduto" class="table table-striped-columns">
-                                    <thead>
-                                        <tr>
-                                            <th class="radius-left" scope="col" style="width:200px;">
-                                                Produto</th>
-                                            <th scope="col" style="width:50px;">
-                                                Custo</th>
-                                            <th scope="col" style="width:50px;">C/
-                                                Impostos</th>
-                                            <th scope="col" style="width:50px;">C/
-                                                Lucro</th>
-                                            <th scope="col" style="width:50px;">Valor
-                                                Sugerido</th>
-                                            <th class="radius-right" scope="col" class="text-center"
-                                                style="width:50px;">
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbListaProdutos">
-                                    </tbody>
-                                </table>
-                            </div>
+            <div class="container-insumos containerDefault col-md-12 collapse multi-collapse mt-4" id="collapseProdutosCalculadosLista">
+                <div class="row mt-3 card-body">
+                    <div class="col-md-6">
+                        <h4 class="">Produtos Calculados</h4>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12" style="padding-right: 0px;">
+                            <table id="tabListaValoresProduto" class="table table-striped-columns">
+                                <thead>
+                                    <tr>
+                                        <th class="radius-left" scope="col" style="width:200px;">
+                                            Produto</th>
+                                        <th scope="col" style="width:50px;">
+                                            Custo</th>
+                                        <th scope="col" style="width:50px;">C/
+                                            Impostos</th>
+                                        <th scope="col" style="width:50px;">C/
+                                            Lucro</th>
+                                        <th scope="col" style="width:50px;">Valor
+                                            Sugerido</th>
+                                        <th class="radius-right" scope="col" class="text-center" style="width:50px;">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbListaProdutos">
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </form>

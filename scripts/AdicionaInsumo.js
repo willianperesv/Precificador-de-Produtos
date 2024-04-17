@@ -6,28 +6,28 @@ function ComporValor(){
     $('#btnComporValor').addClass('btn-warning')
 }
 
-function AdicionaInsumo(){
-    if(TotalInsumosAdicionados == 0){
-        console.log('passou')
-        $("#btnAdicionarInsumo").removeAttr('data-bs-toggle');
-        TotalInsumosAdicionados++
-    }
-    AdicionaInsumoLista(MontaDadosInsumo());
-    LimpaCamposAdicionaInsumo();
-}
+// function AdicionaInsumo(){
+//     if(TotalInsumosAdicionados == 0){
+//         console.log('passou')
+//         $("#btnAdicionarInsumo").removeAttr('data-bs-toggle');
+//         TotalInsumosAdicionados++
+//     }
+//     AdicionaInsumoLista(MontaDadosInsumo());
+//     LimpaCamposAdicionaInsumo();
+// }
 
-function MontaDadosInsumo(){
-    var dadosInsumo = null;
+// function MontaDadosInsumo(){
+//     var dadosInsumo = null;
 
-    dadosInsumo = {
-        NomeInsumo: document.getElementById('inpNomeInsumo').value,
-        TipoMedidaInsumo: document.getElementById('slctTipoMedidaInsumo').value,
-        QuantidadeEmbalagem: parseFloat($('#inpQuantidadeEmbalagem').value),
-        MinimoProducao: parseFloat(document.getElementById('inpMinimoProducao').value),
-        ValorInsumo: parseFloat(document.getElementById('inpValorInsumo').value)        
-    }
-    return dadosInsumo
-}
+//     dadosInsumo = {
+//         NomeInsumo: document.getElementById('inpNomeInsumo').value,
+//         TipoMedidaInsumo: document.getElementById('slctTipoMedidaInsumo').value,
+//         QuantidadeEmbalagem: parseFloat($('#inpQuantidadeEmbalagem').value),
+//         MinimoProducao: parseFloat(document.getElementById('inpMinimoProducao').value),
+//         ValorInsumo: parseFloat(document.getElementById('inpValorInsumo').value)        
+//     }
+//     return dadosInsumo
+// }
 
 function AdicionaInsumoLista(dadosInsumo){
         $('<tr>').append(

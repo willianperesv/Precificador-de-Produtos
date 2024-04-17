@@ -1,3 +1,5 @@
+var abreCollapseInsumosAddCampos = false;
+
 //=========Métodos Gerais ===============//
 function FormatarCampoMonetario() {
     // Selecione o elemento de entrada pelo ID
@@ -34,9 +36,47 @@ function MascaraMonetaria(valor){
 function AdicionarPercentual(valor, percentual) {
     return valor + (valor * percentual / 100);
 }
+//---------Cancela Collapse -------------//
+
+function NoCollapse(btnId, alteraCor, corBotao, NovaCor){
+    if(alteraCor){
+        $('#' + btnId).removeClass(corBotao)
+        $('#' + btnId).addClass(NovaCor);
+    }
+    $('#' + btnId).removeAttr('data-bs-toggle');
+}
+
+function OpenCollapse(elemento) {
+    console.log('OpenCollapse')
+    $('#' + elemento).removeAttr('style');
+}
+
+function HideCollapseInsumosAddCampos(somenteIcones){
+    if(somenteIcones){
+        $('#btnCloseHeaderAddInsumosDown').show()
+        $('#btnCloseHeaderAddInsumosUp').hide()
+    }
+    if(!abreCollapseInsumosAddCampos){
+        $('#collapseInsumosAddCampos').slideUp();
+        $('#btnCloseHeaderAddInsumosDown').show()
+        $('#btnCloseHeaderAddInsumosUp').hide()
+        abreCollapseInsumosAddCampos = true;
+    }else{
+        $('#collapseInsumosAddCampos').slideDown();
+        $('#btnCloseHeaderAddInsumosDown').hide()
+        $('#btnCloseHeaderAddInsumosUp').show()
+        abreCollapseInsumosAddCampos = false;
+    }
+}
 
 //---------Limpa Campos------------------//
+
+function LimpaCamposDiv(divId) {
+    $('#' + divId +' :input').val('');
+  }
 
 function LimpaCamposAdicionaInsumo(){
     $('#formAdicionaInsumo :input').val('');
 }
+
+

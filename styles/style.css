@@ -8,18 +8,26 @@ html {
 }
 
 body {
+  /* background-image: url('../styles/background.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center; */
+
+
   background-image: url('../styles/background.jpg');
   background-repeat:repeat;
   background-size: 100% 100%;
   background-position: center;
   font-family: Arial, sans-serif;
   display: flex;
-  align-items: center;
+  align-items: center; 
   flex-direction: column;
 }
 
 header {
-
   margin: auto;
   color: rgb(197, 190, 190);
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -35,7 +43,6 @@ header h1{
   margin:auto
 }
 
-
 main{
   display:flex;
   justify-content: center;
@@ -46,19 +53,44 @@ main{
 }
 
 form{
+  background-color: rgba(255, 255, 255, 0.856);
+  padding:2rem 2rem;
+  margin-top: 2rem;
+  border-radius: 10px; 
   display:flex;
-  justify-content: center;
+  justify-content: baseline;
   align-items: center;
   flex-direction: column;
   width:65rem;
   max-width: 95%;
-
+  max-height: 49rem; 
+  overflow-x: auto;
+  overflow-y: auto;
 }
-
 
 .btn-ajuste{
   margin-top: 1rem;
   max-height: 2.2rem;
+}
+
+.header-listaInsumos{
+  width: 57rem;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-listaInsumos button{
+    display:flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width: 1.9rem;
+    height:1.9rem;
+    background: transparent;
+    outline:none;
+    border: none;
+
 }
 
 .rs-input{
@@ -69,10 +101,7 @@ form{
  
   display:flex;
   justify-content:baseline;
-  align-items: end;
-  padding-right: 0 !important;
-  margin-bottom:0.1rem;
-  
+  align-items: end;  
 }
 
 
@@ -88,22 +117,38 @@ form{
 .AjusteMoeda{
   float:left;
 }
+.container-criador-de-produto{
+  display:flex;
+  justify-content: center;
+  padding:1rem 2rem;
+  margin:0rem 1rem 1rem 1rem;
+  border-radius: 10px; 
+  background-color: rgba(147, 149, 150, 0.164); 
 
+}
 .containerDefault{
-
-  margin-top: 1rem !important; 
+  display:flex;
+  justify-content: center;
   padding:1rem 2rem;
   margin-left: 0.05rem !important;
   margin-right: 0.05rem !important;
   border-radius: 10px; 
   background-color: rgba(147, 149, 150, 0.164); 
+
   
+}
+
+.table-adicionados{
+
+  margin-left:0.2rem;
 }
 
 
 .btn-container{
-  display:flex;
-  justify-content: space-between;
+  margin: 0.1rem;
+  display: flex;
+  justify-content: end;
+  padding: 0;
 
 }
 
@@ -114,5 +159,20 @@ form{
 .radius-right{
   border-top-right-radius:6px ;
 }
+
+.header-listaInsumos button:hover{
+  padding: 0.2rem;
+  border-radius: 10px;
+  background: rgba(174, 250, 174, 0.795);
+}
+
+ .scrollable::-webkit-scrollbar {
+  display: none; 
+}
+
+.scrollable {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+} 
 
 

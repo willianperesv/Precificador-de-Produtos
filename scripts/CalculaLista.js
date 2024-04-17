@@ -1,3 +1,6 @@
+
+
+
 function CalculaCustoComposto() {
     var minhaTabela = document.getElementById("hdListaInsumos");
     const linhas = minhaTabela.querySelectorAll("tbody tr");
