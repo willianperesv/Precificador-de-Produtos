@@ -74,7 +74,7 @@ form{
 }
 
 .header-listaInsumos{
-  width: 57rem;
+  width: 55rem;
   display:flex;
   justify-content: space-between;
   align-items: center;
@@ -90,8 +90,8 @@ form{
     background: transparent;
     outline:none;
     border: none;
-
 }
+
 
 .rs-input{
   border-radius: 6px 0 0 6px!important;
@@ -118,24 +118,27 @@ form{
   float:left;
 }
 .container-criador-de-produto{
+  max-width: -webkit-fill-available;
   display:flex;
   justify-content: center;
-  padding:1rem 2rem;
+  padding:2rem;
   margin:0rem 1rem 1rem 1rem;
   border-radius: 10px; 
   background-color: rgba(147, 149, 150, 0.164); 
 
 }
-.containerDefault{
+.container-insumos{
+  max-width: -webkit-fill-available;
   display:flex;
   justify-content: center;
-  padding:1rem 2rem;
-  margin-left: 0.05rem !important;
-  margin-right: 0.05rem !important;
+  padding:2rem;
+  margin:0rem 1rem 1rem 1rem;
   border-radius: 10px; 
   background-color: rgba(147, 149, 150, 0.164); 
+}
 
-  
+.container-add-insumos{
+  max-width: -webkit-fill-available;
 }
 
 .table-adicionados{

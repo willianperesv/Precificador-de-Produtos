@@ -1,4 +1,5 @@
-var abreCollapseInsumosAddCampos = false;
+var AbreCollapseInsumosAddCampos = false;
+var AbreCollapseListaDeInsumo = false;
 
 //=========Métodos Gerais ===============//
 function FormatarCampoMonetario() {
@@ -51,21 +52,31 @@ function OpenCollapse(elemento) {
     $('#' + elemento).removeAttr('style');
 }
 
-function HideCollapseInsumosAddCampos(somenteIcones){
-    if(somenteIcones){
-        $('#btnCloseHeaderAddInsumosDown').show()
-        $('#btnCloseHeaderAddInsumosUp').hide()
-    }
-    if(!abreCollapseInsumosAddCampos){
+function HideCollapseInsumosAddCampos(){
+    if(!AbreCollapseInsumosAddCampos){
         $('#collapseInsumosAddCampos').slideUp();
         $('#btnCloseHeaderAddInsumosDown').show()
         $('#btnCloseHeaderAddInsumosUp').hide()
-        abreCollapseInsumosAddCampos = true;
+        AbreCollapseInsumosAddCampos = true;
     }else{
         $('#collapseInsumosAddCampos').slideDown();
         $('#btnCloseHeaderAddInsumosDown').hide()
         $('#btnCloseHeaderAddInsumosUp').show()
-        abreCollapseInsumosAddCampos = false;
+        AbreCollapseInsumosAddCampos = false;
+    }
+}
+
+function CollapseInsumosLista() {
+    if(!AbreCollapseListaDeInsumo){
+        $('#collapseInsumosLista').slideUp();
+        $('#btnCloseHeaderInsumoListaDown').show();
+        $('#btnCloseHeaderInsumoListaUp').hide();
+        AbreCollapseListaDeInsumo = true;
+    }else{
+        $('#collapseInsumosLista').slideDown();
+        $('#btnCloseHeaderInsumoListaDown').hide();
+        $('#btnCloseHeaderInsumoListaUp').show();
+        AbreCollapseListaDeInsumo = false;
     }
 }
 
