@@ -7,18 +7,23 @@ function CriarProduto() {
     
 }
 
-function AdicionaInsumo(){
-    NoCollapse('btnCriarProduto', false)
-    OpenCollapse('collapseListaAdicionados');
+// function AdicionaInsumo(){
+//     OpenCollapse('collapseListaAdicionados');
+// }
 
-    if(TotalInsumosAdicionados == 0){
-        console.log('passou')
-        $("#btnAdicionarInsumo").removeAttr('data-bs-toggle');
-        TotalInsumosAdicionados++
-    }
-    AdicionaInsumoLista(MontaDadosInsumo());
-    LimpaCamposAdicionaInsumo();
-}
+// function AdicionaInsumo(){
+//     NoCollapse('btnCriarProduto', false)
+//     OpenCollapse('collapseListaAdicionados');
+
+//     if(TotalInsumosAdicionados == 0){
+//         console.log('passou')
+//         $("#btnAdicionarInsumo").removeAttr('data-bs-toggle');
+//         TotalInsumosAdicionados++
+//     }
+//     CollapseInsumosLista()
+//     AdicionaInsumoLista(MontaDadosInsumo());
+//     LimpaCamposAdicionaInsumo();
+// }
 
 function MontaProduto(){
     DadosProduto = {

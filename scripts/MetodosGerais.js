@@ -1,5 +1,6 @@
 var AbreCollapseInsumosAddCampos = false;
 var AbreCollapseListaDeInsumo = false;
+var AbreCollapseCriadorDeProdutos = false;
 
 //=========Métodos Gerais ===============//
 function FormatarCampoMonetario() {
@@ -49,6 +50,7 @@ function NoCollapse(btnId, alteraCor, corBotao, NovaCor){
 
 function OpenCollapse(elemento) {
     console.log('OpenCollapse')
+    $('#collapseInsumosLista').slideDown();
     $('#' + elemento).removeAttr('style');
 }
 
@@ -77,6 +79,18 @@ function CollapseInsumosLista() {
         $('#btnCloseHeaderInsumoListaDown').hide();
         $('#btnCloseHeaderInsumoListaUp').show();
         AbreCollapseListaDeInsumo = false;
+    }
+}
+
+function CollapseCriadorDeProdutos() {
+    if(!AbreCollapseCriadorDeProdutos){
+        $('#btnCloseCriadorDeProdutosDown').show();
+        $('#btnCloseCriadorDeProdutosUp').hide();
+        AbreCollapseCriadorDeProdutos = true;
+    }else{
+        $('#btnCloseCriadorDeProdutosDown').hide();
+        $('#btnCloseCriadorDeProdutosUp').show();
+        AbreCollapseCriadorDeProdutos = false;
     }
 }
 
