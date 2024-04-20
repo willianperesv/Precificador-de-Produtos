@@ -1,6 +1,7 @@
 var AbreCollapseInsumosAddCampos = false;
 var AbreCollapseListaDeInsumo = false;
 var AbreCollapseCriadorDeProdutos = false;
+var AbreCollapseProdutosCalculados = false;
 
 //=========Métodos Gerais ===============//
 function FormatarCampoMonetario() {
@@ -91,6 +92,21 @@ function CollapseCriadorDeProdutos() {
         $('#btnCloseCriadorDeProdutosDown').hide();
         $('#btnCloseCriadorDeProdutosUp').show();
         AbreCollapseCriadorDeProdutos = false;
+    }
+}
+
+function CollapseProdutosCalculados() {
+    console.log('precificados')
+    if(!AbreCollapseProdutosCalculados){
+        $('#collapseListaProdutosPrecificados').slideUp();
+        $('#btnCloseHeaderCalculadosDown').show();
+        $('#btnCloseHeaderCalculadosUp').hide();
+        AbreCollapseProdutosCalculados = true;
+    }else{
+        $('#collapseListaProdutosPrecificados').slideDown();
+        $('#btnCloseHeaderCalculadosDown').hide();
+        $('#btnCloseHeaderCalculadosUp').show();
+        AbreCollapseProdutosCalculados = false;
     }
 }
 

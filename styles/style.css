@@ -124,6 +124,30 @@ form{
   max-width: -webkit-fill-available;
 }
 
+.divInsumosLista{
+  overflow-x: auto;
+  max-width: 97.2%;
+  border-top-left-radius: 10px ;
+}
+
+.divProdutosPrecificados{
+  overflow-x: auto;
+  max-width: 100%;
+  border-top-left-radius: 10px ;
+}
+#btnCalcularProduto{
+  margin-right: 1.4rem;
+}
+
+.ajuste-table-adicionados{
+  width: 52rem;
+} 
+
+.ajuste-table-calculados{
+  width: 52rem;
+}
+  
+
 
 
 .rs-input{
@@ -188,5 +212,9 @@ form{
   -ms-overflow-style: none; 
   scrollbar-width: none; 
 } 
+
+
+
+
 
 

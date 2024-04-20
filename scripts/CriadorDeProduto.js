@@ -7,9 +7,9 @@ function CriarProduto() {
     
 }
 
-// function AdicionaInsumo(){
-//     OpenCollapse('collapseListaAdicionados');
-// }
+  function AdicionaInsumo(){
+    OpenCollapse('collapseListaAdicionados')
+ }
 
 // function AdicionaInsumo(){
 //     NoCollapse('btnCriarProduto', false)
