@@ -43,7 +43,7 @@
                     <!-----------------------------HEADER CRIADOR DE PRODUTO------------------------------------->
                     <div class="d-flex justify-content-between  header-listaInsumos">
                         <h4>Crie Seu Produto</h4>
-                        <button id="btnHeaderCriadorDeProdutos" type="button" role="button" data-bs-toggle="collapse"
+                        <button id="btnHeaderCriadorDeProdutos" type="button" role="button" 
                             data-bs-target="#collapseCriadorDeProdutos" aria-expanded="false"
                             aria-controls="collapseCriadorDeProdutos" onclick="CollapseCriadorDeProdutos()">
 
@@ -106,7 +106,7 @@
                 <div id="divListaDeInsumos" class="row  w-100 d-flex">
                     <!-----------------------------HEADER ADD INSUMOS-------------------------------------->
                     <div class="d-flex justify-content-between  header-listaInsumos">
-                        <h4>Adicione Insumos a Seu Produto</h4>
+                        <h4 id="h4TextoAddInsumos" class="col-8">Adicione Insumos a "<p id="headerInsumosNomeProduto"></p>"</h4>
                         <button id="btnHeaderInsumoListaAddCampos" type="button" role="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseInsumosAddCampo" aria-expanded="false"
                             aria-controls="collapseInsumosAddCampo" onclick="HideCollapseInsumosAddCampos()">
@@ -142,10 +142,10 @@
                                 placeholder="kg, unidade, metro, litros.">
                                 <option value="" disabled selected hidden>Selecione a
                                     medida...</option>
-                                <option value="Unidade">Unidade</option>
-                                <option value="kg">Quilograma (kg)</option>
-                                <option value="m">Metro (m)</option>
-                                <option value="litros">Litros</option>
+                                <option value="1">Unidade</option>
+                                <option value="2">Quilograma (kg)</option>
+                                <option value="3">Metro (m)</option>
+                                <option value="4">Litros</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6 col-lg-4 col-xl-3 mt-3">
@@ -157,12 +157,12 @@
                             </div>
                         </div>
                         <div class="form-group col-md-6 col-lg-4 col-xl-3  mt-3">
-                            <label class="form-label" for="inpInsumoValor">Valor</label>
+                            <label class="form-label" for="inputInsumoValor">Valor</label>
                             <div class="input-group">
                                 <div class="input-group-prepend ">
                                     <span class="input-group-text rs-input">R$</span>
                                 </div>
-                                <input type="number" class="form-control" id="inpInsumoValor" name="inpInsumoValor"
+                                <input type="number" class="form-control" id="inputInsumoValor" name="inputInsumoValor"
                                     placeholder="Insira o valor...">
                             </div>
                         </div>
@@ -185,8 +185,7 @@
                     </div>
                     <hr>
                     <!-----------------------------LISTA DE INSUMOS-------------------------------------->
-                    <div id="collapseListaAdicionados" class="d-flex justify-content-between row  lista-adicionados"
-                        style="display:none !important">
+                    <div id="collapseListaAdicionados" class="d-flex justify-content-between row collapse multi-collapse lista-adicionados">
                         <!-----------------------------HEADER LISTA INSUMOS-------------------------------------->
                         <div class="d-flex justify-content-between  header-listaInsumos form-group col-md-12">
                             <h4>Lista de Insumos / Precificador</h4>
@@ -212,11 +211,12 @@
                             </button>
                         </div>
                         <!-----------------------------BODY LISTA INSUMOS-------------------------------------->
+                    
                         <div id="collapseInsumosLista" class="">
                             <div class="form-group col-md-12 p-0 divInsumosLista">
-                                <table
-                                    class="table mt-3 table-gray table-striped-columns col-md-12 ajuste-table-adicionados">
-                                    <thead>
+                                <table id="tableListaInsumos"
+                                    class="table mt-3 table-gray table-striped-columns col-md-12 ajuste-table-adicionados" style="display: none;">
+                                    <thead id="hdListaInsumos">
                                         <tr>
                                             <th class="radius-left" style="width: 30%;">Nome</th>
                                             <th style="width: 15%;">Tipo Medida</th>
@@ -231,7 +231,7 @@
                                 </table>
                             </div>
 
-                            <div class="form-group col-md-12 d-flex justify-content-between btn-container">
+                            <div id="divIdBotoesListaInsumo"  class="form-group col-md-12 d-flex justify-content-between btn-container" style="display: none;">
                                 <button id="ExcluiListaInsumo" type="button" class="btn btn-danger btn-ajuste">Excluir
                                     Lista <i class="fas fa-trash-alt"></i>
                                 </button>
@@ -241,7 +241,12 @@
                                     onclick="CalcularProduto()">
                                     Precificar Produto <i class="fas fa-calculator mr-3"></i></button>
                             </div>
+
+                            <div id="EmptyList" class="d-flex justify-content-center" style="display:block;">
+                                <p class="strong text-center">Não há insumos adicionados a lista</p>
+                            </div>
                         </div>
+                  
 
                     </div>
 
@@ -250,8 +255,8 @@
 
 
             <!------------------------------------------- Produtos Calculados --------------------------------------------------->
-            <div class="container-criador-de-produto col-md-12">
-                <div id="collapseProdutosCalculadosLista" class="row w-100">
+            <div  id="collapseProdutosCalculadosLista" class="container-criador-de-produto col-md-12 collapse multi-collapse">
+                <div  class="row w-100">
                     <!-----------------------------HEADER CRIADOR DE PRODUTO------------------------------------->
                     <div class="d-flex justify-content-between  header-listaInsumos">
                         <h4>Produtos Precificados</h4>
@@ -282,16 +287,14 @@
                             <table id="tabListaValoresProduto" class="table table-striped-columns ajuste-table-adicionados mt-3">
                                 <thead>
                                     <tr>
-                                        <th class="radius-left" scope="col" style="width:30%;">
+                                        <th class="radius-left" scope="col" style="width:55%;">
                                             Produto</th>
                                         <th scope="col" style="width:15%">
                                             Custo</th>
-                                        <th scope="col" style="width:15%;">C/
-                                            Impostos</th>
-                                        <th scope="col" style="width:15%;">C/
-                                            Lucro</th>
                                         <th scope="col" style="width:20%;">Valor
                                             Sugerido</th>
+                                        <th  scope="col" style="width:5%;">
+                                        </th>
                                         <th class="radius-right" scope="col" style="width:5%;">
                                         </th>
                                     </tr>

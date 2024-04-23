@@ -55,6 +55,27 @@ function OpenCollapse(elemento) {
     $('#' + elemento).removeAttr('style');
 }
 
+function CloseCollapse(elemento) {
+    $(elemento).slideUp();
+        switch (elemento) {
+            case "#collapseCriadorDeProdutos":
+                CollapseCriadorDeProdutos();
+                break;
+            case "#collapseInsumosAddCampo":
+                AbreCollapseInsumosAddCampos = true;
+                break;
+    
+            case "#collapseListaAdicionados":
+                CollapseInsumosLista()
+               
+                break;
+            case "#collapseProdutosCalculadosLista":
+                AbreCollapseProdutosCalculados = true;
+                break;
+            default:
+        }
+}
+
 function HideCollapseInsumosAddCampos(){
     if(!AbreCollapseInsumosAddCampos){
         $('#collapseInsumosAddCampos').slideUp();
@@ -85,10 +106,12 @@ function CollapseInsumosLista() {
 
 function CollapseCriadorDeProdutos() {
     if(!AbreCollapseCriadorDeProdutos){
+        $('#collapseCriadorDeProdutos').slideUp();
         $('#btnCloseCriadorDeProdutosDown').show();
         $('#btnCloseCriadorDeProdutosUp').hide();
         AbreCollapseCriadorDeProdutos = true;
     }else{
+        $('#collapseCriadorDeProdutos').slideDown();
         $('#btnCloseCriadorDeProdutosDown').hide();
         $('#btnCloseCriadorDeProdutosUp').show();
         AbreCollapseCriadorDeProdutos = false;

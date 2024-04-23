@@ -19,8 +19,9 @@ body {
 
   background-image: url('../styles/background.jpg');
   background-repeat:repeat;
-  background-size: 100% 100%;
+  background-size: cover;
   background-position: center;
+  max-height: 100%;
   font-family: Arial, sans-serif;
   display: flex;
   align-items: center; 
@@ -48,13 +49,13 @@ main{
   align-items: center;
   width: 70rem;
   max-width: 90%;
- 
+  padding-top:1rem;
+  padding-bottom:2rem;
 }
 
 form{
   background-color: rgba(255, 255, 255, 0.856);
   padding:2rem 2rem;
-  margin-top: 2rem;
   border-radius: 10px; 
   display:flex;
   justify-content: baseline;
@@ -89,6 +90,10 @@ form{
   display:flex;
   justify-content: space-between;
   align-items: center;
+}
+
+#h4TextoAddInsumos{
+   display:flex;
 }
 
 .header-listaInsumos button{
