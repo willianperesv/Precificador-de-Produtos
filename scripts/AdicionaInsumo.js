@@ -38,9 +38,7 @@ function AdicionaInsumoLista(dadosInsumo) {
         $('<td class="d-flex justify-content-between">').html('<span>R$</span><span id="maskValorInsumo"class="ms-auto"> ' + dadosInsumo.InsumoValor + '</span>'),
         $('<td class="text-center btn-remover">').html('<i class="fas fa-trash-alt" style="cursor: pointer;"></i>')
     );
-    $('#EmptyList').hide();
-    $('#tableListaInsumos').show();
-    $('#divIdBotoesListaInsumo').show();
+    ExibeListaDeInsumos(true);
 
     novaLinha.appendTo('#tbListaInsumos');
 

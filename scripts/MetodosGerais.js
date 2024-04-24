@@ -133,6 +133,18 @@ function CollapseProdutosCalculados() {
     }
 }
 
+function ExibeListaDeInsumos(exibe){
+    if(exibe){
+        $('#tableListaInsumos').removeClass('display-none-important');
+        $('#divIdBotoesListaInsumo').removeClass('display-none-important');
+        $('#EmptyList').addClass('display-none-important');
+    }else{
+        $('#tableListaInsumos').addClass('display-none-important');
+        $('#divIdBotoesListaInsumo').addClass('display-none-important');
+        $('#EmptyList').removeClass('display-none-important');
+    }
+}
+
 //---------Limpa Campos------------------//
 
 function LimpaCamposDiv(divId) {

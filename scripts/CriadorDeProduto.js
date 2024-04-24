@@ -10,6 +10,7 @@ function CriarProduto() {
         $('#headerInsumosNomeProduto').html(DadosProduto.ProdutoNome);
         CloseCollapse('#collapseCriadorDeProdutos')
         CloseCollapse('#collapseListaAdicionados');
+        ExibeListaDeInsumos(false);
     }
 }
 
@@ -19,11 +20,12 @@ function AdicionaInsumo() {
         AdicionaInsumoLista(DadosProduto.ListaInsumos[DadosProduto.ListaInsumos.length - 1]);
         CloseCollapse('#collapseListaAdicionados');
     }
-
 }
 
 function CalcularProduto() {
     NoCollapse('btnCalcularProduto', false);
+
+    CalcularListaDeInsumos(DadosProduto.ListaInsumos)
 }
 
 function MontaProduto() {

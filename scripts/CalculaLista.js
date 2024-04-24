@@ -1,3 +1,47 @@
+CalcularListaDeInsumos(ListaDeInusmos){
+
+    switch (ListaDeInusmos.InsumoTipoMedida) {
+        case 1:
+            CalculaUnidade()
+            break;
+        case 2:
+            CalculaMetro();
+            break;
+
+        case 3:
+            CalculaQuilo();
+            break;
+        case "Litros":
+            CalculaLitro();
+            break;
+        default:
+            TipoMedidaEnum = 5
+            console.log("Tipo de medida não reconhecido");
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
