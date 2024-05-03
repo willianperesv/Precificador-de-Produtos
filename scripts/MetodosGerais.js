@@ -4,22 +4,22 @@ var AbreCollapseCriadorDeProdutos = false;
 var AbreCollapseProdutosCalculados = false;
 
 //=========Métodos Gerais ===============//
-function FormatarCampoMonetario() {
-    // Selecione o elemento de entrada pelo ID
-    var campo = document.getElementById('maskValorInsumo');
+// function FormatarCampoMonetario() {
+//     // Selecione o elemento de entrada pelo ID
+//     var campo = document.getElementById('maskValorInsumo');
 
-    // Aplica a máscara monetária
-    var mask = new IMask(campo, {
-        mask: 'R$ num',
-        blocks: {
-            num: {
-                mask: Number,
-                thousandsSeparator: '.',
-                radix: ','
-            }
-        }
-    });
-}
+//     // Aplica a máscara monetária
+//     var mask = new IMask(campo, {
+//         mask: 'R$ num',
+//         blocks: {
+//             num: {
+//                 mask: Number,
+//                 thousandsSeparator: '.',
+//                 radix: ','
+//             }
+//         }
+//     });
+// }
 
 function RemoverLinha() {
     $(this).closest('tr').remove();
@@ -49,20 +49,31 @@ function NoCollapse(btnId, alteraCor, corBotao, NovaCor){
     $('#' + btnId).removeAttr('data-bs-toggle');
 }
 
-function OpenCollapse(elemento) {
+function AddCollapse(btnId, alteraCor, corBotao, NovaCor){
+    if(alteraCor){
+        $('#' + btnId).removeClass(corBotao)
+        $('#' + btnId).addClass(NovaCor);
+    }
+    $('#' + btnId).attr("data-bs-toggle", "collapse")
+}
+
+function OpenCollapse(elemento, semSlide) {
     console.log('OpenCollapse')
-    $('#collapseInsumosLista').slideDown();
+    if(semSlide){
+        $('#collapseInsumosLista').slideDown();
+    }
     $('#' + elemento).removeAttr('style');
 }
 
-function CloseCollapse(elemento) {
-    $(elemento).slideUp();
+function CloseCollapse(elemento, desativaCollapse) {
+    if(!desativaCollapse){
+        $(elemento).slideUp();
         switch (elemento) {
             case "#collapseCriadorDeProdutos":
                 CollapseCriadorDeProdutos();
                 break;
-            case "#collapseInsumosAddCampo":
-                AbreCollapseInsumosAddCampos = true;
+            case "#collapseAddInsumos":
+                HideCollapseInsumosAddCampos();
                 break;
     
             case "#collapseListaAdicionados":
@@ -74,15 +85,34 @@ function CloseCollapse(elemento) {
                 break;
             default:
         }
+
+    }
+
+}
+function CollapseCriadorDeProdutos() {
+    console.log('criador de produtos')
+    if(!AbreCollapseCriadorDeProdutos){
+        $('#collapseCriadorDeProdutos').slideUp();
+        $('#btnCloseCriadorDeProdutosDown').show();
+        $('#btnCloseCriadorDeProdutosUp').hide();
+        AbreCollapseCriadorDeProdutos = true;
+    }else{
+        $('#collapseCriadorDeProdutos').slideDown();
+        $('#btnCloseCriadorDeProdutosDown').hide();
+        $('#btnCloseCriadorDeProdutosUp').show();
+        AbreCollapseCriadorDeProdutos = false;
+    }
 }
 
 function HideCollapseInsumosAddCampos(){
+    console.log('add Campos')
     if(!AbreCollapseInsumosAddCampos){
         $('#collapseInsumosAddCampos').slideUp();
         $('#btnCloseHeaderAddInsumosDown').show()
         $('#btnCloseHeaderAddInsumosUp').hide()
         AbreCollapseInsumosAddCampos = true;
     }else{
+        $('#collapseAddInsumos').removeAttr('style');
         $('#collapseInsumosAddCampos').slideDown();
         $('#btnCloseHeaderAddInsumosDown').hide()
         $('#btnCloseHeaderAddInsumosUp').show()
@@ -91,6 +121,7 @@ function HideCollapseInsumosAddCampos(){
 }
 
 function CollapseInsumosLista() {
+    console.log('Lista Insumos')
     if(!AbreCollapseListaDeInsumo){
         $('#collapseInsumosLista').slideUp();
         $('#btnCloseHeaderInsumoListaDown').show();
@@ -104,19 +135,7 @@ function CollapseInsumosLista() {
     }
 }
 
-function CollapseCriadorDeProdutos() {
-    if(!AbreCollapseCriadorDeProdutos){
-        $('#collapseCriadorDeProdutos').slideUp();
-        $('#btnCloseCriadorDeProdutosDown').show();
-        $('#btnCloseCriadorDeProdutosUp').hide();
-        AbreCollapseCriadorDeProdutos = true;
-    }else{
-        $('#collapseCriadorDeProdutos').slideDown();
-        $('#btnCloseCriadorDeProdutosDown').hide();
-        $('#btnCloseCriadorDeProdutosUp').show();
-        AbreCollapseCriadorDeProdutos = false;
-    }
-}
+
 
 function CollapseProdutosCalculados() {
     console.log('precificados')

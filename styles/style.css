@@ -53,7 +53,7 @@ main{
   padding-bottom:2rem;
 }
 
-form{
+article{
   background-color: rgba(255, 255, 255, 0.856);
   padding:2rem 2rem;
   border-radius: 10px; 
@@ -220,6 +220,29 @@ form{
 
 .display-none-important {
   display: none !important;
+}
+
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+}
+
+
+label.error {
+  color: red;
+}
+input.error {
+  border: 1px solid red;
+  border-top-right-radius:8px !important;
+  border-bottom-right-radius:8px !important;
+}
+.error-message {
+  color: red;
+  margin-top: 5px;
 }
 
 

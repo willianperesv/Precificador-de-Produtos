@@ -1,36 +1,11 @@
-var TotalInsumosAdicionados = 0;
-
 function ComporValor(){
     $('#btnComporValor').removeClass('btn-primary')
     $('#btnComporValor').css('color', 'white')
     $('#btnComporValor').addClass('btn-warning')
 }
 
-// function AdicionaInsumo(){
-//     if(TotalInsumosAdicionados == 0){
-//         console.log('passou')
-//         $("#btnAdicionarInsumo").removeAttr('data-bs-toggle');
-//         TotalInsumosAdicionados++
-//     }
-//     AdicionaInsumoLista(MontaDadosInsumo());
-//     LimpaCamposAdicionaInsumo();
-// }
-
-// function MontaDadosInsumo(){
-//     var dadosInsumo = null;
-
-//     dadosInsumo = {
-//         NomeInsumo: document.getElementById('inpNomeInsumo').value,
-//         TipoMedidaInsumo: document.getElementById('slctTipoMedidaInsumo').value,
-//         QuantidadeEmbalagem: parseFloat($('#inpQuantidadeEmbalagem').value),
-//         MinimoProducao: parseFloat(document.getElementById('inpMinimoProducao').value),
-//         ValorInsumo: parseFloat(document.getElementById('inpValorInsumo').value)        
-//     }
-//     return dadosInsumo
-// }
-
 function AdicionaInsumoLista(dadosInsumo) {
-    var novaLinha = $('<tr>').append(
+    let novaLinha = $('<tr>').append(
         $('<td>').html(dadosInsumo.InsumoNome),
         $('<td>').html(dadosInsumo.InsumoTipoMedida),
         $('<td style="text-align: right;">').html(dadosInsumo.InsumoQuantidadeEmbalagem),
