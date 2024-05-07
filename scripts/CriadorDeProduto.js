@@ -1,51 +1,46 @@
 var DadosProduto = { ListaInsumos: [], ProdutoCalculado:[] };
-var ListaProdutosCalculados = []
-var validCriadorDeProdutos = null;
-var validAddInsumos = true;
+var ListaProdutosCalculados = [];
 
 function CriarProduto() {
-    validCriadorDeProdutos = $("#collapseCriadorDeProdutos").valid();
-    if (validCriadorDeProdutos == true) {
-        console.log('entrou na criaProduto')
+    var validCriadorDeProdutos = $("#collapseCriadorDeProdutos").valid();
+
+    if (validCriadorDeProdutos) {
         MontaProduto();
-        NoCollapse('btnCriarProduto', false);
         LimpaCamposDiv('divCriadorDeProdutos');
         $('#headerInsumosNomeProduto').html(DadosProduto.ProdutoNome);
-        CloseCollapse('#collapseCriadorDeProdutos', false);
-        CloseCollapse('#collapseListaAdicionados', false);
-        ExibeListaDeInsumos(false);
-        if(ListaProdutosCalculados.length > 0){
-        CloseCollapse('#collapseAddInsumos', false);
-        }
-    }else{
-        console.log('false')
-        CloseCollapse('#collapseAddInsumos', false);
+        AbreSessao('collapseInsumosAddCampos','collapseAddInsumos', true, 1000);
+        FechaSessao('collapseCriadorDeProdutos','divCriadorDeProdutos', true, 500);
     }
 }
 
 function AdicionaInsumo() {
+
+    var validAddInsumos = $("#collapseCriadorDeProdutos").valid();
     if (validAddInsumos) {
         MontaInsumos();
         AdicionaInsumoLista(DadosProduto.ListaInsumos[DadosProduto.ListaInsumos.length - 1]);
-        if(DadosProduto.ListaInsumos.length > 1){
-            CloseCollapse('#collapseListaAdicionados', true)
-        }else{
-            CloseCollapse('#collapseListaAdicionados', false);
+
+        if(DadosProduto.ListaInsumos.length == 1){
+            AbreSessao('collapseInsumosLista','collapseListaAdicionados', true, 700)
         }
+
         LimpaCamposDiv('collapseInsumosAddCampos');
     }
 }
 
 function CalcularProduto() {
-    NoCollapse('btnCalcularProduto', false);
+
     produtoCalculado = ComporValorProduto(DadosProduto);
     DadosProduto.ProdutoCalculado.push(produtoCalculado);
     MontaTabelaProdutosCalculados(DadosProduto.ProdutoCalculado[DadosProduto.ProdutoCalculado.length - 1], DadosProduto.ProdutoNome)
     ListaProdutosCalculados.push(DadosProduto);
-    CloseCollapse('#collapseAddInsumos', false);
-    CloseCollapse('#collapseCriadorDeProdutos', false);
     $('#TituloCriadorDeProdutos').html('Criar Novo Produto');
 
+    FechaSessao('collapseInsumosLista','collapseListaAdicionados', true, 700);
+    FechaSessao('collapseInsumosAddCampos','collapseAddInsumos', true, 1500);
+   
+    AbreSessao('collapseListaProdutosPrecificados','collapseProdutosCalculadosLista', true, 3000);
+    AbreSessao('collapseCriadorDeProdutos','divCriadorDeProdutos', true, 3000);
 }
 
 
@@ -57,7 +52,30 @@ function IniciaValidateCriaProdutos(){
             inputProdutoNome: {
                 required: true,
             },
+            inputProdutoMargemLucro: {
+                required: true,
+            },
+          },
+          messages: {
+            inputProdutoNome:{
+                required: "Campo obrigatório.",
+             
+            },
+            inputProdutoMargemLucro:{
+                required: "Campo obrigatório.",
+             
+            }
+          },
+       });
+} 
+
+function IniciaValidateCriaProdutos(){
+    $("#collapseInsumosAddCampos").validate({
+        rules: {
             inputProdutoNome: {
+                required: true,
+            },
+            inputProdutoMargemLucro: {
                 required: true,
             },
           },

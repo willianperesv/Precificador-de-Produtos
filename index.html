@@ -43,9 +43,9 @@
 
             <!-- ---------------------------CRIADOR DE PRODUTO------------------------------------>
             <div class="container-criador-de-produto col-md-12">
-                <div id="divCriadorDeProdutos" class="row w-100">
+                <div  class="row w-100">
                     <!-----------------------------HEADER CRIADOR DE PRODUTO------------------------------------->
-                    <div class="d-flex justify-content-between  header-listaInsumos">
+                    <div id="divCriadorDeProdutos" class="d-flex justify-content-between  header-listaInsumos">
                         <h4 id="TituloCriadorDeProdutos">Crie Seu Produto</h4>
                         <button id="btnHeaderCriadorDeProdutos" type="button" role="button"
                             data-bs-target="#collapseCriadorDeProdutos" aria-expanded="false"
@@ -69,7 +69,7 @@
                         </button>
                     </div>
                     <!-----------------------------BODY CRIADOR DE PRODUTO------------------------------------>
-                    <form id="collapseCriadorDeProdutos" class="row show collapse multi-collapse needs-validation">
+                    <form id="collapseCriadorDeProdutos" class="row needs-validation">
                         <div class="form-group col-lg-12">
                             <label for="inputProdutoNome"  class="form-label">Nome do
                                 Produto</label>
@@ -96,25 +96,24 @@
                         </div>
                         <div class="form-group d-flex justify-content-end col-lg-6 mt-4">
                             <button id="btnCriarProduto" class="btn btn-primary btn-ajuste" type="button"
-                                data-bs-target="#collapseAddInsumos" aria-expanded="false" data-bs-toggle="collapse"
+                                data-bs-target="#collapseAddInsumos" aria-expanded="false" 
                                 aria-controls="collapseAddInsumos" onclick="CriarProduto()">
                                 Criar Produto <i class="fas fa-arrow-right mr-3"></i></button>
-
                         </div>
                     </form>
 
                 </div>
             </div>
             <!-----------------------------------------ADD INSUMOS------------------------------------------------->
-            <div id="collapseAddInsumos" class="container-criador-de-produto collapse multi-collapse col-md-12">
+            <div id="collapseAddInsumos" class="container-criador-de-produto col-md-12" style="display: none;">
                 <div id="divListaDeInsumos" class="row  w-100 d-flex">
                     <!-----------------------------HEADER ADD INSUMOS-------------------------------------->
                     <div class="d-flex justify-content-between  header-listaInsumos">
                         <h4 id="h4TextoAddInsumos" class="col-8">Adicione Insumos a "<p id="headerInsumosNomeProduto">
                             </p>"</h4>
-                        <button id="btnHeaderInsumoListaAddCampos" type="button" role="button" data-bs-toggle="collapse"
+                        <button id="btnHeaderInsumoListaAddCampos" type="button" role="button" 
                             data-bs-target="#collapseInsumosAddCampo" aria-expanded="false"
-                            aria-controls="collapseInsumosAddCampo" onclick="HideCollapseInsumosAddCampos()">
+                            aria-controls="collapseInsumosAddCampo" onclick="">
 
                             <svg id="btnCloseHeaderAddInsumosDown" xmlns="http://www.w3.org/2000/svg" width="16"
                                 height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16"
@@ -134,17 +133,17 @@
                         </button>
                     </div>
                     <!-----------------------------BODY ADD INSUMOS-------------------------------------->
-                    <form id="collapseInsumosAddCampos" class="row mb-3">
+                    <form id="collapseInsumosAddCampos" class="row mb-3" >
                         <div class="form-group col-sm-12 col-md-12 col-lg-9 col-xl-6 mt-3">
                             <label class="form-label" for="inputInsumoNome">Nome</label>
                             <input id="inputInsumoNome" type="text" class="form-control" name="inputInsumoNome"
-                                placeholder="...salsicha, molho, alface ">
+                                placeholder="...salsicha, molho, alface" required>
                         </div>
                         <div class="form-group col-md-6 col-lg-4 col-xl-3 mt-3">
                             <label class="form-label" for="selectInsumoTipoMedida">Tipo de
                                 Medida</label>
                             <select class="form-control" id="selectInsumoTipoMedida" name="selectInsumoTipoMedida"
-                                placeholder="kg, unidade, metro, litros.">
+                                placeholder="kg, unidade, metro, litros." required>
                                 <option value="" disabled selected hidden>Selecione a
                                     medida...</option>
                                 <option value="1">Unidade</option>
@@ -158,7 +157,7 @@
                             <div class="input-group">
                                 <input type="number" class="form-control" id="inputInsumoQuantidadeEmbalagem"
                                     name="inputInsumoQuantidadeEmbalagem"
-                                    placeholder="ex: 0.300(kg), 0.65(metros), 1 (unidade) ">
+                                    placeholder="ex: 0.300(kg), 0.65(metros), 1 (unidade)" required>
                             </div>
                         </div>
                         <div class="form-group col-md-6 col-lg-4 col-xl-3  mt-3">
@@ -168,7 +167,7 @@
                                     <span class="input-group-text rs-input">R$</span>
                                 </div>
                                 <input type="number" class="form-control" id="inputInsumoValor" name="inputInsumoValor"
-                                    placeholder="Insira o valor...">
+                                    placeholder="Insira o valor..." required>
                             </div>
                         </div>
                         <div class="form-group col-md-6 col-lg-4 col-xl-3  mt-3">
@@ -176,7 +175,7 @@
                                 Utilizada</label>
                             <div class="input-group">
                                 <input type="number" class="form-control" id="inputInsumoPorcao"
-                                    name="inputInsumoPorcao" placeholder="ex: 0.200(kg), 0.6(m), .">
+                                    name="inputInsumoPorcao" placeholder="ex: 0.200(kg), 0.6(m), ." required>
                             </div>
                         </div>
                         <div
@@ -191,13 +190,13 @@
                     <hr>
                     <!-----------------------------LISTA DE INSUMOS-------------------------------------->
                     <div id="collapseListaAdicionados"
-                        class="d-flex justify-content-between row collapse multi-collapse lista-adicionados">
+                        class="d-flex justify-content-between row  lista-adicionados" style="display: none !important;">
                         <!-----------------------------HEADER LISTA INSUMOS-------------------------------------->
-                        <div class="d-flex justify-content-between  header-listaInsumos form-group col-md-12">
+                        <div id="headerListaAdicionados" class="d-flex justify-content-between  header-listaInsumos form-group col-md-12" >
                             <h4>Lista de Insumos / Precificador</h4>
                             <button id="btnHeaderInsumosLista" type="button" role="button"
                                 data-bs-target="#collapseInsumosLista" aria-expanded="false"
-                                aria-controls="collapseInsumosLista" onclick="CollapseInsumosLista()">
+                                aria-controls="collapseInsumosLista" onclick="">
 
                                 <svg id="btnCloseHeaderInsumoListaDown" xmlns="http://www.w3.org/2000/svg" width="16"
                                     height="16" fill="currentColor" class="bi bi-chevron-double-down"
@@ -218,10 +217,10 @@
                         </div>
                         <!-----------------------------BODY LISTA INSUMOS-------------------------------------->
 
-                        <div id="collapseInsumosLista" class="">
+                        <div id="collapseInsumosLista" class="" style="display:none;">
                             <div class="form-group col-md-12 p-0 divInsumosLista">
                                 <table id="tableListaInsumos"
-                                    class="table mt-3 table-gray table-striped-columns col-md-12 ajuste-table-adicionados display-none-important">
+                                    class="table mt-3 table-gray table-striped-columns col-md-12 ajuste-table-adicionados">
                                     <thead id="hdListaInsumos">
                                         <tr>
                                             <th class="radius-left" style="width: 30%;">Nome</th>
@@ -238,39 +237,31 @@
                             </div>
 
                             <div id="divIdBotoesListaInsumo"
-                                class="form-group col-md-12 d-flex justify-content-between btn-container display-none-important">
+                                class="form-group col-md-12 d-flex justify-content-between btn-container">
                                 <button id="ExcluiListaInsumo" type="button" class="btn btn-danger btn-ajuste">Excluir
                                     Lista <i class="fas fa-trash-alt"></i>
                                 </button>
                                 <button id="btnCalcularProduto" class="btn btn-primary btn-ajuste" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#collapseProdutosCalculadosLista"
+                                    data-bs-target="#collapseProdutosCalculadosLista"
                                     aria-expanded="false" aria-controls="collapseProdutosCalculadosLista"
                                     onclick="CalcularProduto()">
                                     Precificar Produto <i class="fas fa-calculator mr-3"></i></button>
                             </div>
-
-                            <div id="EmptyList" class="d-flex justify-content-center display-none-important">
-                                <p class="strong text-center">Não há insumos adicionados a lista</p>
-                            </div>
                         </div>
-
-
                     </div>
-
                 </div>
             </div>
 
 
             <!------------------------------------------- Produtos Calculados --------------------------------------------------->
-            <div id="collapseProdutosCalculadosLista"
-                class="container-criador-de-produto col-md-12 collapse multi-collapse">
+            <div id="collapseProdutosCalculadosLista" class="container-criador-de-produto col-md-12" style="display: none;">
                 <div class="row w-100">
                     <!-----------------------------HEADER CRIADOR DE PRODUTO------------------------------------->
                     <div class="d-flex justify-content-between  header-listaInsumos">
                         <h4>Produtos Precificados</h4>
                         <button id="btnHeaderProdutosCalculados" type="button" role="button"
                             data-bs-target="#collapseListaProdutosPrecificados" aria-expanded="false"
-                            aria-controls="collapseListaProdutosPrecificados" onclick="CollapseProdutosCalculados()">
+                            aria-controls="collapseListaProdutosPrecificados" onclick="">
 
                             <svg id="btnCloseHeaderCalculadosDown" xmlns="http://www.w3.org/2000/svg" width="16"
                                 height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16"
@@ -290,7 +281,7 @@
                         </button>
                     </div>
                     <!-----------------------------BODY CRIADOR DE PRODUTO------------------------------------>
-                    <div id="collapseListaProdutosPrecificados" class="row show collapse multi-collapse">
+                    <div id="collapseListaProdutosPrecificados" class="row">
                         <div class="col-md-12 divProdutosPrecificados " style="padding-right: 0px;">
                             <table id="tabListaValoresProduto"
                                 class="table table-striped-columns ajuste-table-adicionados mt-3">

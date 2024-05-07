@@ -40,7 +40,6 @@ function ComporValorProduto(dadosProduto) {
 }
 
 function MontaTabelaProdutosCalculados(custoCalculado, nomeProduto) {
-    console.log('entrou')
     let novaLinha = $('<tr>').append(
         $('<td>').html(nomeProduto),
         $('<td>').html('<span class="AjusteMoeda">R$</span><span class="AjusteValor mascaraMonetaria">' + custoCalculado.CustoBruto.toFixed(2) + '</span>'),
