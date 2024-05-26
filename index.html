@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -19,37 +17,37 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/mask.js"></script> -->
-    <script src="https://cdn.rawgit.com/plentz/jquery-maskmoney/master/dist/jquery.maskMoney.min.js"></script>
-    <title>Calculadora de Preços</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+<!-- <script src="https://cdn.jsdelivr.net/npm/mask.js"></script> -->
+<script src="https://cdn.rawgit.com/plentz/jquery-maskmoney/master/dist/jquery.maskMoney.min.js"></script>
+<title>Calculadora de Preços</title>
 
 
-    <!-----------------------------------------Arquivos------------------------------------------------------------>
-    <script src="scripts/CriadorDeProduto.js"></script>
-    <script src="scripts/MetodosGerais.js"></script>
-    <script src="scripts/AdicionaInsumo.js"></script>
-    <script src="scripts/CalculaProduto.js"></script>
+<!-----------------------------------------Arquivos------------------------------------------------------------>
+<script src="scripts/CriadorDeProduto.js"></script>
+<script src="scripts/MetodosGerais.js"></script>
+<script src="scripts/AdicionaInsumo.js"></script>
+<script src="scripts/CalculaProduto.js"></script>
 </head>
 
 <body>
-
-
     <header>
         <h1>Precificador de Produtos</h1>
     </header>
-
     <main>
         <article class="formPrincipal scrollable" id="formAdicionaInsumo">
 
             <!-- ---------------------------CRIADOR DE PRODUTO------------------------------------>
-            <div class="container-criador-de-produto col-md-12">
-                <div  class="row w-100">
+            <div id="CriadorDeProdutos" class="container-criador-de-produto col-md-12">
+                <div class="row w-100">
                     <!-----------------------------HEADER CRIADOR DE PRODUTO------------------------------------->
                     <div id="divCriadorDeProdutos" class="d-flex justify-content-between  header-listaInsumos">
                         <h4 id="TituloCriadorDeProdutos">Crie Seu Produto</h4>
                         <button id="btnHeaderCriadorDeProdutos" type="button" role="button"
-                            data-bs-target="#collapseCriadorDeProdutos" aria-expanded="false"
-                            aria-controls="collapseCriadorDeProdutos" onclick="CollapseCriadorDeProdutos()">
+                            onclick="ToggleHeader('collapseCriadorDeProdutos', 'btnCloseCriadorDeProdutosDown', 'btnCloseCriadorDeProdutosUp')">
 
                             <svg id="btnCloseCriadorDeProdutosDown" xmlns="http://www.w3.org/2000/svg" width="16"
                                 height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16"
@@ -71,32 +69,34 @@
                     <!-----------------------------BODY CRIADOR DE PRODUTO------------------------------------>
                     <form id="collapseCriadorDeProdutos" class="row needs-validation">
                         <div class="form-group col-lg-12">
-                            <label for="inputProdutoNome"  class="form-label">Nome do
+                            <label for="inputProdutoNome" class="form-label">Nome do
                                 Produto</label>
-                            <input type="text" class="form-control" id="inputProdutoNome" name="inputProdutoNome"
-                                placeholder="Insira o nome do seu produto aqui..." required>
+                            <input type="text" class="form-control input-group" id="inputProdutoNome"
+                                name="inputProdutoNome" placeholder="Insira o nome do seu produto aqui..." required>
+                            <div class="error-message"></div>
                         </div>
                         <div class="form-group col-md-6 col-lg-3 mt-2">
                             <label for="inputProdutoMargemImposto" class="form-label">Margem de
                                 Impostos</label>
                             <div class="input-group">
                                 <span class="input-group-text">%</span>
-                                <input id="inputProdutoMargemImposto" type="number" class="form-control"
+                                <input id="inputProdutoMargemImposto" type="text"
+                                    class="form-control input-group radius-right radius-bottom-right"
                                     placeholder="Impostos...">
                             </div>
                         </div>
                         <div class="form-group col-md-6 col-lg-3 mt-2">
-                            <label for="inputProdutoMargemLucro"  class="form-label" required>Margem de
-                                Lucro</label>
-                            <div class="input-group ">
-                                <span class="input-group-text" name="inputProdutoMargemLucro">%</span>
-                                <input id="inputProdutoMargemLucro" type="number" name="inputProdutoMargemLucro" class="form-control radius-right"
-                                    placeholder="Lucro...">
+                            <label for="inputProdutoMargemLucro" class="form-label">Margem de Lucro</label>
+                            <div class="input-group form-group">
+                                <span class="input-group-text">%</span>
+                                <input id="inputProdutoMargemLucro" type="text" name="inputProdutoMargemLucro"
+                                    class="form-control  radius-right radius-bottom-right" placeholder="Lucro...">
                             </div>
+                            <div class="error-message col-md-6 col-lg-3"></div>
                         </div>
                         <div class="form-group d-flex justify-content-end col-lg-6 mt-4">
                             <button id="btnCriarProduto" class="btn btn-primary btn-ajuste" type="button"
-                                data-bs-target="#collapseAddInsumos" aria-expanded="false" 
+                                data-bs-target="#collapseAddInsumos" aria-expanded="false"
                                 aria-controls="collapseAddInsumos" onclick="CriarProduto()">
                                 Criar Produto <i class="fas fa-arrow-right mr-3"></i></button>
                         </div>
@@ -111,20 +111,20 @@
                     <div class="d-flex justify-content-between  header-listaInsumos">
                         <h4 id="h4TextoAddInsumos" class="col-8">Adicione Insumos a "<p id="headerInsumosNomeProduto">
                             </p>"</h4>
-                        <button id="btnHeaderInsumoListaAddCampos" type="button" role="button" 
+                        <button id="btnHeaderInsumoListaAddCampos" type="button" role="button"
                             data-bs-target="#collapseInsumosAddCampo" aria-expanded="false"
-                            aria-controls="collapseInsumosAddCampo" onclick="">
-
+                            aria-controls="collapseInsumosAddCampo"
+                            onclick="ToggleHeader('collapseInsumosAddCampos','btnCloseHeaderAddInsumosDown', 'btnCloseHeaderAddInsumosUp')">
                             <svg id="btnCloseHeaderAddInsumosDown" xmlns="http://www.w3.org/2000/svg" width="16"
-                                height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16"
-                                display="none">
+                                height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd"
                                     d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
                                 <path fill-rule="evenodd"
                                     d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
                             </svg>
                             <svg id="btnCloseHeaderAddInsumosUp" xmlns="http://www.w3.org/2000/svg" width="16"
-                                height="16" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16">
+                                height="16" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16"
+                                display="none">
                                 <path fill-rule="evenodd"
                                     d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708z" />
                                 <path fill-rule="evenodd"
@@ -133,17 +133,18 @@
                         </button>
                     </div>
                     <!-----------------------------BODY ADD INSUMOS-------------------------------------->
-                    <form id="collapseInsumosAddCampos" class="row mb-3" >
+                    <form id="collapseInsumosAddCampos" class="row mb-3 needs-validation" style="display:none;">
                         <div class="form-group col-sm-12 col-md-12 col-lg-9 col-xl-6 mt-3">
                             <label class="form-label" for="inputInsumoNome">Nome</label>
-                            <input id="inputInsumoNome" type="text" class="form-control" name="inputInsumoNome"
-                                placeholder="...salsicha, molho, alface" required>
+                            <input id="inputInsumoNome" type="text" class="form-control input-group"
+                                name="inputInsumoNome" placeholder="...salsicha, molho, alface" required>
+                            <div class="error-message"></div>
                         </div>
                         <div class="form-group col-md-6 col-lg-4 col-xl-3 mt-3">
                             <label class="form-label" for="selectInsumoTipoMedida">Tipo de
                                 Medida</label>
-                            <select class="form-control" id="selectInsumoTipoMedida" name="selectInsumoTipoMedida"
-                                placeholder="kg, unidade, metro, litros." required>
+                            <select class="form-control input-group remove-borda" id="selectInsumoTipoMedida"
+                                name="selectInsumoTipoMedida" placeholder="kg, unidade, metro, litros." required>
                                 <option value="" disabled selected hidden>Selecione a
                                     medida...</option>
                                 <option value="1">Unidade</option>
@@ -151,29 +152,33 @@
                                 <option value="3">Metro (m)</option>
                                 <option value="4">Litros</option>
                             </select>
+                            <div class="error-message"></div>
                         </div>
-                        <div class="form-group col-md-6 col-lg-4 col-xl-3 mt-3">
+                        <div class="form-group col-md-6 col-lg-4 col-xl-3 mt-3 ">
                             <label class="form-label" for="inputInsumoQuantidadeEmbalagem">Quantidade Embalagem</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" id="inputInsumoQuantidadeEmbalagem"
-                                    name="inputInsumoQuantidadeEmbalagem"
-                                    placeholder="ex: 0.300(kg), 0.65(metros), 1 (unidade)" required>
+                                <input type="number" class="form-control radius-right-complete"
+                                    id="inputInsumoQuantidadeEmbalagem" name="inputInsumoQuantidadeEmbalagem"
+                                    placeholder="ex: 0.300(kg), 0.65(metros), 1 (unidade)">
+                                <div class="error-message"></div>
                             </div>
                         </div>
-                        <div class="form-group col-md-6 col-lg-4 col-xl-3  mt-3">
+                        <div class="form-group col-md-6 col-lg-4 col-xl-3 mt-3">
                             <label class="form-label" for="inputInsumoValor">Valor</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend ">
+                            <div class="input-group form-group ">
+                                <div class="input-group-prepend">
                                     <span class="input-group-text rs-input">R$</span>
                                 </div>
                                 <input type="number" class="form-control" id="inputInsumoValor" name="inputInsumoValor"
                                     placeholder="Insira o valor..." required>
                             </div>
+                            <div class="error-message col-md-6 col-lg-4 col-xl-3"></div>
                         </div>
+
                         <div class="form-group col-md-6 col-lg-4 col-xl-3  mt-3">
                             <label class="form-label" for="inputInsumoPorcao">Porção
                                 Utilizada</label>
-                            <div class="input-group">
+                            <div class="input-group form-group ">
                                 <input type="number" class="form-control" id="inputInsumoPorcao"
                                     name="inputInsumoPorcao" placeholder="ex: 0.200(kg), 0.6(m), ." required>
                             </div>
@@ -189,25 +194,27 @@
                     </form>
                     <hr>
                     <!-----------------------------LISTA DE INSUMOS-------------------------------------->
-                    <div id="collapseListaAdicionados"
-                        class="d-flex justify-content-between row  lista-adicionados" style="display: none !important;">
+                    <div id="collapseListaAdicionados" class="d-flex justify-content-between row  lista-adicionados"
+                        style="display: none;">
                         <!-----------------------------HEADER LISTA INSUMOS-------------------------------------->
-                        <div id="headerListaAdicionados" class="d-flex justify-content-between  header-listaInsumos form-group col-md-12" >
+                        <div id="headerListaAdicionados"
+                            class="d-flex justify-content-between  header-listaInsumos form-group col-md-12">
                             <h4>Lista de Insumos / Precificador</h4>
                             <button id="btnHeaderInsumosLista" type="button" role="button"
                                 data-bs-target="#collapseInsumosLista" aria-expanded="false"
-                                aria-controls="collapseInsumosLista" onclick="">
+                                aria-controls="collapseInsumosLista" onclick="ToggleHeaderInsumos()">
 
                                 <svg id="btnCloseHeaderInsumoListaDown" xmlns="http://www.w3.org/2000/svg" width="16"
                                     height="16" fill="currentColor" class="bi bi-chevron-double-down"
-                                    viewBox="0 0 16 16" display="none">
+                                    viewBox="0 0 16 16">
                                     <path fill-rule="evenodd"
                                         d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
                                     <path fill-rule="evenodd"
                                         d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
                                 </svg>
                                 <svg id="btnCloseHeaderInsumoListaUp" xmlns="http://www.w3.org/2000/svg" width="16"
-                                    height="16" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16">
+                                    height="16" fill="currentColor" class="bi bi-chevron-double-up" viewBox="0 0 16 16"
+                                    display="none">
                                     <path fill-rule="evenodd"
                                         d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708z" />
                                     <path fill-rule="evenodd"
@@ -237,31 +244,37 @@
                             </div>
 
                             <div id="divIdBotoesListaInsumo"
-                                class="form-group col-md-12 d-flex justify-content-between btn-container">
-                                <button id="ExcluiListaInsumo" type="button" class="btn btn-danger btn-ajuste">Excluir
+                                class="form-group col-md-12 d-flex justify-content-between btn-container mb-2">
+                                <button id="ExcluiListaInsumo" type="button" class="btn btn-danger btn-ajuste"
+                                    onclick="ExcluiListaInsumos()">Excluir
                                     Lista <i class="fas fa-trash-alt"></i>
                                 </button>
-                                <button id="btnCalcularProduto" class="btn btn-primary btn-ajuste" type="button"
-                                    data-bs-target="#collapseProdutosCalculadosLista"
-                                    aria-expanded="false" aria-controls="collapseProdutosCalculadosLista"
-                                    onclick="CalcularProduto()">
-                                    Precificar Produto <i class="fas fa-calculator mr-3"></i></button>
                             </div>
                         </div>
+                    </div>
+                    <hr>
+                    <div class="form-group w-100 d-flex justify-content-between">
+                        <button id="btnInsumoAdicionar" class="btn btn-danger btn-ajuste" type="button"
+                            onclick="CancelaProduto()">Excluir Produto <i class="ml-3 fas fa-trash-alt"></i>
+                        </button>
+                        <button id="btnCalcularProduto" class="btn btn-primary btn-ajuste" type="button"
+                            data-bs-target="#collapseProdutosCalculadosLista" aria-expanded="false"
+                            aria-controls="collapseProdutosCalculadosLista" onclick="CalcularProduto()">
+                            Precificar Produto <i class="fas fa-calculator mr-3"></i></button>
                     </div>
                 </div>
             </div>
 
 
             <!------------------------------------------- Produtos Calculados --------------------------------------------------->
-            <div id="collapseProdutosCalculadosLista" class="container-criador-de-produto col-md-12" style="display: none;">
+            <div id="collapseProdutosCalculadosLista" class="container-criador-de-produto col-md-12"
+                style="display: none;">
                 <div class="row w-100">
-                    <!-----------------------------HEADER CRIADOR DE PRODUTO------------------------------------->
+                    <!-----------------------------HEADER Produtos Calculados------------------------------------->
                     <div class="d-flex justify-content-between  header-listaInsumos">
                         <h4>Produtos Precificados</h4>
                         <button id="btnHeaderProdutosCalculados" type="button" role="button"
-                            data-bs-target="#collapseListaProdutosPrecificados" aria-expanded="false"
-                            aria-controls="collapseListaProdutosPrecificados" onclick="">
+                            onclick="ToggleHeader('collapseListaProdutosPrecificados', 'btnCloseHeaderCalculadosDown', 'btnCloseHeaderCalculadosUp')">
 
                             <svg id="btnCloseHeaderCalculadosDown" xmlns="http://www.w3.org/2000/svg" width="16"
                                 height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16"
@@ -280,7 +293,7 @@
                             </svg>
                         </button>
                     </div>
-                    <!-----------------------------BODY CRIADOR DE PRODUTO------------------------------------>
+                    <!-----------------------------BODY Produtos Calculados------------------------------------>
                     <div id="collapseListaProdutosPrecificados" class="row">
                         <div class="col-md-12 divProdutosPrecificados " style="padding-right: 0px;">
                             <table id="tabListaValoresProduto"
@@ -310,24 +323,143 @@
         </article>
     </main>
 
-    <script>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="modalProdutosCalculados"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl ajuste-tamanho-modal">
+            <div class="modal-content mt-5">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalProdutoNomeHeader"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row rowModalListaInsumos">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <label for="modalMargemImposto" class="form-label">Margem de Impostos</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">%</span>
+                                    <input id="modalMargemImposto" type="number"
+                                        class="form-control input-group radius-right radius-bottom-right" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <label for="modalMargemLucro" class="form-label">Margem de Lucro</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">%</span>
+                                    <input id="modalMargemLucro" type="number"
+                                        class="form-control input-group radius-right radius-bottom-right" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <label class="form-label" for="modalCustoProducao">Custo de Produção</label>
+                                <div class="input-group form-group ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text rs-input">R$</span>
+                                    </div>
+                                    <input type="number" class="form-control" id="modalCustoProducao" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <label class="form-label" for="modalValorTotalImposto">Valor com Imposto</label>
+                                <div class="input-group form-group ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text rs-input">R$</span>
+                                    </div>
+                                    <input type="number" class="form-control" id="modalValorTotalImposto" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <label class="form-label" for="modalValorTotalLucro">Valor com Margem de Lucro</label>
+                                <div class="input-group form-group ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text rs-input">R$</span>
+                                    </div>
+                                    <input type="number" class="form-control" id="modalValorTotalLucro" disabled>
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                <label class="form-label" for="modalValorSugerido">Valor com Margem de Lucro</label>
+                                <div class="input-group form-group ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text rs-input">R$</span>
+                                    </div>
+                                    <input type="number" class="form-control" id="modalValorSugerido" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="modalListaInsumos" class="row d-flex justify-content-center">
+                            <div class="form-group ">
+                                <table id="tableModalListaInsumos"
+                                    class="table mt-3 table table-primary table-hover col-md-12">
+                                    <thead id="hdModalListaInsumos">
+                                        <tr>
+                                            <th class="radius-left" style="width: 35%;">Nome</th>
+                                            <th style="width: 15%;">Tipo Medida</th>
+                                            <th style="width: 20%;">Qtd. Embalagem</th>
+                                            <th style="width: 15%;">Porção</th>
+                                            <th class="radius-right" style="width: 15%;">Valor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbModalListaInsumos">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+        <!-- </div> -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
 
-        //======================Eventos===============================//
+            //======================Eventos===============================//
 
-        $(document).ready(function () {
-            IniciaValidateCriaProdutos();
-        });
-        $(function () {
-            $(document).on('click', '.btn-remover', RemoverLinha);
-        });
-        // $(document).ready(function () {
+            $(document).ready(function () {
+                //inputProdutoMargemImposto
+                $('#inputProdutoMargemImposto').mask('000,0', {
+                    reverse: false,
+                    translation: {
+                        '0': {
+                            pattern: /[0-9]/
+                        }
+                    }
+                });
 
-        //     $('#maskValorInsumo').maskMoney();
-        // });
-        // document.addEventListener('DOMContentLoaded', FormatarCampoMonetario);
+                $('#inputProdutoMargemImposto').on('blur', function () {
+                    var value = $(this).val();
+                    if (value && !value.includes(',')) {
+                        $(this).val(value + ',0');
+                    }
+                });
 
+                 $('#inputProdutoMargemLucro').mask('000,0', {
+                     reverse: false,
+                     translation: {
+                         '0': {
+                             pattern: /[0-9]/
+                         }
+                     }
+                 });
 
-    </script>
+                 $('#inputProdutoMargemLucro').on('blur', function () {
+                     var value = $(this).val();
+                     if (value && !value.includes(',')) {
+                         $(this).val(value + ',0');
+                   }
+                 });
+            });
+            $(document).ready(function () {
+                IniciaValidateCriaProdutos();
+            });
+            $(function () {
+                $(document).on('click', '.btn-remover', RemoverLinha);
+            });
+
+        </script>
 
 </body>
 

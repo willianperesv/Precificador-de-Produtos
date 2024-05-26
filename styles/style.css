@@ -8,15 +8,6 @@ html {
 }
 
 body {
-  /* background-image: url('../styles/background.jpg');
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center; */
-
-
   background-image: url('../styles/background.jpg');
   background-repeat:repeat;
   background-size: cover;
@@ -168,8 +159,8 @@ article{
 
 
 .footer {
-  background-color: #f8f9fa71; /* Cor de fundo do footer */
-  color: #0b0c0c; /* Cor do texto do footer */
+  background-color: #f8f9fa71; 
+  color: #0b0c0c; 
 }
 
 .AjusteValor{
@@ -196,11 +187,20 @@ article{
 }
 
 .radius-left{
-   border-top-left-radius:6px ;
+   border-top-left-radius:6px !important ;
 }
 
 .radius-right{
-  border-top-right-radius:6px ;
+  border-top-right-radius:6px !important ;
+ 
+}
+
+.radius-bottom-right{
+  border-bottom-right-radius:6px !important ;
+}
+.radius-right-complete{
+  border-top-right-radius:6px !important ;
+  border-bottom-right-radius:6px !important ;
 }
 
 .header-listaInsumos button:hover{
@@ -245,7 +245,78 @@ input.error {
   margin-top: 5px;
 }
 
+.remove-borda{
+  border: none !important;
+}
+form:invalid select:invalid {
+    border-color: #dc3545; /* Vermelho */
+}
 
+form:valid select:invalid {
+    border-color: initial; /* Remove a borda vermelha quando o formulário for válido */
+}
+
+input[type="number"] {
+  text-align: right;
+}
+input::placeholder {
+  text-align: left;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#btnHeaderInsumoListaAddCampos img{
+  width:1.6rem;
+}
+
+#btnHeaderInsumoListaAddCampos:hover{
+  background-color: rgba(250, 179, 174, 0.795);
+}
+
+.buttonVisualizaProduto{
+  display:flex;
+  justify-content: center;
+  height:22px;
+  padding:0.2rem;
+}
+
+.buttonVisualizaProduto img{
+  color: white;
+  width:1rem;
+}
+
+.rowModalListaInsumos{
+  padding-right: 1rem !important;
+}
+.ajuste-tamanho-modal{
+  width: 55rem !important;
+  margin: auto;
+}
+.divModalInsumosLista{
+  overflow-x: auto;
+  max-width: 100%;
+  border-top-left-radius: 10px;
+}
+
+#modalListaInsumos{
+  padding: 0;
+  width:100%;
+  overflow-x: auto;
+}
+#tableModalListaInsumos{
+  width: 51.9rem;
+}
+
+
+@media (max-width: 576px) {
+  .ajuste-tamanho-modal {
+      width: auto !important;
+  }
+}
 
 
 

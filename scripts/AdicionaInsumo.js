@@ -17,5 +17,16 @@ function AdicionaInsumoLista(dadosInsumo) {
 
 }
 
+function AdicionaModalInsumoLista(dadosInsumo) {
+    let novaLinha = $('<tr>').append(
+        $('<td>').html(dadosInsumo.InsumoNome),
+        $('<td>').html(dadosInsumo.InsumoTipoMedida),
+        $('<td style="text-align: right;">').html(dadosInsumo.InsumoQuantidadeEmbalagem),
+        $('<td style="text-align: right;">').html(dadosInsumo.InsumoPorcao),
+        $('<td class="d-flex justify-content-between">').html('<span>R$</span><span id="maskValorInsumo"class="ms-auto"> ' + dadosInsumo.InsumoValor + '</span>'),
+    );
+    novaLinha.appendTo('#tbModalListaInsumos');
+}
+
 //-------------------Limpa Campos------------------------------------//
 
