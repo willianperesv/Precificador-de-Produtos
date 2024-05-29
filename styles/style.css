@@ -7,6 +7,7 @@ html {
   height: 100%;
 }
 
+
 body {
   background-image: url('../styles/background.jpg');
   background-repeat:repeat;
@@ -142,7 +143,7 @@ article{
 .ajuste-table-calculados{
   width: 52rem;
 }
-  
+
 
 
 
@@ -256,9 +257,16 @@ form:valid select:invalid {
     border-color: initial; /* Remove a borda vermelha quando o formulário for válido */
 }
 
-input[type="number"] {
+.campoPercentual {
   text-align: right;
 }
+.campoMedida {
+  text-align: right;
+}
+.campoValorMonetario {
+  text-align: right;
+}
+
 input::placeholder {
   text-align: left;
 }

@@ -66,17 +66,23 @@ function RemoverLinha() {
     $(this).closest('tr').remove();
 }
 
-function MascaraMonetaria(valor){
-    valorTratado = valor.maskMoney({
-        thousands: '.',
-        decimal: ',',
-        prefix: 'R$ ',
-        precision: 2,
-        allowNegative: false
-    });
-    return valorTratado
+function convertToFloat(value) {
+    // Substitui a vírgula por ponto
+    let formattedValue = value.replace(',', '.');
+    
+    // Converte a string para float
+    let floatValue = parseFloat(formattedValue);
+    
+    // Retorna o valor float
+    return floatValue;
 }
 
+function converteStringPraFloat(value) {
+    let valorSemPonto = value.replace(/\./g, '');
+    let valorFormatado = valorSemPonto.replace(',', '.');
+    let valorFloat = parseFloat(valorFormatado);
+    return valorFloat;
+}
 function AdicionarPercentual(valor, percentual) {
     return valor + (valor * percentual / 100);
 }

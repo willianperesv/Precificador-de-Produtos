@@ -144,7 +144,7 @@ function IniciaValidateCriaProdutos(){
             inputProdutoNome: {
                 required: true,
             },
-            inputProdutoMargemLucro: {
+            ProdutoMargemImposto: {
                 required: true,
             },
           },
@@ -153,7 +153,7 @@ function IniciaValidateCriaProdutos(){
                 required: "Campo obrigatório.",
              
             },
-            inputProdutoMargemLucro:{
+            ProdutoMargemImposto:{
                 required: "Campo obrigatório.",
              
             }
@@ -219,8 +219,8 @@ function IniciaValidateAddInsumos(){
 function MontaProduto() {
     DadosProduto = {
         ProdutoNome: $('#inputProdutoNome').val(),
-        ProdutoMargemImposto: parseFloat($('#inputProdutoMargemImposto').val()),
-        ProdutoMargemLucro: parseFloat($('#inputProdutoMargemLucro').val()),
+        ProdutoMargemImposto: converteStringPraFloat($('#inputProdutoMargemImposto').val()),
+        ProdutoMargemLucro: converteStringPraFloat($('#inputProdutoMargemLucro').val()),
         ProdutoId: $('#inputProdutoNome').val() + (ListaProdutosCalculados.length + 1),
         ListaInsumos: [],
         ProdutoCalculado: []
@@ -233,9 +233,9 @@ function MontaInsumos() {
     DadosProduto.ListaInsumos.push({
         InsumoNome: $('#inputInsumoNome').val(),
         InsumoTipoMedida: $('#selectInsumoTipoMedida').val(),
-        InsumoQuantidadeEmbalagem: parseFloat($('#inputInsumoQuantidadeEmbalagem').val()),
-        InsumoValor: parseFloat($('#inputInsumoValor').val()),
-        InsumoPorcao: parseFloat($('#inputInsumoPorcao').val()),
+        InsumoQuantidadeEmbalagem: converteStringPraFloat($('#inputInsumoQuantidadeEmbalagem').val()),
+        InsumoValor: converteStringPraFloat($('#inputInsumoValor').val()),
+        InsumoPorcao: converteStringPraFloat($('#inputInsumoPorcao').val()),
     });
 }
 

@@ -9,7 +9,7 @@ function ComporValorProduto(dadosProduto) {
     insumos.map(item => {
         switch (item.InsumoTipoMedida) {
             case '1':
-                custoBruto += CalculaUnidade(parseFloat(item.InsumoPorcao), parseFloat(item.InsumoQuantidadeEmbalagem), parseFloat(item.InsumoValor))
+                custoBruto += CalculaUnidade(item.InsumoPorcao, item.InsumoQuantidadeEmbalagem, item.InsumoValor)
                 break;
             case '2':
                 CalculaMetro();

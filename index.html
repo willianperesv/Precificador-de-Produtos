@@ -15,11 +15,13 @@
     <script src="https://kit.fontawesome.com/1a49e8198f.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 </head>
 <!-- <script src="https://cdn.jsdelivr.net/npm/mask.js"></script> -->
 <script src="https://cdn.rawgit.com/plentz/jquery-maskmoney/master/dist/jquery.maskMoney.min.js"></script>
@@ -76,12 +78,12 @@
                             <div class="error-message"></div>
                         </div>
                         <div class="form-group col-md-6 col-lg-3 mt-2">
-                            <label for="inputProdutoMargemImposto" class="form-label">Margem de
+                            <label for="inputProdutoMargemImposto" class="form-label ">Margem de
                                 Impostos</label>
                             <div class="input-group">
                                 <span class="input-group-text">%</span>
-                                <input id="inputProdutoMargemImposto" type="text"
-                                    class="form-control input-group radius-right radius-bottom-right"
+                                <input id="inputProdutoMargemImposto" type="text" name="ProdutoMargemImposto"
+                                    class="form-control input-group radius-right radius-bottom-right campoPercentual"
                                     placeholder="Impostos...">
                             </div>
                         </div>
@@ -89,8 +91,9 @@
                             <label for="inputProdutoMargemLucro" class="form-label">Margem de Lucro</label>
                             <div class="input-group form-group">
                                 <span class="input-group-text">%</span>
-                                <input id="inputProdutoMargemLucro" type="text" name="inputProdutoMargemLucro"
-                                    class="form-control  radius-right radius-bottom-right" placeholder="Lucro...">
+                                <input id="inputProdutoMargemLucro" type="text" name="ProdutoMargemLucro"
+                                    class="form-control  radius-right radius-bottom-right campoPercentual"
+                                    placeholder="Lucro...">
                             </div>
                             <div class="error-message col-md-6 col-lg-3"></div>
                         </div>
@@ -157,7 +160,7 @@
                         <div class="form-group col-md-6 col-lg-4 col-xl-3 mt-3 ">
                             <label class="form-label" for="inputInsumoQuantidadeEmbalagem">Quantidade Embalagem</label>
                             <div class="input-group">
-                                <input type="number" class="form-control radius-right-complete"
+                                <input type="text" class="form-control radius-right-complete campoMedida"
                                     id="inputInsumoQuantidadeEmbalagem" name="inputInsumoQuantidadeEmbalagem"
                                     placeholder="ex: 0.300(kg), 0.65(metros), 1 (unidade)">
                                 <div class="error-message"></div>
@@ -169,17 +172,18 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text rs-input">R$</span>
                                 </div>
-                                <input type="number" class="form-control" id="inputInsumoValor" name="inputInsumoValor"
-                                    placeholder="Insira o valor..." required>
+                                <input type="text" class="form-control campoValorMonetario" id="inputInsumoValor"
+                                    name="inputInsumoValor" data-thousands="." data-decimal="," placeholder="Insira o valor..." required>
                             </div>
                             <div class="error-message col-md-6 col-lg-4 col-xl-3"></div>
+
                         </div>
 
                         <div class="form-group col-md-6 col-lg-4 col-xl-3  mt-3">
                             <label class="form-label" for="inputInsumoPorcao">Porção
                                 Utilizada</label>
                             <div class="input-group form-group ">
-                                <input type="number" class="form-control" id="inputInsumoPorcao"
+                                <input type="text" class="form-control campoMedida" id="inputInsumoPorcao"
                                     name="inputInsumoPorcao" placeholder="ex: 0.200(kg), 0.6(m), ." required>
                             </div>
                         </div>
@@ -419,38 +423,134 @@
             //======================Eventos===============================//
 
             $(document).ready(function () {
-                //inputProdutoMargemImposto
-                $('#inputProdutoMargemImposto').mask('000,0', {
-                    reverse: false,
-                    translation: {
-                        '0': {
-                            pattern: /[0-9]/
+
+                //================Mascaras==========================//
+                $(".campoPercentual").mask("999,99");
+                $(".campoMedida").mask("999,999", {
+                    reverse: true
+                });
+                $("#inputInsumoValor").maskMoney()
+                //$('#inputInsumoValor').mask('999.999,99', { reverse: true });
+
+                //===============Inputs Criação de Produtos==================//
+                $("#inputProdutoMargemLucro").on("blur", function () {
+                    var value = $(this).val();
+                    //     var value = $(this).val();
+                    if (value && !value.includes(',')) {
+                        $(this).val(value + ',00');
+                    }
+                    if (value && value.includes(',')) {
+                        if (value.split(',')[1].length === 0) {
+                            // Adiciona '00' se não houver valor após a vírgula
+                            $(this).val(value + '00');
+                        }
+                        if (value.split(',')[1].length === 1) {
+                            // Adiciona '00' se não houver valor após a vírgula
+                            $(this).val(value + '0');
                         }
                     }
+
                 });
 
-                $('#inputProdutoMargemImposto').on('blur', function () {
+                $("#inputProdutoMargemImposto").on("blur", function () {
                     var value = $(this).val();
+                    //     var value = $(this).val();
                     if (value && !value.includes(',')) {
-                        $(this).val(value + ',0');
+                        $(this).val(value + ',00');
                     }
+                    if (value && value.includes(',')) {
+                        if (value.split(',')[1].length === 0) {
+                            // Adiciona '00' se não houver valor após a vírgula
+                            $(this).val(value + '00');
+                        }
+                        if (value.split(',')[1].length === 1) {
+                            // Adiciona '00' se não houver valor após a vírgula
+                            $(this).val(value + '0');
+                        }
+                    }
+
+                });
+                //===============Inputs add Insumos==================//
+                $("#inputInsumoQuantidadeEmbalagem").on("blur", function () {
+                    var value = $(this).val();
+                    //     var value = $(this).val();
+                    if (value && !value.includes(',')) {
+                        $(this).val(value + ',00');
+                    }
+                    if (value && value.includes(',')) {
+                        if (value.split(',')[1].length === 0) {
+                            // Adiciona '00' se não houver valor após a vírgula
+                            $(this).val(value + '00');
+                        }
+                        if (value.split(',')[1].length === 1) {
+                            // Adiciona '00' se não houver valor após a vírgula
+                            $(this).val(value + '0');
+                        }
+                    }
+
+                });
+                $("#inputInsumoPorcao").on("blur", function () {
+                    var value = $(this).val();
+                    //     var value = $(this).val();
+                    if (value && !value.includes(',')) {
+                        $(this).val(value + ',00');
+                    }
+                    if (value && value.includes(',')) {
+                        if (value.split(',')[1].length === 0) {
+                            // Adiciona '00' se não houver valor após a vírgula
+                            $(this).val(value + '00');
+                        }
+                        if (value.split(',')[1].length === 1) {
+                            // Adiciona '00' se não houver valor após a vírgula
+                            $(this).val(value + '0');
+                        }
+                    }
+
                 });
 
-                 $('#inputProdutoMargemLucro').mask('000,0', {
-                     reverse: false,
-                     translation: {
-                         '0': {
-                             pattern: /[0-9]/
-                         }
-                     }
-                 });
+                // $("#inputInsumoValor").on("blur", function () {
+                //     var value = $(this).val();
+                //     //     var value = $(this).val();
+                //     if (value && !value.includes(',')) {
+                //         if (value.split('.')[1].length === 0) {
+                //             $(this).val(value + '000,00');
+                //         } else {
+                //             $(this).val(value + ',00');
+                //         }
 
-                 $('#inputProdutoMargemLucro').on('blur', function () {
-                     var value = $(this).val();
-                     if (value && !value.includes(',')) {
-                         $(this).val(value + ',0');
-                   }
-                 });
+                //     }
+
+                //     if (value && value.includes(',')) {
+                //         if (value.split(',')[1].length === 0) {
+                //             // Adiciona '00' se não houver valor após a vírgula
+                //             $(this).val(value + '00');
+                //         }
+                //         if (value.split(',')[1].length === 1) {
+                //             // Adiciona '00' se não houver valor após a vírgula
+                //             $(this).val(value + '0');
+                //         }
+                //     }
+
+                // });
+     
+                // $('#inputInsumoValor').on('keypress', function (e) {
+                //     // Permite o ponto ser digitado
+                //     if (e.key === '.') {
+                //         // Impede o comportamento padrão do ponto
+                //         e.preventDefault();
+
+                //         // Insere o ponto na posição correta
+                //         $(this).val($(this).val() + '.');
+                //     }
+                //     if (e.key === '.0') {
+                //         // Impede o comportamento padrão do ponto
+                //         e.preventDefault();
+
+                //         // Insere o ponto na posição correta
+                        
+                //     }
+                // });
+
             });
             $(document).ready(function () {
                 IniciaValidateCriaProdutos();
