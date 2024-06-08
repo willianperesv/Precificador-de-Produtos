@@ -9,9 +9,7 @@ function CriarProduto() {
         MontaProduto();
         LimpaCamposDiv('collapseCriadorDeProdutos');
         $('#headerInsumosNomeProduto').html(DadosProduto.ProdutoNome);
-        //FechaSessao('collapseCriadorDeProdutos','CriadorDeProdutos', true, 800);
         FechaSessaoComSlide('CriadorDeProdutos', 'collapseCriadorDeProdutos', 'btnCloseCriadorDeProdutosDown', 'btnCloseCriadorDeProdutosUp', 1000)
-        //AbreSessao('collapseInsumosAddCampos','collapseAddInsumos', true, 1000);
         AbreSessaoComSlide('collapseAddInsumos', 'collapseInsumosAddCampos', 'btnCloseHeaderAddInsumosDown', 'btnCloseHeaderAddInsumosUp', 2000)
     }
 }
@@ -117,16 +115,21 @@ function PreencheModalProdutoCalculado(produtoId){
 
      $('#modalProdutoNomeHeader').text(ProdutoSelecionado.ProdutoNome)
 
-    $('#modalMargemImposto').val(ProdutoSelecionado.ProdutoMargemImposto)
-    $('#modalMargemLucro').val(ProdutoSelecionado.ProdutoMargemLucro)
-    $('#modalCustoProducao').val(ProdutoSelecionado.ProdutoCalculado[0].CustoBruto)
-    $('#modalValorTotalImposto').val(ProdutoSelecionado.ProdutoCalculado[0].ValorComImposto)
-    $('#modalValorTotalLucro').val(ProdutoSelecionado.ProdutoCalculado[0].ValorComLucro)
-    $('#modalValorSugerido').val(ProdutoSelecionado.ProdutoCalculado[0].ValorSugerido)
+    $('#modalMargemImposto').val(ProdutoSelecionado.ProdutoMargemImposto.toFixed(2))
+    $('#modalMargemLucro').val(ProdutoSelecionado.ProdutoMargemLucro.toFixed(2))
+    $('#modalCustoProducao').val(ProdutoSelecionado.ProdutoCalculado[0].CustoBruto.toFixed(2))
+    $('#modalValorTotalImposto').val(ProdutoSelecionado.ProdutoCalculado[0].ValorComImposto.toFixed(2))
+    $('#modalValorTotalLucro').val(ProdutoSelecionado.ProdutoCalculado[0].ValorComLucro.toFixed(2))
+    $('#modalValorSugerido').val(ProdutoSelecionado.ProdutoCalculado[0].ValorSugerido.toFixed(2))
 
     ProdutoSelecionado.ListaInsumos.map((item) => {
         AdicionaModalInsumoLista(item)
     })
+}
+
+function FechaModalProdutoCalculado() {
+    LimpaCamposDiv('modalCamposProdutoCalculado');
+    $("#tableModalListaInsumos tbody").empty();
 }
 
 //==========================Métodos Validate =================================//
@@ -233,6 +236,7 @@ function MontaInsumos() {
     DadosProduto.ListaInsumos.push({
         InsumoNome: $('#inputInsumoNome').val(),
         InsumoTipoMedida: $('#selectInsumoTipoMedida').val(),
+        InsumoTipoMedidaDescricao: retornaTipoMedidaDescricao($('#selectInsumoTipoMedida').val()),
         InsumoQuantidadeEmbalagem: converteStringPraFloat($('#inputInsumoQuantidadeEmbalagem').val()),
         InsumoValor: converteStringPraFloat($('#inputInsumoValor').val()),
         InsumoPorcao: converteStringPraFloat($('#inputInsumoPorcao').val()),

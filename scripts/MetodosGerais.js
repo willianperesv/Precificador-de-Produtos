@@ -66,14 +66,95 @@ function RemoverLinha() {
     $(this).closest('tr').remove();
 }
 
+function retornaTipoMedidaDescricao(valor){
+    var tipoMedidaDescricao = null;
+    switch (valor) {
+        case '1':
+            tipoMedidaDescricao = 'Unidade'
+            break;
+        case '2':
+            tipoMedidaDescricao = 'Metro(m)'
+            break;
+        case '3':
+            tipoMedidaDescricao = 'Quilo(Kg)'
+            break;
+        case '4':
+            tipoMedidaDescricao = 'Litro(l)'
+            break;
+        default:
+            tipoMedidaDescricao = 'Não reconhecido'
+    }
+    return tipoMedidaDescricao
+}
+
+function aplicaMascaraTipoMedida(tipoMedida){
+    var tipoMedidaDescricao = null;
+    switch (tipoMedida) {
+        case '1':
+            $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraMetroKgLitro');
+            $('#inputInsumoPorcao').removeClass('mascaraMetroKgLitro');
+            $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraMetros');
+            $('#inputInsumoPorcao').removeClass('mascaraMetros');
+
+            $('#inputInsumoQuantidadeEmbalagem').addClass('mascaraUnidade');
+            $('#inputInsumoPorcao').addClass('mascaraUnidade');
+
+            MascaraUnidadeUnidadeAtiva = true;
+
+            $('.mascaraUnidade').mask('000.000', {
+                translation: {
+                    '0': {pattern: /[0-9]/}
+                },
+                reverse: true
+            });
+            break;
+        case '2':
+            $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraUnidade');
+            $('#inputInsumoPorcao').removeClass('mascaraUnidade');
+            $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraMetros');
+            $('#inputInsumoPorcao').removeClass('mascaraMetros');
+
+            $('#inputInsumoQuantidadeEmbalagem').addClass('mascaraMetroKgLitro');
+            $('#inputInsumoPorcao').addClass('mascaraMetroKgLitro');
+            
+            MascaraUnidadeUnidadeAtiva = false;
+
+            $(".mascaraMetroKgLitro").mask("999,999", {reverse: true});
+            break;
+        case '3':
+            $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraUnidade');
+            $('#inputInsumoPorcao').removeClass('mascaraUnidade');
+            $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraMetroKgLitro');
+            $('#inputInsumoPorcao').removeClass('mascaraMetroKgLitro');
+
+            $('#inputInsumoQuantidadeEmbalagem').addClass('mascaraMetros');
+            $('#inputInsumoPorcao').addClass('mascaraMetros');
+           
+            MascaraUnidadeUnidadeAtiva = false;
+            
+            $('.mascaraMetros').mask('#.##0,00', {reverse: true});
+            break;
+        case '4':
+            $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraUnidade');
+            $('#inputInsumoPorcao').removeClass('mascaraUnidade');
+            $('#inputInsumoQuantidadeEmbalagem').addClass('mascaraMetroKgLitro');
+            $('#inputInsumoPorcao').addClass('mascaraMetroKgLitro');
+            $(".mascaraMetroKgLitro").mask("999,999", {reverse: true});
+            break;
+        default:
+            tipoMedidaDescricao = 'Não reconhecido'
+    }
+    return tipoMedidaDescricao
+}
+
 function convertToFloat(value) {
-    // Substitui a vírgula por ponto
     let formattedValue = value.replace(',', '.');
-    
-    // Converte a string para float
     let floatValue = parseFloat(formattedValue);
-    
-    // Retorna o valor float
+    return floatValue;
+}
+function convertePontoPorVirgula(value) {
+    let formattedValue = value.replace(',', '.');
+    let floatValue = parseFloat(formattedValue);
     return floatValue;
 }
 

@@ -83,7 +83,7 @@
                             <div class="input-group">
                                 <span class="input-group-text">%</span>
                                 <input id="inputProdutoMargemImposto" type="text" name="ProdutoMargemImposto"
-                                    class="form-control input-group radius-right radius-bottom-right campoPercentual"
+                                    class="form-control input-group radius-right radius-bottom-right text-end"
                                     placeholder="Impostos...">
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                             <div class="input-group form-group">
                                 <span class="input-group-text">%</span>
                                 <input id="inputProdutoMargemLucro" type="text" name="ProdutoMargemLucro"
-                                    class="form-control  radius-right radius-bottom-right campoPercentual"
+                                    class="form-control  radius-right radius-bottom-right text-end"
                                     placeholder="Lucro...">
                             </div>
                             <div class="error-message col-md-6 col-lg-3"></div>
@@ -160,7 +160,7 @@
                         <div class="form-group col-md-6 col-lg-4 col-xl-3 mt-3 ">
                             <label class="form-label" for="inputInsumoQuantidadeEmbalagem">Quantidade Embalagem</label>
                             <div class="input-group">
-                                <input type="text" class="form-control radius-right-complete campoMedida"
+                                <input type="text" class="form-control radius-right-complete text-end"
                                     id="inputInsumoQuantidadeEmbalagem" name="inputInsumoQuantidadeEmbalagem"
                                     placeholder="ex: 0.300(kg), 0.65(metros), 1 (unidade)">
                                 <div class="error-message"></div>
@@ -172,7 +172,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text rs-input">R$</span>
                                 </div>
-                                <input type="text" class="form-control campoValorMonetario" id="inputInsumoValor"
+                                <input type="text" class="form-control text-end" id="inputInsumoValor"
                                     name="inputInsumoValor" data-thousands="." data-decimal="," placeholder="Insira o valor..." required>
                             </div>
                             <div class="error-message col-md-6 col-lg-4 col-xl-3"></div>
@@ -183,7 +183,7 @@
                             <label class="form-label" for="inputInsumoPorcao">Porção
                                 Utilizada</label>
                             <div class="input-group form-group ">
-                                <input type="text" class="form-control campoMedida" id="inputInsumoPorcao"
+                                <input type="text" class="form-control text-end" id="inputInsumoPorcao"
                                     name="inputInsumoPorcao" placeholder="ex: 0.200(kg), 0.6(m), ." required>
                             </div>
                         </div>
@@ -333,11 +333,11 @@
             <div class="modal-content mt-5">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="modalProdutoNomeHeader"></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="FechaModalProdutoCalculado()"></button>
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="row rowModalListaInsumos">
+                        <div id="modalCamposProdutoCalculado" class="row rowModalListaInsumos">
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
                                 <label for="modalMargemImposto" class="form-label">Margem de Impostos</label>
                                 <div class="input-group">
@@ -394,7 +394,7 @@
                         <div id="modalListaInsumos" class="row d-flex justify-content-center">
                             <div class="form-group ">
                                 <table id="tableModalListaInsumos"
-                                    class="table mt-3 table table-primary table-hover col-md-12">
+                                    class="mt-3 table table-primary table-striped-columns table-hover col-md-12">
                                     <thead id="hdModalListaInsumos">
                                         <tr>
                                             <th class="radius-left" style="width: 35%;">Nome</th>
@@ -412,154 +412,13 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="FechaModalProdutoCalculado()">Fechar</button>
                 </div>
             </div>
         </div>
         <!-- </div> -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script>
-
-            //======================Eventos===============================//
-
-            $(document).ready(function () {
-
-                //================Mascaras==========================//
-                $(".campoPercentual").mask("999,99");
-                $(".campoMedida").mask("999,999", {
-                    reverse: true
-                });
-                $("#inputInsumoValor").maskMoney()
-                //$('#inputInsumoValor').mask('999.999,99', { reverse: true });
-
-                //===============Inputs Criação de Produtos==================//
-                $("#inputProdutoMargemLucro").on("blur", function () {
-                    var value = $(this).val();
-                    //     var value = $(this).val();
-                    if (value && !value.includes(',')) {
-                        $(this).val(value + ',00');
-                    }
-                    if (value && value.includes(',')) {
-                        if (value.split(',')[1].length === 0) {
-                            // Adiciona '00' se não houver valor após a vírgula
-                            $(this).val(value + '00');
-                        }
-                        if (value.split(',')[1].length === 1) {
-                            // Adiciona '00' se não houver valor após a vírgula
-                            $(this).val(value + '0');
-                        }
-                    }
-
-                });
-
-                $("#inputProdutoMargemImposto").on("blur", function () {
-                    var value = $(this).val();
-                    //     var value = $(this).val();
-                    if (value && !value.includes(',')) {
-                        $(this).val(value + ',00');
-                    }
-                    if (value && value.includes(',')) {
-                        if (value.split(',')[1].length === 0) {
-                            // Adiciona '00' se não houver valor após a vírgula
-                            $(this).val(value + '00');
-                        }
-                        if (value.split(',')[1].length === 1) {
-                            // Adiciona '00' se não houver valor após a vírgula
-                            $(this).val(value + '0');
-                        }
-                    }
-
-                });
-                //===============Inputs add Insumos==================//
-                $("#inputInsumoQuantidadeEmbalagem").on("blur", function () {
-                    var value = $(this).val();
-                    //     var value = $(this).val();
-                    if (value && !value.includes(',')) {
-                        $(this).val(value + ',00');
-                    }
-                    if (value && value.includes(',')) {
-                        if (value.split(',')[1].length === 0) {
-                            // Adiciona '00' se não houver valor após a vírgula
-                            $(this).val(value + '00');
-                        }
-                        if (value.split(',')[1].length === 1) {
-                            // Adiciona '00' se não houver valor após a vírgula
-                            $(this).val(value + '0');
-                        }
-                    }
-
-                });
-                $("#inputInsumoPorcao").on("blur", function () {
-                    var value = $(this).val();
-                    //     var value = $(this).val();
-                    if (value && !value.includes(',')) {
-                        $(this).val(value + ',00');
-                    }
-                    if (value && value.includes(',')) {
-                        if (value.split(',')[1].length === 0) {
-                            // Adiciona '00' se não houver valor após a vírgula
-                            $(this).val(value + '00');
-                        }
-                        if (value.split(',')[1].length === 1) {
-                            // Adiciona '00' se não houver valor após a vírgula
-                            $(this).val(value + '0');
-                        }
-                    }
-
-                });
-
-                // $("#inputInsumoValor").on("blur", function () {
-                //     var value = $(this).val();
-                //     //     var value = $(this).val();
-                //     if (value && !value.includes(',')) {
-                //         if (value.split('.')[1].length === 0) {
-                //             $(this).val(value + '000,00');
-                //         } else {
-                //             $(this).val(value + ',00');
-                //         }
-
-                //     }
-
-                //     if (value && value.includes(',')) {
-                //         if (value.split(',')[1].length === 0) {
-                //             // Adiciona '00' se não houver valor após a vírgula
-                //             $(this).val(value + '00');
-                //         }
-                //         if (value.split(',')[1].length === 1) {
-                //             // Adiciona '00' se não houver valor após a vírgula
-                //             $(this).val(value + '0');
-                //         }
-                //     }
-
-                // });
-     
-                // $('#inputInsumoValor').on('keypress', function (e) {
-                //     // Permite o ponto ser digitado
-                //     if (e.key === '.') {
-                //         // Impede o comportamento padrão do ponto
-                //         e.preventDefault();
-
-                //         // Insere o ponto na posição correta
-                //         $(this).val($(this).val() + '.');
-                //     }
-                //     if (e.key === '.0') {
-                //         // Impede o comportamento padrão do ponto
-                //         e.preventDefault();
-
-                //         // Insere o ponto na posição correta
-                        
-                //     }
-                // });
-
-            });
-            $(document).ready(function () {
-                IniciaValidateCriaProdutos();
-            });
-            $(function () {
-                $(document).on('click', '.btn-remover', RemoverLinha);
-            });
-
-        </script>
+        <script src="./scripts/eventos.js"></script>
 
 </body>
 

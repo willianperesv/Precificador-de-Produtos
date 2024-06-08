@@ -9,7 +9,8 @@ html {
 
 
 body {
-  background-image: url('../styles/background.jpg');
+  /* background-image: url('../styles/background.jpg'); */
+  background-color: #0b0c0c;
   background-repeat:repeat;
   background-size: cover;
   background-position: center;
@@ -25,7 +26,7 @@ header {
   color: rgb(197, 190, 190);
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   text-align: start;
-  background-color: rgba(43, 88, 73, 0.158);
+  background-color: rgba(32, 79, 117, 0.158);
   padding:1rem;
   width:100%
 }
@@ -255,16 +256,6 @@ form:invalid select:invalid {
 
 form:valid select:invalid {
     border-color: initial; /* Remove a borda vermelha quando o formulário for válido */
-}
-
-.campoPercentual {
-  text-align: right;
-}
-.campoMedida {
-  text-align: right;
-}
-.campoValorMonetario {
-  text-align: right;
 }
 
 input::placeholder {
