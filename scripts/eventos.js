@@ -1,4 +1,3 @@
-
 var MascaraUnidadeUnidadeAtiva = false;
 
 $(document).ready(function () {

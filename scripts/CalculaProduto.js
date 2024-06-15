@@ -9,17 +9,14 @@ function ComporValorProduto(dadosProduto) {
     insumos.map(item => {
         switch (item.InsumoTipoMedida) {
             case '1':
-                custoBruto += CalculaUnidade(item.InsumoPorcao, item.InsumoQuantidadeEmbalagem, item.InsumoValor)
-                break;
             case '2':
-                CalculaMetro();
+                custoBruto += CalculaUnidadeMetro(item.InsumoPorcao, item.InsumoQuantidadeEmbalagem, item.InsumoValor);
                 break;
-    
             case '3':
-                CalculaQuilo();
+                custoBruto += CalculaMetro(item.InsumoPorcao, item.InsumoQuantidadeEmbalagem, item.InsumoValor);
                 break;
             case '4':
-                CalculaLitro();
+                custoBruto += CalculaLitro(item.InsumoPorcao, item.InsumoQuantidadeEmbalagem, item.InsumoValor);
                 break;
             default:
                 TipoMedidaEnum = 5
@@ -41,8 +38,8 @@ function ComporValorProduto(dadosProduto) {
 function MontaTabelaProdutosCalculados(custoCalculado, nomeProduto, produtoId) {
     let novaLinha = $('<tr>').append(
         $('<td>').html(nomeProduto),
-        $('<td>').html('<span class="AjusteMoeda">R$</span><span class="AjusteValor mascaraMonetaria">' + custoCalculado.CustoBruto.toFixed(2) + '</span>'),
-        $('<td>').html('<span class="AjusteMoeda">R$</span><span class="AjusteValor mascaraMonetaria">' + custoCalculado.ValorSugerido.toFixed(2) + '</span>'),
+        $('<td>').html('<span class="AjusteMoeda">R$</span><span class="AjusteValor ">' + formatarNumeroMonetario(custoCalculado.CustoBruto.toFixed(2)) + '</span>'),
+        $('<td>').html('<span class="AjusteMoeda">R$</span><span class="AjusteValor ">' + formatarNumeroMonetario(custoCalculado.ValorSugerido.toFixed(2)) + '</span>'),
         $('<td class="text-center">').html(`<button type="button" class="btn btn-primary buttonVisualizaProduto" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" onclick="PreencheModalProdutoCalculado('${produtoId}')"><img id="visualizaIcon" src="/styles/eyeIcon.png" alt="Visualizar Detalhes do Produto"></button>`), 
         $('<td class="text-center btn-remover">').html('<i  &#xF877 class="fas fa-trash-alt" style="cursor: pointer;"></i>')
     );
@@ -50,15 +47,13 @@ function MontaTabelaProdutosCalculados(custoCalculado, nomeProduto, produtoId) {
     novaLinha.appendTo('#tbListaProdutosCalculados');
 }
 
-function CalculaUnidade(insumoPorcao, insumoQuantidadeEmbalagem, insumoValor){
+function CalculaUnidadeMetro(insumoPorcao, insumoQuantidadeEmbalagem, insumoValor){
     var porcaoPorProducao = parseFloat(insumoPorcao) / parseFloat(insumoQuantidadeEmbalagem);
     var custoInsumoPorProducao = porcaoPorProducao * parseFloat(insumoValor);
     return custoInsumoPorProducao;
 }
 
-function CalculaMetro(){
-  console.log('calculaUnidade')
-}
+
 function CalculaQuilo(){
   console.log('calculaUnidade')
 }

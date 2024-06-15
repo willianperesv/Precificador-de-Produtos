@@ -66,20 +66,21 @@ function RemoverLinha() {
     $(this).closest('tr').remove();
 }
 
-function retornaTipoMedidaDescricao(valor){
+function retornaTipoMedidaDescricao(tipoMedida){
     var tipoMedidaDescricao = null;
-    switch (valor) {
+    switch (tipoMedida) {
         case '1':
             tipoMedidaDescricao = 'Unidade'
             break;
         case '2':
-            tipoMedidaDescricao = 'Metro(m)'
-            break;
-        case '3':
             tipoMedidaDescricao = 'Quilo(Kg)'
             break;
-        case '4':
+        case '3':
             tipoMedidaDescricao = 'Litro(l)'
+            
+            break;
+        case '4':
+            tipoMedidaDescricao = 'Metro(m)'
             break;
         default:
             tipoMedidaDescricao = 'Não reconhecido'
@@ -119,7 +120,7 @@ function aplicaMascaraTipoMedida(tipoMedida){
             
             MascaraUnidadeUnidadeAtiva = false;
 
-            $(".mascaraMetroKgLitro").mask("999,999", {reverse: true});
+            $(".mascaraMetroKgLitro").mask("999.999,99", {reverse: true});
             break;
         case '3':
             $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraUnidade');
@@ -132,7 +133,7 @@ function aplicaMascaraTipoMedida(tipoMedida){
            
             MascaraUnidadeUnidadeAtiva = false;
             
-            $('.mascaraMetros').mask('#.##0,00', {reverse: true});
+            $('.mascaraMetros').mask("999.999,99", {reverse: true});
             break;
         case '4':
             $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraUnidade');
@@ -147,15 +148,44 @@ function aplicaMascaraTipoMedida(tipoMedida){
     return tipoMedidaDescricao
 }
 
-function convertToFloat(value) {
-    let formattedValue = value.replace(',', '.');
-    let floatValue = parseFloat(formattedValue);
-    return floatValue;
-}
+
 function convertePontoPorVirgula(value) {
-    let formattedValue = value.replace(',', '.');
-    let floatValue = parseFloat(formattedValue);
-    return floatValue;
+    let valorFormatado = value.replace('.', ',');
+    return valorFormatado;
+}
+
+function formatarNumeroMonetario(num) {
+    let [parteInteira, parteDecimal] = num.toString().split('.');
+    parteInteira = parteInteira.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    if (parteDecimal !== undefined) {
+        return `${parteInteira},${parteDecimal}`;
+    } else {
+        return parteInteira;
+    }
+}
+
+function formatarNumeroModal(valor) {
+        // Converter para float e garantir duas casas decimais
+        let num = parseFloat(valor).toFixed(2);
+
+        // Substituir o ponto decimal por uma vírgula temporariamente
+        num = num.replace('.', ',');
+
+        // Adicionar pontos como separadores de milhar
+        num = num.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+        return num;
+    
+}
+
+function adicionarPontosMilhares(num) {
+    let [parteInteira, parteDecimal] = num.toString().split('.');
+    parteInteira = parteInteira.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    if (parteDecimal !== undefined) {
+        return `${parteInteira},${parteDecimal}`;
+    } else {
+        return parteInteira;
+    }
 }
 
 function converteStringPraFloat(value) {

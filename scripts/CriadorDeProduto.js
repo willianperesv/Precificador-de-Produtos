@@ -15,9 +15,8 @@ function CriarProduto() {
 }
 
 function AdicionaInsumo() {
-
     var validAddInsumos = $("#collapseInsumosAddCampos").valid();
-
+    
     if (validAddInsumos) {
         $('#selectInsumoTipoMedida').addClass('remove-borda');
         MontaInsumos();
@@ -26,9 +25,7 @@ function AdicionaInsumo() {
         if(DadosProduto.ListaInsumos.length == 1){
             ToggleHeader('collapseInsumosLista', 'btnCloseHeaderInsumoListaDown', 'btnCloseHeaderInsumoListaUp')
         }
-
         LimpaCamposDiv('collapseInsumosAddCampos');
-
     }else{
         $('#selectInsumoTipoMedida').removeClass('remove-borda');
         $('#selectInsumoTipoMedida').addClass('select:invalid');
@@ -84,6 +81,7 @@ function CancelaProduto(){
 
 function CalcularProduto() {
    if(DadosProduto.ListaInsumos.length >= 1){
+    console.log(DadosProduto)
     produtoCalculado = ComporValorProduto(DadosProduto);
     DadosProduto.ProdutoCalculado.push(produtoCalculado);
     MontaTabelaProdutosCalculados(DadosProduto.ProdutoCalculado[DadosProduto.ProdutoCalculado.length - 1], DadosProduto.ProdutoNome, DadosProduto.ProdutoId);
@@ -91,7 +89,6 @@ function CalcularProduto() {
     DadosProduto = [];
     $("#tableListaInsumos tbody").empty();
     $('#TituloCriadorDeProdutos').html('Criar Novo Produto');
-    console.log(ListaProdutosCalculados)
     FechaInsumos();
    
     AbreSessao('collapseListaProdutosPrecificados','collapseProdutosCalculadosLista', true, 1000);
@@ -112,15 +109,16 @@ function CalcularProduto() {
 
 function PreencheModalProdutoCalculado(produtoId){
      const ProdutoSelecionado = ListaProdutosCalculados.find(item => item.ProdutoId === produtoId);
+     console.log(ProdutoSelecionado)
 
-     $('#modalProdutoNomeHeader').text(ProdutoSelecionado.ProdutoNome)
+    $('#modalProdutoNomeHeader').text(ProdutoSelecionado.ProdutoNome);
 
-    $('#modalMargemImposto').val(ProdutoSelecionado.ProdutoMargemImposto.toFixed(2))
-    $('#modalMargemLucro').val(ProdutoSelecionado.ProdutoMargemLucro.toFixed(2))
-    $('#modalCustoProducao').val(ProdutoSelecionado.ProdutoCalculado[0].CustoBruto.toFixed(2))
-    $('#modalValorTotalImposto').val(ProdutoSelecionado.ProdutoCalculado[0].ValorComImposto.toFixed(2))
-    $('#modalValorTotalLucro').val(ProdutoSelecionado.ProdutoCalculado[0].ValorComLucro.toFixed(2))
-    $('#modalValorSugerido').val(ProdutoSelecionado.ProdutoCalculado[0].ValorSugerido.toFixed(2))
+    $('#modalMargemImposto').val(formatarNumeroModal(ProdutoSelecionado.ProdutoMargemImposto));
+    $('#modalMargemLucro').val(formatarNumeroModal(ProdutoSelecionado.ProdutoMargemLucro));
+    $('#modalCustoProducao').val(formatarNumeroModal(ProdutoSelecionado.ProdutoCalculado[0].CustoBruto));
+    $('#modalValorTotalImposto').val(formatarNumeroModal(ProdutoSelecionado.ProdutoCalculado[0].ValorComImposto));
+    $('#modalValorTotalLucro').val(formatarNumeroModal(ProdutoSelecionado.ProdutoCalculado[0].ValorComLucro));
+    $('#modalValorSugerido').val(formatarNumeroModal(ProdutoSelecionado.ProdutoCalculado[0].ValorSugerido));
 
     ProdutoSelecionado.ListaInsumos.map((item) => {
         AdicionaModalInsumoLista(item)
@@ -147,7 +145,7 @@ function IniciaValidateCriaProdutos(){
             inputProdutoNome: {
                 required: true,
             },
-            ProdutoMargemImposto: {
+            ProdutoMargemLucro: {
                 required: true,
             },
           },
@@ -156,7 +154,7 @@ function IniciaValidateCriaProdutos(){
                 required: "Campo obrigatório.",
              
             },
-            ProdutoMargemImposto:{
+            ProdutoMargemLucro:{
                 required: "Campo obrigatório.",
              
             }
