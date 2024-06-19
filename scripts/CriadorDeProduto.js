@@ -16,17 +16,28 @@ function CriarProduto() {
 
 function AdicionaInsumo() {
     var validAddInsumos = $("#collapseInsumosAddCampos").valid();
-    
     if (validAddInsumos) {
-        $('#selectInsumoTipoMedida').addClass('remove-borda');
+        
         MontaInsumos();
-        AdicionaInsumoLista(DadosProduto.ListaInsumos[DadosProduto.ListaInsumos.length - 1]);
+        CriaListagem(DadosProduto.ListaInsumos, 'paginationListaInsumo', '#tbListaInsumos');
+        if(DadosProduto.ListaInsumos.length > 5){
+            $('#ulPaginationListaInsumo').slideDown()
+        }else{
+            $('#ulPaginationListaInsumo').hide()
+        }
 
         if(DadosProduto.ListaInsumos.length == 1){
             ToggleHeader('collapseInsumosLista', 'btnCloseHeaderInsumoListaDown', 'btnCloseHeaderInsumoListaUp')
         }
+
         LimpaCamposDiv('collapseInsumosAddCampos');
     }else{
+        $('#selectInsumoTipoMedida').addClass('validateBorda');
+        if($('#inputInsumoValor-error').is(':visible') || $('#inputInsumoPorcao-error').is(':visible')){
+            $('#divBotaoAdicionaInsumo').addClass('align-items-center')
+        }else{
+            $('#divBotaoAdicionaInsumo').addClass('align-items-end')
+        }
         $('#selectInsumoTipoMedida').removeClass('remove-borda');
         $('#selectInsumoTipoMedida').addClass('select:invalid');
     }
@@ -69,23 +80,25 @@ function CancelaProduto(){
             `Removido da Lista de Precificação`
           
           )
-          FechaSessao('collapseInsumosLista','collapseListaAdicionados', false, 700);
-          FechaSessao('collapseAddInsumos','collapseInsumosAddCampos', false, 500);
+          FechaInsumos();
           AbreSessao('collapseCriadorDeProdutos','CriadorDeProdutos', true, 1500);
           DadosProduto = []
           LimpaCamposDiv('collapseInsumosAddCampos');
           $("#tableListaInsumos tbody").empty();
+          $("#collapseInsumosAddCampos").validate().resetForm();
+          $('#selectInsumoTipoMedida').removeClass('validateBorda');
         }
       })
 }
 
 function CalcularProduto() {
    if(DadosProduto.ListaInsumos.length >= 1){
-    console.log(DadosProduto)
     produtoCalculado = ComporValorProduto(DadosProduto);
     DadosProduto.ProdutoCalculado.push(produtoCalculado);
-    MontaTabelaProdutosCalculados(DadosProduto.ProdutoCalculado[DadosProduto.ProdutoCalculado.length - 1], DadosProduto.ProdutoNome, DadosProduto.ProdutoId);
+    
+    //MontaTabelaProdutosCalculados(DadosProduto.ProdutoCalculado[DadosProduto.ProdutoCalculado.length - 1], DadosProduto.ProdutoNome, DadosProduto.ProdutoId);
     ListaProdutosCalculados.push(DadosProduto);
+    CriaListagem(ListaProdutosCalculados, 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
     DadosProduto = [];
     $("#tableListaInsumos tbody").empty();
     $('#TituloCriadorDeProdutos').html('Criar Novo Produto');
@@ -109,7 +122,12 @@ function CalcularProduto() {
 
 function PreencheModalProdutoCalculado(produtoId){
      const ProdutoSelecionado = ListaProdutosCalculados.find(item => item.ProdutoId === produtoId);
-     console.log(ProdutoSelecionado)
+     
+     if(ProdutoSelecionado.ListaInsumos.length > 5){
+        $('#paginationModalInsumos').slideDown()
+    }else{
+        $('#paginationModalInsumos').hide()
+    }
 
     $('#modalProdutoNomeHeader').text(ProdutoSelecionado.ProdutoNome);
 
@@ -135,12 +153,9 @@ function FechaModalProdutoCalculado() {
 function IniciaValidateCriaProdutos(){
     $("#collapseCriadorDeProdutos").validate({
         errorPlacement: function(error, element) {
-            error.insertAfter(element.parents('.form-group').find('.input-group').last());
+            error.insertAfter(element.parents('.form-group').find('.error-message').last());
         },
-        success: function(label, element) {
-            $(element).parents('.form-group').find('.error-message').remove();
-        },
- 
+
         rules: {
             inputProdutoNome: {
                 required: true,
@@ -165,10 +180,7 @@ function IniciaValidateCriaProdutos(){
 function IniciaValidateAddInsumos(){
     $("#collapseInsumosAddCampos").validate({
         errorPlacement: function(error, element) {
-            error.insertAfter(element.parents('.form-group').find('.input-group').last());
-        },
-        success: function(label, element) {
-            $(element).parents('.form-group').find('.error-message').remove();
+            error.insertAfter(element.parents('.form-group').find('.error-message').last());
         },
 
         rules: {

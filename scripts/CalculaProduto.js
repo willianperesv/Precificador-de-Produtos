@@ -7,22 +7,7 @@ function ComporValorProduto(dadosProduto) {
     var insumos = dadosProduto.ListaInsumos
 
     insumos.map(item => {
-        switch (item.InsumoTipoMedida) {
-            case '1':
-            case '2':
-                custoBruto += CalculaUnidadeMetro(item.InsumoPorcao, item.InsumoQuantidadeEmbalagem, item.InsumoValor);
-                break;
-            case '3':
-                custoBruto += CalculaMetro(item.InsumoPorcao, item.InsumoQuantidadeEmbalagem, item.InsumoValor);
-                break;
-            case '4':
-                custoBruto += CalculaLitro(item.InsumoPorcao, item.InsumoQuantidadeEmbalagem, item.InsumoValor);
-                break;
-            default:
-                TipoMedidaEnum = 5
-                console.log("Tipo de medida não reconhecido");
-        }
-
+        custoBruto += CalculaCustoBruto(item.InsumoPorcao, item.InsumoQuantidadeEmbalagem, item.InsumoValor);
     })
 
     ProdutoCalculado = {
@@ -47,15 +32,10 @@ function MontaTabelaProdutosCalculados(custoCalculado, nomeProduto, produtoId) {
     novaLinha.appendTo('#tbListaProdutosCalculados');
 }
 
-function CalculaUnidadeMetro(insumoPorcao, insumoQuantidadeEmbalagem, insumoValor){
+function CalculaCustoBruto(insumoPorcao, insumoQuantidadeEmbalagem, insumoValor){
     var porcaoPorProducao = parseFloat(insumoPorcao) / parseFloat(insumoQuantidadeEmbalagem);
     var custoInsumoPorProducao = porcaoPorProducao * parseFloat(insumoValor);
     return custoInsumoPorProducao;
-}
-
-
-function CalculaQuilo(){
-  console.log('calculaUnidade')
 }
 
 

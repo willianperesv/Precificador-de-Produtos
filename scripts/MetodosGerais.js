@@ -70,17 +70,17 @@ function retornaTipoMedidaDescricao(tipoMedida){
     var tipoMedidaDescricao = null;
     switch (tipoMedida) {
         case '1':
-            tipoMedidaDescricao = 'Unidade'
+            tipoMedidaDescricao = 'Un'
             break;
         case '2':
-            tipoMedidaDescricao = 'Quilo(Kg)'
+            tipoMedidaDescricao = 'Kg'
             break;
         case '3':
-            tipoMedidaDescricao = 'Litro(l)'
+            tipoMedidaDescricao = 'l'
             
             break;
         case '4':
-            tipoMedidaDescricao = 'Metro(m)'
+            tipoMedidaDescricao = 'm'
             break;
         default:
             tipoMedidaDescricao = 'Não reconhecido'
@@ -208,5 +208,7 @@ function LimpaCamposAdicionaInsumo(){
     $('#formAdicionaInsumo :input').val('');
 }
 
-//============================================//
+//====================Paginação========================//
+
+
 

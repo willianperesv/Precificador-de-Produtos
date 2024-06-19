@@ -114,6 +114,17 @@ article{
 .container-add-insumos{
   max-width: -webkit-fill-available;
 }
+/* #collapseInsumosAddCampos input{
+  cursor:pointer;
+}
+
+#selectInsumoTipoMedida{
+  cursor:pointer;
+} */
+
+#ExcluiListaInsumo{
+  max-height: 2.2rem;
+}
 
 .lista-adicionados{
   padding-right: 0px;
@@ -187,6 +198,14 @@ article{
 
 
 }
+table tr:last-child td:last-child {
+  border-bottom: none; 
+  border-bottom-right-radius:6px !important ;
+}
+table tr:last-child td:first-child {
+  border-bottom: none; 
+  border-bottom-left-radius:6px !important ;
+}
 
 .radius-left{
    border-top-left-radius:6px !important ;
@@ -247,15 +266,12 @@ input.error {
   margin-top: 5px;
 }
 
-.remove-borda{
-  border: none !important;
-}
-form:invalid select:invalid {
-    border-color: #dc3545; /* Vermelho */
+.validateBorda {
+    border-color: #dc3545;
 }
 
 form:valid select:invalid {
-    border-color: initial; /* Remove a borda vermelha quando o formulário for válido */
+    border-color: initial ; 
 }
 
 input::placeholder {

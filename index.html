@@ -29,9 +29,9 @@
 
 
 <!-----------------------------------------Arquivos------------------------------------------------------------>
-<script src="scripts/CriadorDeProduto.js"></script>
-<script src="scripts/MetodosGerais.js"></script>
 <script src="scripts/AdicionaInsumo.js"></script>
+<script src="scripts/MetodosGerais.js"></script>
+<script src="scripts/CriadorDeProduto.js"></script>
 <script src="scripts/CalculaProduto.js"></script>
 </head>
 
@@ -75,7 +75,7 @@
                                 Produto</label>
                             <input type="text" class="form-control input-group" id="inputProdutoNome"
                                 name="inputProdutoNome" placeholder="Insira o nome do seu produto aqui..." required>
-                            <div class="error-message"></div>
+                            <div class="error-message" display="none"></div>
                         </div>
                         <div class="form-group col-md-6 col-lg-3 mt-2">
                             <label for="inputProdutoMargemImposto" class="form-label ">Margem de
@@ -136,7 +136,7 @@
                         </button>
                     </div>
                     <!-----------------------------BODY ADD INSUMOS-------------------------------------->
-                    <form id="collapseInsumosAddCampos" class="row mb-3 needs-validation" style="display:none;">
+                    <form id="collapseInsumosAddCampos" class="row mb-3" style="display:none;">
                         <div class="form-group col-sm-12 col-md-12 col-lg-9 col-xl-6 mt-3">
                             <label class="form-label" for="inputInsumoNome">Nome</label>
                             <input id="inputInsumoNome" type="text" class="form-control input-group"
@@ -146,25 +146,25 @@
                         <div class="form-group col-md-6 col-lg-4 col-xl-3 mt-3">
                             <label class="form-label" for="selectInsumoTipoMedida">Tipo de
                                 Medida</label>
-                            <select class="form-control input-group remove-borda" id="selectInsumoTipoMedida"
+                            <select class="form-control input-group" id="selectInsumoTipoMedida"
                                 name="selectInsumoTipoMedida" placeholder="kg, unidade, metro, litros." required>
                                 <option value="" disabled selected hidden>Selecione a
                                     medida...</option>
                                 <option value="1">Unidade</option>
-                                <option value="2">Quilograma (kg)</option>
+                                <option value="2">Quilograma(kg)</option>
                                 <option value="3">Litros(l)</option>
-                                <option value="4">Metro (m)</option>
+                                <option value="4">Metro(m)</option>
                             </select>
-                            <div class="error-message"></div>
+                            <div id="selectTipoMedidaError"class="error-message"></div>
                         </div>
                         <div class="form-group col-md-6 col-lg-4 col-xl-3 mt-3 ">
                             <label class="form-label" for="inputInsumoQuantidadeEmbalagem">Quantidade Embalagem</label>
                             <div class="input-group">
                                 <input type="text" class="form-control radius-right-complete text-end"
                                     id="inputInsumoQuantidadeEmbalagem" name="inputInsumoQuantidadeEmbalagem"
-                                    placeholder="ex: 0.300(kg), 0.65(metros), 1 (unidade)">
-                                <div class="error-message"></div>
+                                    placeholder="ex: 0.300(kg), 0.65(metros), 1 (unidade)"> 
                             </div>
+                            <div class="error-message"></div>
                         </div>
                         <div class="form-group col-md-6 col-lg-4 col-xl-3 mt-3">
                             <label class="form-label" for="inputInsumoValor">Valor</label>
@@ -176,19 +176,17 @@
                                     name="inputInsumoValor" data-thousands="." data-decimal="," placeholder="Insira o valor..." required>
                             </div>
                             <div class="error-message col-md-6 col-lg-4 col-xl-3"></div>
-
                         </div>
 
                         <div class="form-group col-md-6 col-lg-4 col-xl-3  mt-3">
                             <label class="form-label" for="inputInsumoPorcao">Porção
                                 Utilizada</label>
                             <div class="input-group form-group ">
-                                <input type="text" class="form-control text-end" id="inputInsumoPorcao"
-                                    name="inputInsumoPorcao" placeholder="ex: 0.200(kg), 0.6(m), ." required>
+                                <input type="text" class="form-control text-end" id="inputInsumoPorcao" name="inputInsumoPorcao" placeholder="ex: 0.200(kg), 0.6(m), ." required>
                             </div>
+                            <div class="error-message col-md-6 col-lg-4 col-xl-3"></div>
                         </div>
-                        <div
-                            class="form-group  d-flex justify-content-end col-sm-6 col-md-6 col-lg-4 col-xl-6 offset-sm-6 offset-md-6 offset-lg-4 offset-xl-0  calcula-lista mt-3">
+                        <div id="divBotaoAdicionaInsumo" class="form-group  d-flex justify-content-end col-sm-6 col-md-6 col-lg-4 col-xl-6 offset-sm-6 offset-md-6 offset-lg-4 offset-xl-0  calcula-lista mt-3">
                             <button id="btnInsumoAdicionar" class="btn btn-success btn-ajuste" type="button"
                                 data-bs-target="#collapseListaAdicionados" aria-expanded="false"
                                 aria-controls="collapseListaAdicionados" onclick="AdicionaInsumo()">Adicionar <i
@@ -235,10 +233,10 @@
                                     <thead id="hdListaInsumos">
                                         <tr>
                                             <th class="radius-left" style="width: 30%;">Nome</th>
-                                            <th style="width: 15%;">Tipo Medida</th>
-                                            <th style="width: 20%;">Qtd. Embalagem</th>
+                                            <th style="width: 20%;">Custo Embalagem</th>
+                                            <th style="width: 13%;">Valor</th>
                                             <th style="width: 15%;">Porção</th>
-                                            <th style="width: 15%;">Valor</th>
+                                            <th style="width: 17%;">Custo Produção</th>
                                             <th class="radius-right" style="width:5%;"></th>
                                         </tr>
                                     </thead>
@@ -246,14 +244,21 @@
                                     </tbody>
                                 </table>
                             </div>
-
-                            <div id="divIdBotoesListaInsumo"
-                                class="form-group col-md-12 d-flex justify-content-between btn-container mb-2">
-                                <button id="ExcluiListaInsumo" type="button" class="btn btn-danger btn-ajuste"
-                                    onclick="ExcluiListaInsumos()">Excluir
-                                    Lista <i class="fas fa-trash-alt"></i>
-                                </button>
+                            <div class="row d-flex justify-content-between w-100">
+                                <nav aria-label="..." id="paginationListaInsumo" class="col-md-5">
+                                    <ul id="ulPaginationListaInsumo" class="pagination">
+                                        <!-- Links de paginação serão inseridos via JavaScript -->
+                                    </ul>
+                                </nav>
+                                <div id="divIdBotoesListaInsumo"
+                                    class="col-md-6 btn-container mb-2">
+                                    <button id="ExcluiListaInsumo" type="button" class="btn btn-danger"
+                                        onclick="ExcluiListaInsumos()">Excluir
+                                        Lista <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
                             </div>
+             
                         </div>
                     </div>
                     <hr>
@@ -318,7 +323,12 @@
                                 </thead>
                                 <tbody id="tbListaProdutosCalculados">
                                 </tbody>
+                  
                             </table>
+                            <nav aria-label="..." id="paginationListaProdutosCalculados" class="col-md-5" display="none">
+                                <ul class="pagination">
+                                </ul>
+                            </nav>
                         </div>
                     </div>
 
@@ -338,56 +348,54 @@
                 <div class="modal-body">
                     <form>
                         <div id="modalCamposProdutoCalculado" class="row rowModalListaInsumos">
-                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                <label for="modalMargemImposto" class="form-label">Margem de Impostos</label>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4 mt-2">
+                                <label for="modalMargemImposto" class="form-label">Impostos Aplicado</label>
                                 <div class="input-group">
                                     <span class="input-group-text">%</span>
-                                    <input id="modalMargemImposto" type="text"
-                                        class="form-control input-group radius-right radius-bottom-right" disabled>
+                                    <input id="modalMargemImposto" type="text" class="form-control input-group radius-right radius-bottom-right text-end" disabled>
                                 </div>
                             </div>
-                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                <label for="modalMargemLucro" class="form-label">Margem de Lucro</label>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4 mt-2">
+                                <label for="modalMargemLucro" class="form-label">Lucro Aplicado</label>
                                 <div class="input-group">
                                     <span class="input-group-text">%</span>
-                                    <input id="modalMargemLucro" type="text"
-                                        class="form-control input-group radius-right radius-bottom-right" disabled>
+                                    <input id="modalMargemLucro" type="text" class="form-control input-group radius-right radius-bottom-right text-end" disabled>
                                 </div>
                             </div>
-                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                <label class="form-label" for="modalCustoProducao">Custo de Produção</label>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4 mt-2">
+                                <label class="form-label" for="modalCustoProducao">Custo Total de Produção</label>
                                 <div class="input-group form-group ">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text rs-input">R$</span>
                                     </div>
-                                    <input type="text" class="form-control" id="modalCustoProducao" disabled>
+                                    <input type="text" class="form-control text-end" id="modalCustoProducao" disabled>
                                 </div>
                             </div>
-                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4 mt-2">
                                 <label class="form-label" for="modalValorTotalImposto">Valor com Imposto</label>
                                 <div class="input-group form-group ">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text rs-input">R$</span>
                                     </div>
-                                    <input type="text" class="form-control" id="modalValorTotalImposto" disabled>
+                                    <input type="text" class="form-control text-end" id="modalValorTotalImposto" disabled>
                                 </div>
                             </div>
-                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4 mt-2">
                                 <label class="form-label" for="modalValorTotalLucro">Valor com Margem de Lucro</label>
                                 <div class="input-group form-group ">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text rs-input">R$</span>
                                     </div>
-                                    <input type="text" class="form-control" id="modalValorTotalLucro" disabled>
+                                    <input type="text" class="form-control text-end" id="modalValorTotalLucro" disabled>
                                 </div>
                             </div>
-                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                <label class="form-label" for="modalValorSugerido">Valor com Margem de Lucro</label>
+                            <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4 mt-2">
+                                <label class="form-label" for="modalValorSugerido">Valor Sugerido</label>
                                 <div class="input-group form-group ">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text rs-input">R$</span>
                                     </div>
-                                    <input type="text" class="form-control" id="modalValorSugerido" disabled>
+                                    <input type="text" class="form-control text-end background-danger" id="modalValorSugerido" disabled>
                                 </div>
                             </div>
                         </div>
@@ -397,16 +405,20 @@
                                     class="mt-3 table table-primary table-striped-columns table-hover col-md-12">
                                     <thead id="hdModalListaInsumos">
                                         <tr>
-                                            <th class="radius-left" style="width: 35%;">Nome</th>
-                                            <th style="width: 15%;">Tipo Medida</th>
-                                            <th style="width: 20%;">Qtd. Embalagem</th>
-                                            <th style="width: 15%;">Porção</th>
-                                            <th class="radius-right" style="width: 15%;">Valor</th>
+                                            <th class="radius-left" style="width: 30%;">Insumo</th>
+                                            <th style="width: 20%;">Volume Embalagem</th>
+                                            <th style="width: 18%;">Custo Embalagem</th>
+                                            <th style="width: 10%;">Porção</th>
+                                            <th class="radius-right" style="width: 17%;">Custo Porção</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tbModalListaInsumos">
                                     </tbody>
                                 </table>
+                                <nav aria-label="..." id="paginationModalInsumos" class="col-md-5">
+                                    <ul class="pagination">
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </form>
