@@ -1,64 +1,64 @@
 //=========Métodos Gerais ===============//
 
- function AbreSessao(elementoId, formId, hideForm, tempo) {
-     var Elemento = $("#" + elementoId);
-     setTimeout(function() {
-         Elemento.slideDown();
-         if (hideForm) {
-             $("#" + formId).show();
-         }
-     }, tempo);
- }
- function AbreSessaoComSlide(formId, sessaoId, btnDown, btnUp, tempo) {
+function AbreSessao(elementoId, formId, hideForm, tempo) {
+    var Elemento = $("#" + elementoId);
+    setTimeout(function () {
+        Elemento.slideDown();
+        if (hideForm) {
+            $("#" + formId).show();
+        }
+    }, tempo);
+}
+function AbreSessaoComSlide(formId, sessaoId, btnDown, btnUp, tempo) {
     $("#" + formId).show();
-     setTimeout(function() {
+    setTimeout(function () {
         ToggleHeader(sessaoId, btnDown, btnUp)
-     }, tempo);
- }
- function FechaSessaoComSlide(formId, sessaoId, btnDown, btnUp, tempo) {
-     ToggleHeader(sessaoId, btnDown, btnUp)
-     setTimeout(function() {
+    }, tempo);
+}
+function FechaSessaoComSlide(formId, sessaoId, btnDown, btnUp, tempo) {
+    ToggleHeader(sessaoId, btnDown, btnUp)
+    setTimeout(function () {
         $("#" + formId).hide();
-     }, tempo);
- }
+    }, tempo);
+}
 
-  function FechaInsumos(){
-     if($('#btnCloseHeaderInsumoListaUp').is(':visible')){
+function FechaInsumos() {
+    if ($('#btnCloseHeaderInsumoListaUp').is(':visible')) {
         ToggleHeader('collapseInsumosLista', 'btnCloseHeaderInsumoListaDown', 'btnCloseHeaderInsumoListaUp');
-     }
-     if($('#btnCloseHeaderAddInsumosUp').is(':visible')){
-        setTimeout(function() {
-            ToggleHeader('collapseInsumosAddCampos','btnCloseHeaderAddInsumosDown', 'btnCloseHeaderAddInsumosUp')
-         }, 500);
-     }
-     setTimeout(function() {
+    }
+    if ($('#btnCloseHeaderAddInsumosUp').is(':visible')) {
+        setTimeout(function () {
+            ToggleHeader('collapseInsumosAddCampos', 'btnCloseHeaderAddInsumosDown', 'btnCloseHeaderAddInsumosUp')
+        }, 500);
+    }
+    setTimeout(function () {
         $("#collapseAddInsumos").hide();
-     }, 1000);
+    }, 1000);
 
-  }
- 
+}
 
- function FechaSessao(elementoId, formId, hideForm, tempo) {
-     var Elemento = $("#" + elementoId);
-     setTimeout(function() {
-         Elemento.slideUp();
-         if (hideForm) {
-             $("#" + formId).hide();
-         }
-     }, tempo);
- }
 
- function ToggleHeader(formId, btnDown, btnUp){
-    if($('#' + btnDown).is(':visible')){
+function FechaSessao(elementoId, formId, hideForm, tempo) {
+    var Elemento = $("#" + elementoId);
+    setTimeout(function () {
+        Elemento.slideUp();
+        if (hideForm) {
+            $("#" + formId).hide();
+        }
+    }, tempo);
+}
+
+function ToggleHeader(formId, btnDown, btnUp) {
+    if ($('#' + btnDown).is(':visible')) {
         $('#' + formId).slideDown();
         $('#' + btnUp).removeAttr('display', 'none');
         $('#' + btnDown).attr('display', 'none');
-    }else{
+    } else {
         $('#' + formId).slideUp();
         $('#' + btnDown).removeAttr('display', 'none');
         $('#' + btnUp).attr('display', 'none');
     }
- }
+}
 
 
 //=========================Métodos=================================///
@@ -66,7 +66,7 @@ function RemoverLinha() {
     $(this).closest('tr').remove();
 }
 
-function retornaTipoMedidaDescricao(tipoMedida){
+function retornaTipoMedidaDescricao(tipoMedida) {
     var tipoMedidaDescricao = null;
     switch (tipoMedida) {
         case '1':
@@ -77,7 +77,7 @@ function retornaTipoMedidaDescricao(tipoMedida){
             break;
         case '3':
             tipoMedidaDescricao = 'l'
-            
+
             break;
         case '4':
             tipoMedidaDescricao = 'm'
@@ -88,7 +88,7 @@ function retornaTipoMedidaDescricao(tipoMedida){
     return tipoMedidaDescricao
 }
 
-function aplicaMascaraTipoMedida(tipoMedida){
+function aplicaMascaraTipoMedida(tipoMedida) {
     var tipoMedidaDescricao = null;
     switch (tipoMedida) {
         case '1':
@@ -104,7 +104,7 @@ function aplicaMascaraTipoMedida(tipoMedida){
 
             $('.mascaraUnidade').mask('000.000', {
                 translation: {
-                    '0': {pattern: /[0-9]/}
+                    '0': { pattern: /[0-9]/ }
                 },
                 reverse: true
             });
@@ -117,10 +117,10 @@ function aplicaMascaraTipoMedida(tipoMedida){
 
             $('#inputInsumoQuantidadeEmbalagem').addClass('mascaraMetroKgLitro');
             $('#inputInsumoPorcao').addClass('mascaraMetroKgLitro');
-            
+
             MascaraUnidadeUnidadeAtiva = false;
 
-            $(".mascaraMetroKgLitro").mask("999.999,99", {reverse: true});
+            $(".mascaraMetroKgLitro").mask("999.999,99", { reverse: true });
             break;
         case '3':
             $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraUnidade');
@@ -130,17 +130,17 @@ function aplicaMascaraTipoMedida(tipoMedida){
 
             $('#inputInsumoQuantidadeEmbalagem').addClass('mascaraMetros');
             $('#inputInsumoPorcao').addClass('mascaraMetros');
-           
+
             MascaraUnidadeUnidadeAtiva = false;
-            
-            $('.mascaraMetros').mask("999.999,99", {reverse: true});
+
+            $('.mascaraMetros').mask("999.999,99", { reverse: true });
             break;
         case '4':
             $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraUnidade');
             $('#inputInsumoPorcao').removeClass('mascaraUnidade');
             $('#inputInsumoQuantidadeEmbalagem').addClass('mascaraMetroKgLitro');
             $('#inputInsumoPorcao').addClass('mascaraMetroKgLitro');
-            $(".mascaraMetroKgLitro").mask("999,999", {reverse: true});
+            $(".mascaraMetroKgLitro").mask("999,999", { reverse: true });
             break;
         default:
             tipoMedidaDescricao = 'Não reconhecido'
@@ -165,17 +165,11 @@ function formatarNumeroMonetario(num) {
 }
 
 function formatarNumeroModal(valor) {
-        // Converter para float e garantir duas casas decimais
-        let num = parseFloat(valor).toFixed(2);
+    let num = parseFloat(valor).toFixed(2);
+    num = num.replace('.', ',');
+    num = num.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-        // Substituir o ponto decimal por uma vírgula temporariamente
-        num = num.replace('.', ',');
-
-        // Adicionar pontos como separadores de milhar
-        num = num.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
-        return num;
-    
+    return num;
 }
 
 function adicionarPontosMilhares(num) {
@@ -198,13 +192,30 @@ function AdicionarPercentual(valor, percentual) {
     return valor + (valor * percentual / 100);
 }
 
+function verificarEIncrementarString(str, array) {
+    function existeStringNoArray(s, arr) {
+        return arr.some(function (obj) {
+            return Object.values(obj).includes(s);
+        });
+    }
+    var novaString = str;
+    var contador = 0;
+    while (existeStringNoArray(novaString, array)) {
+        contador++;
+        novaString = str + ' (' + contador + ')';
+    }
+
+    return novaString;
+}
+
+
 //================Limpa Campos===============//
 
 function LimpaCamposDiv(divId) {
-    $('#' + divId +' :input').val('');
-  }
+    $('#' + divId + ' :input').val('');
+}
 
-function LimpaCamposAdicionaInsumo(){
+function LimpaCamposAdicionaInsumo() {
     $('#formAdicionaInsumo :input').val('');
 }
 

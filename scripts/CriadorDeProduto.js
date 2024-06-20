@@ -19,18 +19,42 @@ function AdicionaInsumo() {
     if (validAddInsumos) {
         
         MontaInsumos();
-        CriaListagem(DadosProduto.ListaInsumos, 'paginationListaInsumo', '#tbListaInsumos');
+
+        CriaListagem(DadosProduto.ListaInsumos.reverse(), 'paginationListaInsumo', '#tbListaInsumos');
+        
         if(DadosProduto.ListaInsumos.length > 5){
-            $('#ulPaginationListaInsumo').slideDown()
+            $('#divIdBotoesListaInsumo').addClass('col-xs-12')
+            $('#divIdBotoesListaInsumo').addClass('col-sm-12')
+            $('#divIdBotoesListaInsumo').addClass('col-md-6')
+            $('#divIdBotoesListaInsumo').addClass('col-lg-6')
+            $('#divIdBotoesListaInsumo').addClass('col-xg-6')
+
+            $('#divIdBotoesListaInsumo').removeClass('col-xs-12')
+            $('#divIdBotoesListaInsumo').removeClass('col-sm-12')
+            $('#divIdBotoesListaInsumo').removeClass('col-md-12')
+            $('#divIdBotoesListaInsumo').removeClass('col-lg-12')
+            $('#divIdBotoesListaInsumo').removeClass('col-xg-12')
+            $('#paginationListaInsumo').slideDown()
         }else{
-            $('#ulPaginationListaInsumo').hide()
+            $('#divIdBotoesListaInsumo').removeClass('col-xs-12')
+            $('#divIdBotoesListaInsumo').removeClass('col-sm-12')
+            $('#divIdBotoesListaInsumo').removeClass('col-md-6')
+            $('#divIdBotoesListaInsumo').removeClass('col-lg-6')
+            $('#divIdBotoesListaInsumo').removeClass('col-xg-6')
+
+            $('#divIdBotoesListaInsumo').addClass('col-xs-12')
+            $('#divIdBotoesListaInsumo').addClass('col-sm-12')
+            $('#divIdBotoesListaInsumo').addClass('col-md-12')
+            $('#divIdBotoesListaInsumo').addClass('col-lg-12')
+            $('#divIdBotoesListaInsumo').addClass('col-xg-12')
+            $('#paginationListaInsumo').hide()
         }
 
         if(DadosProduto.ListaInsumos.length == 1){
             ToggleHeader('collapseInsumosLista', 'btnCloseHeaderInsumoListaDown', 'btnCloseHeaderInsumoListaUp')
         }
-
         LimpaCamposDiv('collapseInsumosAddCampos');
+
     }else{
         $('#selectInsumoTipoMedida').addClass('validateBorda');
         if($('#inputInsumoValor-error').is(':visible') || $('#inputInsumoPorcao-error').is(':visible')){
@@ -41,6 +65,35 @@ function AdicionaInsumo() {
         $('#selectInsumoTipoMedida').removeClass('remove-borda');
         $('#selectInsumoTipoMedida').addClass('select:invalid');
     }
+}
+
+function ExcluiInsumo(insumoId){
+    console.log(DadosProduto.ListaInsumos)
+    var indice = DadosProduto.ListaInsumos.findIndex(function(objeto) {
+        return objeto.InsumoId === insumoId;
+    });
+
+    if (indice !== -1) {
+        DadosProduto.ListaInsumos.splice(indice, 1);
+    } else {
+        console.log('Objeto com id ' + insumoId + ' não encontrado.');
+    }
+
+    if(DadosProduto.ListaInsumos.length > 5){
+        $('#divIdBotoesListaInsumo').addClass('col-md-6')
+        $('#divIdBotoesListaInsumo').removeClass('col-md-12')
+        $('#paginationListaInsumo').slideDown()
+    }else{
+        $('#divIdBotoesListaInsumo').removeClass('col-md-6')
+        $('#divIdBotoesListaInsumo').addClass('col-md-12')
+        $('#paginationListaInsumo').hide()
+    }
+
+    if(DadosProduto.ListaInsumos.length == 0){
+        ToggleHeader('collapseInsumosLista', 'btnCloseHeaderInsumoListaDown', 'btnCloseHeaderInsumoListaUp')
+    }
+
+    CriaListagem(DadosProduto.ListaInsumos.reverse(), 'paginationListaInsumo', '#tbListaInsumos');
 }
 
 function ExcluiListaInsumos(){
@@ -95,10 +148,14 @@ function CalcularProduto() {
    if(DadosProduto.ListaInsumos.length >= 1){
     produtoCalculado = ComporValorProduto(DadosProduto);
     DadosProduto.ProdutoCalculado.push(produtoCalculado);
-    
-    //MontaTabelaProdutosCalculados(DadosProduto.ProdutoCalculado[DadosProduto.ProdutoCalculado.length - 1], DadosProduto.ProdutoNome, DadosProduto.ProdutoId);
     ListaProdutosCalculados.push(DadosProduto);
-    CriaListagem(ListaProdutosCalculados, 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
+    CriaListagem(ListaProdutosCalculados.reverse(), 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
+    if(ListaProdutosCalculados.length > 5){
+        $('#paginationListaProdutosCalculados').slideDown()
+    }else{
+        $('#paginationListaProdutosCalculados').hide()
+    }
+
     DadosProduto = [];
     $("#tableListaInsumos tbody").empty();
     $('#TituloCriadorDeProdutos').html('Criar Novo Produto');
@@ -116,7 +173,32 @@ function CalcularProduto() {
         confirmButtonText: 'Ok',
       })
    }
+}
 
+function ExcluiProdutoCalculado(idProduto){
+        var indice = ListaProdutosCalculados.findIndex(function(objeto) {
+            return objeto.ProdutoId === idProduto;
+        });
+
+        if (indice !== -1) {
+            ListaProdutosCalculados.splice(indice, 1);
+        } else {
+            console.log('Objeto com id ' + idProduto + ' não encontrado.');
+        }
+         
+        if(ListaProdutosCalculados.length == 0){
+            FechaSessaoComSlide('collapseListaProdutosPrecificados', 'collapseProdutosCalculadosLista', 'btnCloseHeaderCalculadosDown', 'btnCloseHeaderCalculadosDown', 1000)
+            AbreSessao('collapseCriadorDeProdutos','CriadorDeProdutos', true, 2000);
+        }
+
+        if(ListaProdutosCalculados.length > 5){
+            $('#paginationListParodutosCalculados').slideDown()
+        }else{
+
+            $('#paginationListaProdutosCalculados').hide()
+        }
+
+        CriaListagem(ListaProdutosCalculados, 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
 }
 //==================== Modal Produto Calculado ===============================//
 
@@ -138,9 +220,9 @@ function PreencheModalProdutoCalculado(produtoId){
     $('#modalValorTotalLucro').val(formatarNumeroModal(ProdutoSelecionado.ProdutoCalculado[0].ValorComLucro));
     $('#modalValorSugerido').val(formatarNumeroModal(ProdutoSelecionado.ProdutoCalculado[0].ValorSugerido));
 
-    ProdutoSelecionado.ListaInsumos.map((item) => {
-        AdicionaModalInsumoLista(item)
-    })
+
+    CriaListagem(ProdutoSelecionado.ListaInsumos, 'paginationModalInsumos', '#tbModalListaInsumos')
+    
 }
 
 function FechaModalProdutoCalculado() {
@@ -231,8 +313,8 @@ function IniciaValidateAddInsumos(){
 
 function MontaProduto() {
     DadosProduto = {
-        ProdutoNome: $('#inputProdutoNome').val(),
-        ProdutoMargemImposto: converteStringPraFloat($('#inputProdutoMargemImposto').val()),
+        ProdutoNome: verificarEIncrementarString($('#inputProdutoNome').val(), ListaProdutosCalculados),
+        ProdutoMargemImposto: $('#inputProdutoMargemImposto').val().trim() === '' ? 0 : converteStringPraFloat($('#inputProdutoMargemImposto').val()),
         ProdutoMargemLucro: converteStringPraFloat($('#inputProdutoMargemLucro').val()),
         ProdutoId: $('#inputProdutoNome').val() + (ListaProdutosCalculados.length + 1),
         ListaInsumos: [],
@@ -244,12 +326,13 @@ function MontaProduto() {
 
 function MontaInsumos() {
     DadosProduto.ListaInsumos.push({
-        InsumoNome: $('#inputInsumoNome').val(),
+        InsumoNome: verificarEIncrementarString($('#inputInsumoNome').val(), DadosProduto.ListaInsumos),
         InsumoTipoMedida: $('#selectInsumoTipoMedida').val(),
         InsumoTipoMedidaDescricao: retornaTipoMedidaDescricao($('#selectInsumoTipoMedida').val()),
         InsumoQuantidadeEmbalagem: converteStringPraFloat($('#inputInsumoQuantidadeEmbalagem').val()),
         InsumoValor: converteStringPraFloat($('#inputInsumoValor').val()),
         InsumoPorcao: converteStringPraFloat($('#inputInsumoPorcao').val()),
+        InsumoId: $('#inputInsumoNome').val() + (DadosProduto.ListaInsumos.length + 27)
     });
 }
 

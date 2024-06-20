@@ -16,7 +16,6 @@ function CriaListagem(dadosInsumo, idPagination, tbodyId) {
         const dadosPaginados = dadosInsumo.slice(inicio, final);
         
         $(tbodyId).empty();
-        console.log(dadosPaginados)
         dadosPaginados.forEach(data => {
             if(tbodyId == '#tbListaInsumos' ){
                 var custoInsumo = CalculaCustoBruto(data.InsumoPorcao, data.InsumoQuantidadeEmbalagem, data.InsumoValor);
@@ -26,7 +25,7 @@ function CriaListagem(dadosInsumo, idPagination, tbodyId) {
                     $('<td>').html('<span>R$</span><span class="AjusteValor"> ' + formatarNumeroMonetario(data.InsumoValor) + '</span>'),
                     $('<td>').html('<span>' + data.InsumoTipoMedidaDescricao + '</span><span class="AjusteValor"> ' + trataExibicaoListaInsumoQuantidades(data.InsumoTipoMedida, data.InsumoPorcao) + '</span>'),
                     $('<td>').html('<span>R$</span><span class="AjusteValor"> ' + formatarNumeroMonetario(custoInsumo.toFixed(2)) + '</span>'),
-                    $('<td class="text-center btn-remover">').html('<i class="fas fa-trash-alt" style="cursor: pointer;"></i>')
+                    $('<td class="text-center">').html(`<button type="button" class="btn text-center btn-danger btn-remover buttonVisualizaProduto" onclick="ExcluiInsumo('${data.InsumoId}')"><img id="visualizaIcon" src="/styles/trashIcon.png" alt="Excluir Produto"></button>`)
                 );
                 novaLinha.appendTo(tbodyId);
 
@@ -36,25 +35,22 @@ function CriaListagem(dadosInsumo, idPagination, tbodyId) {
                     $('<td>').html('<span class="AjusteMoeda">R$</span><span class="AjusteValor ">' + formatarNumeroMonetario(data.ProdutoCalculado[0].CustoBruto.toFixed(2)) + '</span>'),
                     $('<td>').html('<span class="AjusteMoeda">R$</span><span class="AjusteValor ">' + formatarNumeroMonetario(data.ProdutoCalculado[0].ValorSugerido.toFixed(2)) + '</span>'),
                     $('<td class="text-center">').html(`<button type="button" class="btn btn-primary buttonVisualizaProduto" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" onclick="PreencheModalProdutoCalculado('${data.ProdutoId}')"><img id="visualizaIcon" src="/styles/eyeIcon.png" alt="Visualizar Detalhes do Produto"></button>`), 
-                    $('<td class="text-center btn-remover">').html('<i  &#xF877 class="fas fa-trash-alt" style="cursor: pointer;"></i>')
+                    $('<td class="text-center">').html(`<button type="button" class="btn text-center btn-danger btn-remover buttonVisualizaProduto" onclick="ExcluiProdutoCalculado('${data.ProdutoId}')"><img id="visualizaIcon" src="/styles/trashIcon.png" alt="Excluir Produto"></button>`)
                 );
                 novaLinha.appendTo(tbodyId);
             }else{
-                var custoInsumo = CalculaCustoBruto(dadosInsumo.InsumoPorcao, dadosInsumo.InsumoQuantidadeEmbalagem, dadosInsumo.InsumoValor)
+                var custoInsumo = CalculaCustoBruto(data.InsumoPorcao, data.InsumoQuantidadeEmbalagem, data.InsumoValor)
                 let novaLinha = $('<tr>').append(
-                    $('<td>').html(dadosInsumo.InsumoNome),
-                    $('<td>').html('<span>'+ dadosInsumo.InsumoTipoMedidaDescricao+'</span><span class="AjusteValor"> ' + trataExibicaoListaInsumoQuantidades(dadosInsumo.InsumoTipoMedida, dadosInsumo.InsumoQuantidadeEmbalagem) + '</span>'),
-                    $('<td>').html('<span>R$</span><span class="AjusteValor"> ' + formatarNumeroMonetario(dadosInsumo.InsumoValor.toFixed(2)) + '</span>'),
-                    $('<td>').html('<span>'+ dadosInsumo.InsumoTipoMedidaDescricao +'</span><span class="AjusteValor"> ' + trataExibicaoListaInsumoQuantidades(dadosInsumo.InsumoTipoMedida, dadosInsumo.InsumoPorcao) + '</span>'),
+                    $('<td>').html(data.InsumoNome),
+                    $('<td>').html('<span>'+ data.InsumoTipoMedidaDescricao+'</span><span class="AjusteValor"> ' + trataExibicaoListaInsumoQuantidades(data.InsumoTipoMedida, data.InsumoQuantidadeEmbalagem) + '</span>'),
+                    $('<td>').html('<span>R$</span><span class="AjusteValor"> ' + formatarNumeroMonetario(data.InsumoValor.toFixed(2)) + '</span>'),
+                    $('<td>').html('<span>'+ data.InsumoTipoMedidaDescricao +'</span><span class="AjusteValor"> ' + trataExibicaoListaInsumoQuantidades(data.InsumoTipoMedida, data.InsumoPorcao) + '</span>'),
                     $('<td>').html('<span>R$</span><span class="AjusteValor"> ' + formatarNumeroMonetario(custoInsumo.toFixed(2)) + '</span>'),
                 );
-                novaLinha.appendTo('#tbModalListaInsumos');
+                novaLinha.appendTo(tbodyId);
             }
 
         });
-        
-        
-
     }
 
     function configurarPaginacao(idPagination) {
@@ -63,20 +59,17 @@ function CriaListagem(dadosInsumo, idPagination, tbodyId) {
         let itemAnterior = $('<li class="page-item disabled"><a class="page-link" href="#"><<</a></li>');
         $('#' + idPagination + ' .pagination').append(itemAnterior);
 
-        // Criação dos números de página
         for (let i = 1; i <= totalPaginas; i++) {
             let itemPagina = $(`<li class="page-item ${i === 1 ? 'active' : ''}"><a class="page-link" href="#">${i}</a></li>`);
             $('#' + idPagination + ' .pagination').append(itemPagina);
         }
 
-        // Criação do botão "Próxima Página"
         let itemProximo = $('<li class="page-item"><a class="page-link" href="#">>></a></li>');
         if (totalPaginas <= 1) {
             itemProximo.addClass('disabled');
         }
         $('#' + idPagination + ' .pagination').append(itemProximo);
 
-        // Função de clique para os números de página
         $('#' + idPagination + ' .page-link').click(function(e) {
             e.preventDefault();
             const itemPagina = $(this).parent();
@@ -91,14 +84,12 @@ function CriaListagem(dadosInsumo, idPagination, tbodyId) {
 
             exibirTabela(pagina);
 
-            // Habilita o botão "Página Anterior" se não estiver na primeira página
             if (pagina > 1) {
                 $('#' + idPagination + ' .page-item:first').removeClass('disabled');
             } else {
                 $('#' + idPagination + ' .page-item:first').addClass('disabled');
             }
 
-            // Desabilita o botão "Próxima Página" se estiver na última página
             if (pagina === totalPaginas) {
                 $('#' + idPagination + ' .page-item:last').addClass('disabled');
             } else {
@@ -106,7 +97,6 @@ function CriaListagem(dadosInsumo, idPagination, tbodyId) {
             }
         });
 
-        // Função de clique para o botão "Primeira Página"
         $('#' + idPagination + ' .page-item:first').click(function(e) {
             e.preventDefault();
             const paginaAtual = parseInt($('#' + idPagination + ' .pagination .active .page-link').text());
@@ -122,7 +112,6 @@ function CriaListagem(dadosInsumo, idPagination, tbodyId) {
             }
         });
 
-        // Função de clique para o botão "Última Página"
         $('#' + idPagination + ' .page-item:last').click(function(e) {
             e.preventDefault();
             const paginaAtual = parseInt($('#' + idPagination + ' .pagination .active .page-link').text());
@@ -137,8 +126,6 @@ function CriaListagem(dadosInsumo, idPagination, tbodyId) {
                 $('#' + idPagination + ' .page-item:first').removeClass('disabled');
             }
         });
-
-        // Inicialmente, se estiver na última página, desabilita o botão "Próxima Página"
         if (totalPaginas <= 1) {
             $('#' + idPagination + ' .page-item:last').addClass('disabled');
         }
@@ -149,37 +136,12 @@ function CriaListagem(dadosInsumo, idPagination, tbodyId) {
 }
 
 
-// function AdicionaInsumoLista(dadosInsumo) {
-//     var custoInsumo = CalculaCustoBruto(dadosInsumo.InsumoPorcao, dadosInsumo.InsumoQuantidadeEmbalagem, dadosInsumo.InsumoValor)
-//     let novaLinha = $('<tr>').append(
-//         $('<td>').html(dadosInsumo.InsumoNome),
-//         $('<td>').html('<span>'+ dadosInsumo.InsumoTipoMedidaDescricao+'</span><span class="AjusteValor"> ' + trataExibicaoListaInsumoQuantidades(dadosInsumo.InsumoTipoMedida, dadosInsumo.InsumoQuantidadeEmbalagem) + '</span>'),
-//         $('<td>').html('<span>R$</span><span class="AjusteValor"> ' + formatarNumeroMonetario(dadosInsumo.InsumoValor.toFixed(2)) + '</span>'),
-//         $('<td>').html('<span>'+ dadosInsumo.InsumoTipoMedidaDescricao +'</span><span class="AjusteValor"> ' + trataExibicaoListaInsumoQuantidades(dadosInsumo.InsumoTipoMedida, dadosInsumo.InsumoPorcao) + '</span>'),
-//         $('<td>').html('<span>R$</span><span class="AjusteValor"> ' + formatarNumeroMonetario(custoInsumo.toFixed(2)) + '</span>'),
-//         $('<td class="text-center btn-remover">').html('<i class="fas fa-trash-alt" style="cursor: pointer;"></i>')
-//     );
-//     novaLinha.appendTo('#tbListaInsumos');
-// }
-
-function AdicionaModalInsumoLista(dadosInsumo) {
-    var custoInsumo = CalculaCustoBruto(dadosInsumo.InsumoPorcao, dadosInsumo.InsumoQuantidadeEmbalagem, dadosInsumo.InsumoValor)
-    let novaLinha = $('<tr>').append(
-        $('<td>').html(dadosInsumo.InsumoNome),
-        $('<td>').html('<span>'+ dadosInsumo.InsumoTipoMedidaDescricao+'</span><span class="AjusteValor"> ' + trataExibicaoListaInsumoQuantidades(dadosInsumo.InsumoTipoMedida, dadosInsumo.InsumoQuantidadeEmbalagem) + '</span>'),
-        $('<td>').html('<span>R$</span><span class="AjusteValor"> ' + formatarNumeroMonetario(dadosInsumo.InsumoValor.toFixed(2)) + '</span>'),
-        $('<td>').html('<span>'+ dadosInsumo.InsumoTipoMedidaDescricao +'</span><span class="AjusteValor"> ' + trataExibicaoListaInsumoQuantidades(dadosInsumo.InsumoTipoMedida, dadosInsumo.InsumoPorcao) + '</span>'),
-        $('<td>').html('<span>R$</span><span class="AjusteValor"> ' + formatarNumeroMonetario(custoInsumo.toFixed(2)) + '</span>'),
-    );
-    novaLinha.appendTo('#tbModalListaInsumos');
-}
-
 function trataExibicaoListaInsumoQuantidades(tipoMedida, quantidade){
     var quantidadeTratada = null
     if(tipoMedida == 1){
        quantidadeTratada = adicionarPontosMilhares(quantidade)
     }else{
-        quantidadeTratada = formatarNumeroMonetario(quantidade)
+        quantidadeTratada = formatarNumeroMonetario(quantidade.toFixed(2))
     }
 
     return quantidadeTratada

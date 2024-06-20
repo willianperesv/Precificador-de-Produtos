@@ -155,14 +155,14 @@
                                 <option value="3">Litros(l)</option>
                                 <option value="4">Metro(m)</option>
                             </select>
-                            <div id="selectTipoMedidaError"class="error-message"></div>
+                            <div id="selectTipoMedidaError" class="error-message"></div>
                         </div>
                         <div class="form-group col-md-6 col-lg-4 col-xl-3 mt-3 ">
                             <label class="form-label" for="inputInsumoQuantidadeEmbalagem">Quantidade Embalagem</label>
                             <div class="input-group">
                                 <input type="text" class="form-control radius-right-complete text-end"
                                     id="inputInsumoQuantidadeEmbalagem" name="inputInsumoQuantidadeEmbalagem"
-                                    placeholder="ex: 0.300(kg), 0.65(metros), 1 (unidade)"> 
+                                    placeholder="ex: 0.300(kg), 0.65(metros), 1 (unidade)">
                             </div>
                             <div class="error-message"></div>
                         </div>
@@ -173,7 +173,8 @@
                                     <span class="input-group-text rs-input">R$</span>
                                 </div>
                                 <input type="text" class="form-control text-end" id="inputInsumoValor"
-                                    name="inputInsumoValor" data-thousands="." data-decimal="," placeholder="Insira o valor..." required>
+                                    name="inputInsumoValor" data-thousands="." data-decimal=","
+                                    placeholder="Insira o valor..." required>
                             </div>
                             <div class="error-message col-md-6 col-lg-4 col-xl-3"></div>
                         </div>
@@ -182,11 +183,13 @@
                             <label class="form-label" for="inputInsumoPorcao">Porção
                                 Utilizada</label>
                             <div class="input-group form-group ">
-                                <input type="text" class="form-control text-end" id="inputInsumoPorcao" name="inputInsumoPorcao" placeholder="ex: 0.200(kg), 0.6(m), ." required>
+                                <input type="text" class="form-control text-end" id="inputInsumoPorcao"
+                                    name="inputInsumoPorcao" placeholder="ex: 0.200(kg), 0.6(m), ." required>
                             </div>
                             <div class="error-message col-md-6 col-lg-4 col-xl-3"></div>
                         </div>
-                        <div id="divBotaoAdicionaInsumo" class="form-group  d-flex justify-content-end col-sm-6 col-md-6 col-lg-4 col-xl-6 offset-sm-6 offset-md-6 offset-lg-4 offset-xl-0  calcula-lista mt-3">
+                        <div id="divBotaoAdicionaInsumo"
+                            class="form-group  d-flex justify-content-end col-sm-6 col-md-6 col-lg-4 col-xl-6 offset-sm-6 offset-md-6 offset-lg-4 offset-xl-0  calcula-lista mt-3">
                             <button id="btnInsumoAdicionar" class="btn btn-success btn-ajuste" type="button"
                                 data-bs-target="#collapseListaAdicionados" aria-expanded="false"
                                 aria-controls="collapseListaAdicionados" onclick="AdicionaInsumo()">Adicionar <i
@@ -245,31 +248,36 @@
                                 </table>
                             </div>
                             <div class="row d-flex justify-content-between w-100">
-                                <nav aria-label="..." id="paginationListaInsumo" class="col-md-5">
+                                <nav aria-label="..." id="paginationListaInsumo"
+                                    class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                     <ul id="ulPaginationListaInsumo" class="pagination">
                                         <!-- Links de paginação serão inseridos via JavaScript -->
                                     </ul>
                                 </nav>
                                 <div id="divIdBotoesListaInsumo"
-                                    class="col-md-6 btn-container mb-2">
+                                    class="col-xs-12 col-sm-12 col-md-6 col-lg-6 btn-container mb-2">
                                     <button id="ExcluiListaInsumo" type="button" class="btn btn-danger"
                                         onclick="ExcluiListaInsumos()">Excluir
                                         Lista <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </div>
                             </div>
-             
                         </div>
                     </div>
                     <hr>
-                    <div class="form-group w-100 d-flex justify-content-between">
-                        <button id="btnInsumoAdicionar" class="btn btn-danger btn-ajuste" type="button"
-                            onclick="CancelaProduto()">Excluir Produto <i class="ml-3 fas fa-trash-alt"></i>
-                        </button>
-                        <button id="btnCalcularProduto" class="btn btn-primary btn-ajuste" type="button"
-                            data-bs-target="#collapseProdutosCalculadosLista" aria-expanded="false"
-                            aria-controls="collapseProdutosCalculadosLista" onclick="CalcularProduto()">
-                            Precificar Produto <i class="fas fa-calculator mr-3"></i></button>
+                    <div class="row form-group w-100 d-flex justify-content-between">
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p0">
+                            <button id="btnInsumoAdicionar" class="btn btn-danger btn-ajuste float-start" type="button"
+                                onclick="CancelaProduto()">Excluir Produto <i class="ml-3 fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 float-end">
+                            <button id="btnCalcularProduto" class="btn btn-primary btn-ajuste float-end" type="button"
+                                data-bs-target="#collapseProdutosCalculadosLista" aria-expanded="false"
+                                aria-controls="collapseProdutosCalculadosLista" onclick="CalcularProduto()">
+                                Precificar Produto <i class="fas fa-calculator mr-3"></i></button>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -323,9 +331,9 @@
                                 </thead>
                                 <tbody id="tbListaProdutosCalculados">
                                 </tbody>
-                  
+
                             </table>
-                            <nav aria-label="..." id="paginationListaProdutosCalculados" class="col-md-5" display="none">
+                            <nav aria-label="..." id="paginationListaProdutosCalculados" class="col-md-5">
                                 <ul class="pagination">
                                 </ul>
                             </nav>
@@ -343,7 +351,8 @@
             <div class="modal-content mt-5">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="modalProdutoNomeHeader"></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="FechaModalProdutoCalculado()"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="FechaModalProdutoCalculado()"></button>
                 </div>
                 <div class="modal-body">
                     <form>
@@ -352,14 +361,18 @@
                                 <label for="modalMargemImposto" class="form-label">Impostos Aplicado</label>
                                 <div class="input-group">
                                     <span class="input-group-text">%</span>
-                                    <input id="modalMargemImposto" type="text" class="form-control input-group radius-right radius-bottom-right text-end" disabled>
+                                    <input id="modalMargemImposto" type="text"
+                                        class="form-control input-group radius-right radius-bottom-right text-end"
+                                        disabled>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4 mt-2">
                                 <label for="modalMargemLucro" class="form-label">Lucro Aplicado</label>
                                 <div class="input-group">
                                     <span class="input-group-text">%</span>
-                                    <input id="modalMargemLucro" type="text" class="form-control input-group radius-right radius-bottom-right text-end" disabled>
+                                    <input id="modalMargemLucro" type="text"
+                                        class="form-control input-group radius-right radius-bottom-right text-end"
+                                        disabled>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4 mt-2">
@@ -377,7 +390,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text rs-input">R$</span>
                                     </div>
-                                    <input type="text" class="form-control text-end" id="modalValorTotalImposto" disabled>
+                                    <input type="text" class="form-control text-end" id="modalValorTotalImposto"
+                                        disabled>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4 mt-2">
@@ -395,7 +409,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text rs-input">R$</span>
                                     </div>
-                                    <input type="text" class="form-control text-end background-danger" id="modalValorSugerido" disabled>
+                                    <input type="text" class="form-control text-end background-danger"
+                                        id="modalValorSugerido" disabled>
                                 </div>
                             </div>
                         </div>
@@ -424,7 +439,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="FechaModalProdutoCalculado()">Fechar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                        onclick="FechaModalProdutoCalculado()">Fechar</button>
                 </div>
             </div>
         </div>
