@@ -1,5 +1,6 @@
 var DadosProduto = { ListaInsumos: [], ProdutoCalculado:[] };
 var ListaProdutosCalculados = [];
+var ProdutoEmAberto = false;
 
 function CriarProduto() {
     var validCriadorDeProdutos = $("#collapseCriadorDeProdutos").valid();
@@ -11,6 +12,8 @@ function CriarProduto() {
         $('#headerInsumosNomeProduto').html(DadosProduto.ProdutoNome);
         FechaSessaoComSlide('CriadorDeProdutos', 'collapseCriadorDeProdutos', 'btnCloseCriadorDeProdutosDown', 'btnCloseCriadorDeProdutosUp', 1000)
         AbreSessaoComSlide('collapseAddInsumos', 'collapseInsumosAddCampos', 'btnCloseHeaderAddInsumosDown', 'btnCloseHeaderAddInsumosUp', 2000)
+        ProdutoEmAberto = true;
+
     }
 }
 
@@ -21,35 +24,7 @@ function AdicionaInsumo() {
         MontaInsumos();
 
         CriaListagem(DadosProduto.ListaInsumos.reverse(), 'paginationListaInsumo', '#tbListaInsumos');
-        
-        if(DadosProduto.ListaInsumos.length > 5){
-            $('#divIdBotoesListaInsumo').addClass('col-xs-12')
-            $('#divIdBotoesListaInsumo').addClass('col-sm-12')
-            $('#divIdBotoesListaInsumo').addClass('col-md-6')
-            $('#divIdBotoesListaInsumo').addClass('col-lg-6')
-            $('#divIdBotoesListaInsumo').addClass('col-xg-6')
-
-            $('#divIdBotoesListaInsumo').removeClass('col-xs-12')
-            $('#divIdBotoesListaInsumo').removeClass('col-sm-12')
-            $('#divIdBotoesListaInsumo').removeClass('col-md-12')
-            $('#divIdBotoesListaInsumo').removeClass('col-lg-12')
-            $('#divIdBotoesListaInsumo').removeClass('col-xg-12')
-            $('#paginationListaInsumo').slideDown()
-        }else{
-            $('#divIdBotoesListaInsumo').removeClass('col-xs-12')
-            $('#divIdBotoesListaInsumo').removeClass('col-sm-12')
-            $('#divIdBotoesListaInsumo').removeClass('col-md-6')
-            $('#divIdBotoesListaInsumo').removeClass('col-lg-6')
-            $('#divIdBotoesListaInsumo').removeClass('col-xg-6')
-
-            $('#divIdBotoesListaInsumo').addClass('col-xs-12')
-            $('#divIdBotoesListaInsumo').addClass('col-sm-12')
-            $('#divIdBotoesListaInsumo').addClass('col-md-12')
-            $('#divIdBotoesListaInsumo').addClass('col-lg-12')
-            $('#divIdBotoesListaInsumo').addClass('col-xg-12')
-            $('#paginationListaInsumo').hide()
-        }
-
+        ajusteBotões(DadosProduto.ListaInsumos.length > 5)
         if(DadosProduto.ListaInsumos.length == 1){
             ToggleHeader('collapseInsumosLista', 'btnCloseHeaderInsumoListaDown', 'btnCloseHeaderInsumoListaUp')
         }
@@ -140,6 +115,7 @@ function CancelaProduto(){
           $("#tableListaInsumos tbody").empty();
           $("#collapseInsumosAddCampos").validate().resetForm();
           $('#selectInsumoTipoMedida').removeClass('validateBorda');
+          ProdutoEmAberto = false;
         }
       })
 }
@@ -160,7 +136,9 @@ function CalcularProduto() {
     $("#tableListaInsumos tbody").empty();
     $('#TituloCriadorDeProdutos').html('Criar Novo Produto');
     FechaInsumos();
-   
+
+    ProdutoEmAberto = false;
+
     AbreSessao('collapseListaProdutosPrecificados','collapseProdutosCalculadosLista', true, 1000);
     AbreSessao('collapseCriadorDeProdutos','CriadorDeProdutos', true, 1500);
 
@@ -188,7 +166,9 @@ function ExcluiProdutoCalculado(idProduto){
          
         if(ListaProdutosCalculados.length == 0){
             FechaSessaoComSlide('collapseListaProdutosPrecificados', 'collapseProdutosCalculadosLista', 'btnCloseHeaderCalculadosDown', 'btnCloseHeaderCalculadosDown', 1000)
-            AbreSessao('collapseCriadorDeProdutos','CriadorDeProdutos', true, 2000);
+            if(!ProdutoEmAberto){
+                AbreSessao('collapseCriadorDeProdutos','CriadorDeProdutos', true, 2000);
+            }
         }
 
         if(ListaProdutosCalculados.length > 5){
@@ -199,6 +179,7 @@ function ExcluiProdutoCalculado(idProduto){
         }
 
         CriaListagem(ListaProdutosCalculados, 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
+        
 }
 //==================== Modal Produto Calculado ===============================//
 

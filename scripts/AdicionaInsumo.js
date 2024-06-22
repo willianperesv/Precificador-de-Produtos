@@ -141,10 +141,23 @@ function trataExibicaoListaInsumoQuantidades(tipoMedida, quantidade){
     if(tipoMedida == 1){
        quantidadeTratada = adicionarPontosMilhares(quantidade)
     }else{
-        quantidadeTratada = formatarNumeroMonetario(quantidade.toFixed(2))
+        quantidadeTratada = formatarNumeroDecimal(quantidade)
     }
 
     return quantidadeTratada
 }
 
+function formatarNumeroDecimal(numero) {
+    let numeroStr = numero.toFixed(3);
+
+    while (numeroStr.includes('.') && (numeroStr.endsWith('0') || numeroStr.endsWith('.'))) {
+        numeroStr = numeroStr.slice(0, -1);
+    }
+    numeroStr = numeroStr.replace('.', ',');
+    if (!numeroStr.includes(',')) {
+        numeroStr += ',0';
+    }
+
+    return numeroStr;
+}
 

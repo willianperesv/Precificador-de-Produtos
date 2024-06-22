@@ -98,7 +98,7 @@ function IniciaMascaras() {
                     $(this).val(value + '0');
                 }
                 if (value.split(',')[1].length === 1) {
-                    $(this).val(value + '00');
+                    $(this).val(value + '0');
                 }
             }
         }
@@ -115,7 +115,7 @@ function IniciaMascaras() {
                     $(this).val(value + '0');
                 }
                 if (value.split(',')[1].length === 1) {
-                    $(this).val(value + '00');
+                    $(this).val(value + '0');
                 }
             }
         }

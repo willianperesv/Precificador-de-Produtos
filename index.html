@@ -137,7 +137,7 @@
                     </div>
                     <!-----------------------------BODY ADD INSUMOS-------------------------------------->
                     <form id="collapseInsumosAddCampos" class="row mb-3" style="display:none;">
-                        <div class="form-group col-sm-12 col-md-12 col-lg-9 col-xl-6 mt-3">
+                        <div class="form-group col-sm-12 col-md-12 col-lg-12 col-xl-6 mt-3">
                             <label class="form-label" for="inputInsumoNome">Nome</label>
                             <input id="inputInsumoNome" type="text" class="form-control input-group"
                                 name="inputInsumoNome" placeholder="...salsicha, molho, alface" required>
@@ -232,7 +232,7 @@
                         <div id="collapseInsumosLista" class="" style="display:none;">
                             <div class="form-group col-md-12 p-0 divInsumosLista">
                                 <table id="tableListaInsumos"
-                                    class="table mt-3 table-gray table-striped-columns col-md-12 ajuste-table-adicionados">
+                                    class="table mt-3 table-gray table-striped-columns col-md-12 ajuste-table-adicionados mb-0">
                                     <thead id="hdListaInsumos">
                                         <tr>
                                             <th class="radius-left" style="width: 30%;">Nome</th>
@@ -247,16 +247,15 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="row d-flex justify-content-between w-100">
+                            <div class="row d-flex justify-content-between w-100 mt-2">
                                 <nav aria-label="..." id="paginationListaInsumo"
-                                    class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                     <ul id="ulPaginationListaInsumo" class="pagination">
-                                        <!-- Links de paginação serão inseridos via JavaScript -->
                                     </ul>
                                 </nav>
                                 <div id="divIdBotoesListaInsumo"
-                                    class="col-xs-12 col-sm-12 col-md-6 col-lg-6 btn-container mb-2">
-                                    <button id="ExcluiListaInsumo" type="button" class="btn btn-danger"
+                                    class="col-xs-12 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-end mb-2">
+                                    <button id="ExcluiListaInsumo" type="button" class="btn btn-danger btn-ajuste-excluiListaInsumo"
                                         onclick="ExcluiListaInsumos()">Excluir
                                         Lista <i class="fas fa-trash-alt"></i>
                                     </button>
@@ -264,14 +263,14 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
-                    <div class="row form-group w-100 d-flex justify-content-between">
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 p0">
+                    <hr class="mb-0">
+                    <div class="row form-group w-100 d-flex justify-content-between ">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 p0 mt-1">
                             <button id="btnInsumoAdicionar" class="btn btn-danger btn-ajuste float-start" type="button"
                                 onclick="CancelaProduto()">Excluir Produto <i class="ml-3 fas fa-trash-alt"></i>
                             </button>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 float-end">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 float-end mt-1">
                             <button id="btnCalcularProduto" class="btn btn-primary btn-ajuste float-end" type="button"
                                 data-bs-target="#collapseProdutosCalculadosLista" aria-expanded="false"
                                 aria-controls="collapseProdutosCalculadosLista" onclick="CalcularProduto()">
@@ -444,7 +443,7 @@
                 </div>
             </div>
         </div>
-        <!-- </div> -->
+
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="./scripts/eventos.js"></script>
 

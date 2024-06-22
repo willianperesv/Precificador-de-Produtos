@@ -89,65 +89,68 @@ function retornaTipoMedidaDescricao(tipoMedida) {
 }
 
 function aplicaMascaraTipoMedida(tipoMedida) {
-    var tipoMedidaDescricao = null;
-    switch (tipoMedida) {
-        case '1':
-            $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraMetroKgLitro');
-            $('#inputInsumoPorcao').removeClass('mascaraMetroKgLitro');
-            $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraMetros');
-            $('#inputInsumoPorcao').removeClass('mascaraMetros');
+    if(tipoMedida == 1){
+        $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraMedidaDecimal');
+        $('#inputInsumoPorcao').removeClass('mascaraMedidaDecimal');
+        $('#inputInsumoQuantidadeEmbalagem').addClass('mascaraUnidadeEmbalagem');
+        $('#inputInsumoPorcao').addClass('mascaraUnidadePorcao');
 
-            $('#inputInsumoQuantidadeEmbalagem').addClass('mascaraUnidade');
-            $('#inputInsumoPorcao').addClass('mascaraUnidade');
+        MascaraUnidadeUnidadeAtiva = true;
 
-            MascaraUnidadeUnidadeAtiva = true;
+        $('.mascaraUnidadeEmbalagem').mask('000.000', {
+            translation: {
+                '0': { pattern: /[0-9]/ }
+            },
+            reverse: true
+        });
 
-            $('.mascaraUnidade').mask('000.000', {
-                translation: {
-                    '0': { pattern: /[0-9]/ }
-                },
-                reverse: true
-            });
-            break;
-        case '2':
-            $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraUnidade');
-            $('#inputInsumoPorcao').removeClass('mascaraUnidade');
-            $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraMetros');
-            $('#inputInsumoPorcao').removeClass('mascaraMetros');
+        $('.mascaraUnidadePorcao').mask('999.999,999', {
+    
+            reverse: true
+        });
 
-            $('#inputInsumoQuantidadeEmbalagem').addClass('mascaraMetroKgLitro');
-            $('#inputInsumoPorcao').addClass('mascaraMetroKgLitro');
+    }else{
+        $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraUnidadeEmbalagem');
+        $('#inputInsumoPorcao').removeClass('mascaraUnidadePorcao');
 
-            MascaraUnidadeUnidadeAtiva = false;
+        $('#inputInsumoQuantidadeEmbalagem').addClass('mascaraMedidaDecimal');
+        $('#inputInsumoPorcao').addClass('mascaraMedidaDecimal');
 
-            $(".mascaraMetroKgLitro").mask("999.999,99", { reverse: true });
-            break;
-        case '3':
-            $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraUnidade');
-            $('#inputInsumoPorcao').removeClass('mascaraUnidade');
-            $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraMetroKgLitro');
-            $('#inputInsumoPorcao').removeClass('mascaraMetroKgLitro');
+        MascaraUnidadeUnidadeAtiva = false;
 
-            $('#inputInsumoQuantidadeEmbalagem').addClass('mascaraMetros');
-            $('#inputInsumoPorcao').addClass('mascaraMetros');
-
-            MascaraUnidadeUnidadeAtiva = false;
-
-            $('.mascaraMetros').mask("999.999,99", { reverse: true });
-            break;
-        case '4':
-            $('#inputInsumoQuantidadeEmbalagem').removeClass('mascaraUnidade');
-            $('#inputInsumoPorcao').removeClass('mascaraUnidade');
-            $('#inputInsumoQuantidadeEmbalagem').addClass('mascaraMetroKgLitro');
-            $('#inputInsumoPorcao').addClass('mascaraMetroKgLitro');
-            $(".mascaraMetroKgLitro").mask("999,999", { reverse: true });
-            break;
-        default:
-            tipoMedidaDescricao = 'Não reconhecido'
+        $(".mascaraMedidaDecimal").mask("999,999", { reverse: true });
     }
-    return tipoMedidaDescricao
 }
 
+function ajusteBotões(ListaInsumosMaiorQue5){
+    if(ListaInsumosMaiorQue5){
+        $('#divIdBotoesListaInsumo').addClass('col-xs-12')
+        $('#divIdBotoesListaInsumo').addClass('col-sm-12')
+        $('#divIdBotoesListaInsumo').addClass('col-md-6')
+        $('#divIdBotoesListaInsumo').addClass('col-lg-6')
+        $('#divIdBotoesListaInsumo').addClass('col-xg-6')
+
+        $('#divIdBotoesListaInsumo').removeClass('col-xs-12')
+        $('#divIdBotoesListaInsumo').removeClass('col-sm-12')
+        $('#divIdBotoesListaInsumo').removeClass('col-md-12')
+        $('#divIdBotoesListaInsumo').removeClass('col-lg-12')
+        $('#divIdBotoesListaInsumo').removeClass('col-xg-12')
+        $('#paginationListaInsumo').slideDown()
+    }else{
+        $('#divIdBotoesListaInsumo').removeClass('col-xs-12')
+        $('#divIdBotoesListaInsumo').removeClass('col-sm-12')
+        $('#divIdBotoesListaInsumo').removeClass('col-md-6')
+        $('#divIdBotoesListaInsumo').removeClass('col-lg-6')
+        $('#divIdBotoesListaInsumo').removeClass('col-xg-6')
+
+        $('#divIdBotoesListaInsumo').addClass('col-xs-12')
+        $('#divIdBotoesListaInsumo').addClass('col-sm-12')
+        $('#divIdBotoesListaInsumo').addClass('col-md-12')
+        $('#divIdBotoesListaInsumo').addClass('col-lg-12')
+        $('#divIdBotoesListaInsumo').addClass('col-xg-12')
+        $('#paginationListaInsumo').hide()
+    }
+}
 
 function convertePontoPorVirgula(value) {
     let valorFormatado = value.replace('.', ',');
