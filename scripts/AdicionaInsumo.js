@@ -1,9 +1,3 @@
-function ComporValor(){
-    $('#btnComporValor').removeClass('btn-primary')
-    $('#btnComporValor').css('color', 'white')
-    $('#btnComporValor').addClass('btn-warning')
-}
-
 function CriaListagem(dadosInsumo, idPagination, tbodyId) {
    
     const linhasPorPagina = 5;

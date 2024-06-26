@@ -19,7 +19,6 @@ function CriarProduto() {
         ProdutoEmAberto = true;
         CriacaoEtapa1 = false;
     }
-    
 }
 
 function AdicionaInsumo() {
@@ -201,7 +200,6 @@ function ExcluiProdutoCalculado(idProduto) {
     }else{
         CriaListagem(ListaCalculadosStorage.Reverse(), 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
     } 
-
 }
 
 //==================== Modal Produto Calculado ===============================//
@@ -225,9 +223,7 @@ function PreencheModalProdutoCalculado(produtoId){
     $('#modalValorTotalLucro').val(formatarNumeroModal(ProdutoSelecionado.ProdutoCalculado[0].ValorComLucro));
     $('#modalValorSugerido').val(formatarNumeroModal(ProdutoSelecionado.ProdutoCalculado[0].ValorSugerido));
 
-
     CriaListagem(ProdutoSelecionado.ListaInsumos.reverse(), 'paginationModalInsumos', '#tbModalListaInsumos')
-    
 }
 
 function FechaModalProdutoCalculado() {
@@ -273,7 +269,6 @@ function IniciaValidateCriaProdutos(){
         errorPlacement: function(error, element) {
             error.insertAfter(element.parents('.form-group').find('.error-message').last());
         },
-
         rules: {
             inputProdutoNome: {
                 required: true,
@@ -300,7 +295,6 @@ function IniciaValidateAddInsumos(){
         errorPlacement: function(error, element) {
             error.insertAfter(element.parents('.form-group').find('.error-message').last());
         },
-
         rules: {
             inputInsumoNome: {
                 required: true,
@@ -339,8 +333,6 @@ function IniciaValidateAddInsumos(){
              
             }
           },
-
-
        });
 } 
 

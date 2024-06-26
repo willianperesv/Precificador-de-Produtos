@@ -1,14 +1,5 @@
 //=========Métodos Gerais ===============//
 
-function AbreSessao(elementoId, formId, hideForm, tempo) {
-    var Elemento = $("#" + elementoId);
-    setTimeout(function () {
-        Elemento.slideDown();
-        if (hideForm) {
-            $("#" + formId).show();
-        }
-    }, tempo);
-}
 function AbreSessaoComSlide(formId, sessaoId, btnDown, btnUp, tempo) {
     $("#" + formId).slideDown();
 
@@ -51,16 +42,6 @@ function FechaInsumos() {
 
 }
 
-
-function FechaSessao(elementoId, formId, hideForm, tempo) {
-    var Elemento = $("#" + elementoId);
-    setTimeout(function () {
-        Elemento.slideUp();
-        if (hideForm) {
-            $("#" + formId).hide();
-        }
-    }, tempo);
-}
 
 function ToggleHeader(formId, btnDown, btnUp) {
     if ($('#' + btnDown).is(':visible')) {
@@ -166,10 +147,6 @@ function ajusteBotões(ListaInsumosMaiorQue5){
     }
 }
 
-function convertePontoPorVirgula(value) {
-    let valorFormatado = value.replace('.', ',');
-    return valorFormatado;
-}
 
 function formatarNumeroMonetario(num) {
     let [parteInteira, parteDecimal] = num.toString().split('.');
@@ -230,10 +207,6 @@ function verificarEIncrementarString(str, array) {
 
 function LimpaCamposDiv(divId) {
     $('#' + divId + ' :input').val('');
-}
-
-function LimpaCamposAdicionaInsumo() {
-    $('#formAdicionaInsumo :input').val('');
 }
 
 //====================Paginação========================//

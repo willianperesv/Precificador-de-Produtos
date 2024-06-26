@@ -8,7 +8,6 @@ $(document).ready(function () {
 
 });
 
-
 function IniciaEventos() {
     $(function () {
         $(document).on('click', '.btn-remover', RemoverLinha);
@@ -78,8 +77,6 @@ function IniciaEventos() {
         aplicaMascaraTipoMedida(tipoMedida)
         $('#selectInsumoTipoMedida').removeClass('validateBorda');
     });
-
-
 }
 
 
@@ -117,7 +114,6 @@ function IniciaMascaras() {
                 $(this).val(value + '0');
             }
         }
-
     });
 
     //===============Inputs add Insumos==================//
@@ -157,7 +153,6 @@ function IniciaMascaras() {
     });
 }
 
-//==================Paginação================================//
 
 
 
