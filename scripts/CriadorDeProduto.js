@@ -247,11 +247,10 @@ function CarregaTelaCriaProdutos(){
 function CarregaProdutosCalculados(){
     
     let data = localStorage.getItem('userArray')
-    var ListaCalculados = JSON.parse(data)
+    var ListaCalculados = JSON.parse(data) ?? []
     console.log(ListaCalculados)
     if(ListaCalculados.length > 0){
         CriaListagem(ListaCalculados.reverse(), 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
-        //IniciaTooltip();
         AbreSessaoComSlide('collapseProdutosCalculadosLista', 'collapseListaProdutosPrecificados', 'btnCloseHeaderCalculadosDown', 'btnCloseHeaderCalculadosUp', 2000)
         if (ListaCalculados.length > 5) {
             $('#paginationListParodutosCalculados').show();
