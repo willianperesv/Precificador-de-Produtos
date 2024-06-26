@@ -92,14 +92,14 @@ function aplicaMascaraTipoMedida(tipoMedida) {
 
         MascaraUnidadeUnidadeAtiva = true;
 
-        $('.mascaraUnidadeEmbalagem').mask('000.000', {
+        $('.mascaraUnidadeEmbalagem').mask('###.###', {
             translation: {
                 '0': { pattern: /[0-9]/ }
             },
             reverse: true
         });
 
-        $('.mascaraUnidadePorcao').mask('999.999,999', {
+        $('.mascaraUnidadePorcao').mask('###.###,#0', {
     
             reverse: true
         });
@@ -112,8 +112,7 @@ function aplicaMascaraTipoMedida(tipoMedida) {
         $('#inputInsumoPorcao').addClass('mascaraMedidaDecimal');
 
         MascaraUnidadeUnidadeAtiva = false;
-
-        $(".mascaraMedidaDecimal").mask("999,999", { reverse: true });
+        $(".mascaraMedidaDecimal").mask("###.###,#0", { reverse: true });
     }
 }
 

@@ -81,8 +81,10 @@ function IniciaEventos() {
 
 
 function IniciaMascaras() {
-    $('#inputInsumoValor').mask('#.###,00', {reverse: true});
-    //$("#inputInsumoValor").maskMoney()
+    //$('#inputInsumoValor').mask('#.###,00', {reverse: true});
+    $('#inputInsumoValor').mask('###.###,#0', {reverse: true});
+    $('#inputProdutoMargemLucro').mask('###.###,#0', {reverse: true});
+    $('#inputProdutoMargemImposto').mask('###.###,#0', {reverse: true});
 
     //===============Inputs Criação de Produtos==================//
 
