@@ -268,7 +268,7 @@ article{
 .footer {
   background-color: #f8f9fa71; 
   color: #0b0c0c; 
-  border-bottom-style: outset;
+  border-top-style: outset;
   box-shadow:  12px 12px 12px 12px rgb(141, 110, 70), 12px 12px 12px 12px rgb(141, 110, 70), 12px 12px 12px 12px rgb(141, 110, 70);
 }
 
