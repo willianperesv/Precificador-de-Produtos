@@ -1,5 +1,5 @@
 var data = localStorage.getItem('userArray')
-var ListaCalculadosStorage = JSON.parse(data) || [];
+var ListaCalculadosStorage = data ? JSON.parse(data) : [];
 var DadosProduto = { ListaInsumos: [], ProdutoCalculado:[] };
 var ListaProdutosCalculados = ListaCalculadosStorage;
 var ProdutoEmAberto = false;
@@ -137,9 +137,9 @@ function CalcularProduto() {
    if(DadosProduto.ListaInsumos.length >= 1){
     produtoCalculado = ComporValorProduto(DadosProduto);
     DadosProduto.ProdutoCalculado.push(produtoCalculado);
-    ListaProdutosCalculados.push(DadosProduto);
-    localStorage.setItem('userArray', JSON.stringify(ListaProdutosCalculados))
-    CriaListagem(ListaProdutosCalculados.reverse(), 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
+    ListaCalculadosStorage.push(DadosProduto);
+    localStorage.setItem('userArray', JSON.stringify(ListaCalculadosStorage))
+    CriaListagem(ListaCalculadosStorage.reverse(), 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
     Swal.fire({
         title:  DadosProduto.ProdutoNome +'<br> Precificado Com Sucesso!',
         text: 'Você consultar o produto na sessão de Produtos Precificados',
@@ -177,29 +177,29 @@ function CalcularProduto() {
 }
 
 function ExcluiProdutoCalculado(idProduto) {
-    var indice = ListaProdutosCalculados.findIndex(function(objeto) {
+    var indice = ListaCalculadosStorage.findIndex(function(objeto) {
         return objeto.ProdutoId === idProduto;
     });
 
     if (indice !== -1) {
-        ListaProdutosCalculados.splice(indice, 1);
-        localStorage.setItem('userArray', JSON.stringify(ListaProdutosCalculados));
+        ListaCalculadosStorage.splice(indice, 1);
+        localStorage.setItem('userArray', JSON.stringify(ListaCalculadosStorage));
     } else {
         console.log('Objeto com id ' + idProduto + ' não encontrado.');
     }
 
-    if (ListaProdutosCalculados.length > 5) {
+    if (ListaCalculadosStorage.length > 5) {
         $('#paginationListParodutosCalculados').slideDown();
     } else {
         $('#paginationListaProdutosCalculados').hide();
     }
 
-    if (ListaProdutosCalculados.length == 0) {
+    if (ListaCalculadosStorage.length == 0) {
         CarregaProdutosCalculados();
-        localStorage.setItem('userArray', chave, JSON.stringify([]))
+        localStorage.setItem('userArray', JSON.stringify([]))
 
     }else{
-        CriaListagem(ListaProdutosCalculados.Reverse(), 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
+        CriaListagem(ListaCalculadosStorage.Reverse(), 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
     } 
 
 }
@@ -207,10 +207,8 @@ function ExcluiProdutoCalculado(idProduto) {
 //==================== Modal Produto Calculado ===============================//
 
 function PreencheModalProdutoCalculado(produtoId){
-    let data = localStorage.getItem('userArray')
-    var ListaCalculados = JSON.parse(data)
 
-     const ProdutoSelecionado = ListaCalculados.find(item => item.ProdutoId === produtoId);
+     const ProdutoSelecionado = ListaCalculadosStorage.find(item => item.ProdutoId === produtoId);
      
      if(ProdutoSelecionado.ListaInsumos.length > 5){
         $('#paginationModalInsumos').slideDown()
@@ -246,13 +244,10 @@ function CarregaTelaCriaProdutos(){
 
 function CarregaProdutosCalculados(){
     
-    let data = localStorage.getItem('userArray')
-    var ListaCalculados = data ? JSON.parse(data) : []
-    console.log(ListaCalculados)
-    if(ListaCalculados.length > 0){
-        CriaListagem(ListaCalculados.reverse(), 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
+    if(ListaCalculadosStorage.length > 0){
+        CriaListagem(ListaCalculadosStorage.reverse(), 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
         AbreSessaoComSlide('collapseProdutosCalculadosLista', 'collapseListaProdutosPrecificados', 'btnCloseHeaderCalculadosDown', 'btnCloseHeaderCalculadosUp', 2000)
-        if (ListaCalculados.length > 5) {
+        if (ListaCalculadosStorage.length > 5) {
             $('#paginationListParodutosCalculados').show();
         } else {
             $('#paginationListaProdutosCalculados').hide();
@@ -264,9 +259,8 @@ function CarregaProdutosCalculados(){
 }
 
 function FechaCalculados(){
-    let data = localStorage.getItem('userArray')
-    var ListaCalculados = JSON.parse(data)
-    if(ListaCalculados.length > 0 ){
+
+    if(ListaCalculadosStorage.length > 0 ){
         FechaSessaoComSlide('collapseProdutosCalculadosLista', 'collapseListaProdutosPrecificados', 'btnCloseHeaderCalculadosDown', 'btnCloseHeaderCalculadosUp', 500)
     }else{
         AbreFechaSessaoListaVazia(false)
