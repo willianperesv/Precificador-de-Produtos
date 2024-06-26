@@ -81,7 +81,13 @@ function IniciaEventos() {
 
 
 function IniciaMascaras() {
-    $("#inputInsumoValor").maskMoney()
+    $("#inputInsumoValor").maskMoney({
+        allowNegative: true,
+        thousands: '.',
+        decimal: ',',
+        affixesStay: false
+    }).trigger('mask.maskMoney');
+    //$("#inputInsumoValor").maskMoney()
 
     //===============Inputs Criação de Produtos==================//
 
