@@ -5,7 +5,7 @@ $(document).ready(function () {
     IniciaValidateCriaProdutos();
     IniciaEventos();
     CarregaProdutosCalculados();
-    IniciaTooltip()
+
 });
 
 
@@ -82,15 +82,6 @@ function IniciaEventos() {
 
 }
 
- function IniciaTooltip() {
-    $('[data-toggle="tooltip"]').tooltip();
-   
-    $(".buttonVisualizaProduto").tooltip();
-    $(".buttonVisualizaProduto").on("mouseleave", function() {
-        $(this).tooltip("close");
-     });
-
- }
 
 function IniciaMascaras() {
     $("#inputInsumoValor").maskMoney()
