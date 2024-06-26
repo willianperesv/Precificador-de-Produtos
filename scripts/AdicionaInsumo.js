@@ -22,10 +22,10 @@ function CriaListagem(dadosInsumo, idPagination, tbodyId) {
                 let novaLinha = $('<tr>').append(
                     $('<td>').html(data.InsumoNome),
                     $('<td>').html('<span>' + data.InsumoTipoMedidaDescricao + '</span><span class="AjusteValor"> ' + trataExibicaoListaInsumoQuantidades(data.InsumoTipoMedida, data.InsumoQuantidadeEmbalagem) + '</span>'),
-                    $('<td>').html('<span>R$</span><span class="AjusteValor"> ' + formatarNumeroMonetario(data.InsumoValor) + '</span>'),
+                    $('<td>').html('<span>R$</span><span class="AjusteValor"> ' + formatarNumeroMonetario(data.InsumoValor.toFixed(2)) + '</span>'),
                     $('<td>').html('<span>' + data.InsumoTipoMedidaDescricao + '</span><span class="AjusteValor"> ' + trataExibicaoListaInsumoQuantidades(data.InsumoTipoMedida, data.InsumoPorcao) + '</span>'),
                     $('<td>').html('<span>R$</span><span class="AjusteValor"> ' + formatarNumeroMonetario(custoInsumo.toFixed(2)) + '</span>'),
-                    $('<td class="text-center">').html(`<button type="button" class="btn text-center btn-danger btn-remover buttonVisualizaProduto" onclick="ExcluiInsumo('${data.InsumoId}')"><img id="visualizaIcon" src="/styles/trashIcon.png" alt="Excluir Produto"></button>`)
+                    $('<td class="text-center">').html(`<button type="button" class="btn text-center btn-danger btn-remover buttonVisualizaProduto" title="Excluir Insumo" data-toggle="tooltip"  onclick="ExcluiInsumo('${data.InsumoId}')"><img id="visualizaIcon" src="/styles/trashIcon.png" alt="Excluir Produto"></button>`)
                 );
                 novaLinha.appendTo(tbodyId);
 
@@ -34,8 +34,8 @@ function CriaListagem(dadosInsumo, idPagination, tbodyId) {
                     $('<td>').html(data.ProdutoNome),
                     $('<td>').html('<span class="AjusteMoeda">R$</span><span class="AjusteValor ">' + formatarNumeroMonetario(data.ProdutoCalculado[0].CustoBruto.toFixed(2)) + '</span>'),
                     $('<td>').html('<span class="AjusteMoeda">R$</span><span class="AjusteValor ">' + formatarNumeroMonetario(data.ProdutoCalculado[0].ValorSugerido.toFixed(2)) + '</span>'),
-                    $('<td class="text-center">').html(`<button type="button" class="btn btn-primary buttonVisualizaProduto" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" onclick="PreencheModalProdutoCalculado('${data.ProdutoId}')"><img id="visualizaIcon" src="/styles/eyeIcon.png" alt="Visualizar Detalhes do Produto"></button>`), 
-                    $('<td class="text-center">').html(`<button type="button" class="btn text-center btn-danger btn-remover buttonVisualizaProduto" onclick="ExcluiProdutoCalculado('${data.ProdutoId}')"><img id="visualizaIcon" src="/styles/trashIcon.png" alt="Excluir Produto"></button>`)
+                    $('<td class="text-center">').html(`<button type="button" class="btn btn-primary buttonVisualizaProduto" title="Visualizar Produto" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" onclick="PreencheModalProdutoCalculado('${data.ProdutoId}')"><img id="visualizaIcon" src="/styles/eyeIcon.png" alt="Visualizar Detalhes do Produto"></button>`), 
+                    $('<td class="text-center">').html(`<button type="button" class="btn text-center btn-danger btn-remover buttonVisualizaProduto" title="Excluir Produto" data-toggle="tooltip" onclick="ExcluiProdutoCalculado('${data.ProdutoId}')"><img id="visualizaIcon" src="/styles/trashIcon.png" alt="Excluir Produto"></button>`)
                 );
                 novaLinha.appendTo(tbodyId);
             }else{

@@ -4,12 +4,48 @@ $(document).ready(function () {
     IniciaMascaras();
     IniciaValidateCriaProdutos();
     IniciaEventos();
+    CarregaProdutosCalculados();
+    IniciaTooltip()
 });
 
 
 function IniciaEventos() {
     $(function () {
         $(document).on('click', '.btn-remover', RemoverLinha);
+
+    });
+
+    $('#toggle-h3').on('click', function () {
+        if ($('#btnIniciarCriacaoProduto').hasClass('active')) {
+            if (CriacaoEtapa1) {
+                FechaSessaoComSlide('CriadorDeProdutos', 'collapseCriadorDeProdutos', 'btnCloseCriadorDeProdutosDown', 'btnCloseCriadorDeProdutosUp', 500);
+            } else {
+                FechaInsumos();
+            }
+            CarregaProdutosCalculados();
+        }
+        $(this).removeClass('inactive');
+        $(this).addClass('active');
+        $('#btnIniciarCriacaoProduto').removeClass('active');
+        $('#btnIniciarCriacaoProduto').addClass('inactive');
+    });
+
+    $('#btnIniciarCriacaoProduto').on('click', function () {
+        if ($(this).hasClass('inactive')) {
+            if (CriacaoEtapa1) {
+                AbreSessaoComSlide('CriadorDeProdutos', 'collapseCriadorDeProdutos', 'btnCloseCriadorDeProdutosDown', 'btnCloseCriadorDeProdutosUp', 500)
+            } else {
+                AbreSessaoComSlide('collapseAddInsumos', 'collapseInsumosAddCampos', 'btnCloseHeaderAddInsumosDown', 'btnCloseHeaderAddInsumosUp', 500);
+                if (DadosProduto.ListaInsumos.length > 0) {
+                    ToggleHeader('collapseInsumosLista', 'btnCloseHeaderInsumoListaDown', 'btnCloseHeaderInsumoListaUp');
+                }
+            }
+            FechaCalculados();
+        }
+        $(this).removeClass('inactive');
+        $(this).addClass('active');
+        $('#toggle-h3').removeClass('active');
+        $('#toggle-h3').addClass('inactive');
     });
 
     $('#inputInsumoValor').change(function () {
@@ -46,9 +82,17 @@ function IniciaEventos() {
 
 }
 
+ function IniciaTooltip() {
+    $('[data-toggle="tooltip"]').tooltip();
+   
+    $(".buttonVisualizaProduto").tooltip();
+    $(".buttonVisualizaProduto").on("mouseleave", function() {
+        $(this).tooltip("close");
+     });
+
+ }
+
 function IniciaMascaras() {
-
-
     $("#inputInsumoValor").maskMoney()
 
     //===============Inputs Criação de Produtos==================//

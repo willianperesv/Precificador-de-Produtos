@@ -20,17 +20,6 @@ function ComporValorProduto(dadosProduto) {
     return ProdutoCalculado
 }
 
-function MontaTabelaProdutosCalculados(custoCalculado, nomeProduto, produtoId) {
-    let novaLinha = $('<tr>').append(
-        $('<td>').html(nomeProduto),
-        $('<td>').html('<span class="AjusteMoeda">R$</span><span class="AjusteValor ">' + formatarNumeroMonetario(custoCalculado.CustoBruto.toFixed(2)) + '</span>'),
-        $('<td>').html('<span class="AjusteMoeda">R$</span><span class="AjusteValor ">' + formatarNumeroMonetario(custoCalculado.ValorSugerido.toFixed(2)) + '</span>'),
-        $('<td class="text-center">').html(`<button type="button" class="btn btn-primary buttonVisualizaProduto" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" onclick="PreencheModalProdutoCalculado('${produtoId}')"><img id="visualizaIcon" src="/styles/eyeIcon.png" alt="Visualizar Detalhes do Produto"></button>`), 
-        $('<td class="text-center btn-remover">').html('<i  &#xF877 class="fas fa-trash-alt" style="cursor: pointer;"></i>')
-    );
-
-    novaLinha.appendTo('#tbListaProdutosCalculados');
-}
 
 function CalculaCustoBruto(insumoPorcao, insumoQuantidadeEmbalagem, insumoValor){
     var porcaoPorProducao = parseFloat(insumoPorcao) / parseFloat(insumoQuantidadeEmbalagem);

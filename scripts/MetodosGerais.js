@@ -10,7 +10,8 @@ function AbreSessao(elementoId, formId, hideForm, tempo) {
     }, tempo);
 }
 function AbreSessaoComSlide(formId, sessaoId, btnDown, btnUp, tempo) {
-    $("#" + formId).show();
+    $("#" + formId).slideDown();
+
     setTimeout(function () {
         ToggleHeader(sessaoId, btnDown, btnUp)
     }, tempo);
@@ -18,8 +19,21 @@ function AbreSessaoComSlide(formId, sessaoId, btnDown, btnUp, tempo) {
 function FechaSessaoComSlide(formId, sessaoId, btnDown, btnUp, tempo) {
     ToggleHeader(sessaoId, btnDown, btnUp)
     setTimeout(function () {
-        $("#" + formId).hide();
+        $("#" + formId).slideUp();
     }, tempo);
+}
+
+function AbreFechaSessaoListaVazia(abreSessao) {
+    if (abreSessao) {
+        $('#divListaVaziaProdutosCalculados').removeClass('display-none-important');
+        $('#divListaVaziaProdutosCalculados').slideDown();
+       
+    } else {
+        setTimeout(function () {
+            $('#divListaVaziaProdutosCalculados').addClass('display-none-important');
+        }, 400);
+        $('#divListaVaziaProdutosCalculados').slideUp();
+    }
 }
 
 function FechaInsumos() {

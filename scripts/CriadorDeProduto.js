@@ -1,34 +1,39 @@
+var data = localStorage.getItem('userArray')
+var ListaCalculadosStorage = JSON.parse(data)
 var DadosProduto = { ListaInsumos: [], ProdutoCalculado:[] };
-var ListaProdutosCalculados = [];
+var ListaProdutosCalculados = ListaCalculadosStorage;
 var ProdutoEmAberto = false;
+var CriacaoEtapa1 = true;
 
 function CriarProduto() {
+    
     var validCriadorDeProdutos = $("#collapseCriadorDeProdutos").valid();
 
     if (validCriadorDeProdutos) {
         IniciaValidateAddInsumos();
         MontaProduto();
         LimpaCamposDiv('collapseCriadorDeProdutos');
-        $('#headerInsumosNomeProduto').html(DadosProduto.ProdutoNome);
-        FechaSessaoComSlide('CriadorDeProdutos', 'collapseCriadorDeProdutos', 'btnCloseCriadorDeProdutosDown', 'btnCloseCriadorDeProdutosUp', 1000)
-        AbreSessaoComSlide('collapseAddInsumos', 'collapseInsumosAddCampos', 'btnCloseHeaderAddInsumosDown', 'btnCloseHeaderAddInsumosUp', 2000)
+        $('#headerInsumosNomeProduto').html('Adicione Insumos a "'+ DadosProduto.ProdutoNome+'"');
+        FechaSessaoComSlide('CriadorDeProdutos', 'collapseCriadorDeProdutos', 'btnCloseCriadorDeProdutosDown', 'btnCloseCriadorDeProdutosUp', 500)
+        AbreSessaoComSlide('collapseAddInsumos', 'collapseInsumosAddCampos', 'btnCloseHeaderAddInsumosDown', 'btnCloseHeaderAddInsumosUp', 500)
         ProdutoEmAberto = true;
-
+        CriacaoEtapa1 = false;
     }
+    
 }
 
 function AdicionaInsumo() {
     var validAddInsumos = $("#collapseInsumosAddCampos").valid();
     if (validAddInsumos) {
-        
         MontaInsumos();
-
         CriaListagem(DadosProduto.ListaInsumos.reverse(), 'paginationListaInsumo', '#tbListaInsumos');
         ajusteBotões(DadosProduto.ListaInsumos.length > 5)
         if(DadosProduto.ListaInsumos.length == 1){
             ToggleHeader('collapseInsumosLista', 'btnCloseHeaderInsumoListaDown', 'btnCloseHeaderInsumoListaUp')
+
         }
         LimpaCamposDiv('collapseInsumosAddCampos');
+        $('#selectInsumoTipoMedida').removeClass('remove-borda');
 
     }else{
         $('#selectInsumoTipoMedida').addClass('validateBorda');
@@ -71,6 +76,13 @@ function ExcluiInsumo(insumoId){
     CriaListagem(DadosProduto.ListaInsumos.reverse(), 'paginationListaInsumo', '#tbListaInsumos');
 }
 
+function VoltarInsumos(){
+    FechaInsumos();
+    CarregaTelaCriaProdutos();
+    AbreSessaoComSlide('CriadorDeProdutos', 'collapseCriadorDeProdutos', 'btnCloseCriadorDeProdutosDown', 'btnCloseCriadorDeProdutosUp', 500)
+    CriacaoEtapa1 = true;
+}
+
 function ExcluiListaInsumos(){
     DadosProduto.ListaInsumos = []
     $("#tableListaInsumos tbody").empty();
@@ -109,13 +121,14 @@ function CancelaProduto(){
           
           )
           FechaInsumos();
-          AbreSessao('collapseCriadorDeProdutos','CriadorDeProdutos', true, 1500);
+          AbreSessaoComSlide('CriadorDeProdutos', 'collapseCriadorDeProdutos', 'btnCloseCriadorDeProdutosDown', 'btnCloseCriadorDeProdutosUp', 500)
           DadosProduto = []
           LimpaCamposDiv('collapseInsumosAddCampos');
           $("#tableListaInsumos tbody").empty();
           $("#collapseInsumosAddCampos").validate().resetForm();
           $('#selectInsumoTipoMedida').removeClass('validateBorda');
           ProdutoEmAberto = false;
+          CriacaoEtapa1 = true;
         }
       })
 }
@@ -125,23 +138,33 @@ function CalcularProduto() {
     produtoCalculado = ComporValorProduto(DadosProduto);
     DadosProduto.ProdutoCalculado.push(produtoCalculado);
     ListaProdutosCalculados.push(DadosProduto);
+    localStorage.setItem('userArray', JSON.stringify(ListaProdutosCalculados))
     CriaListagem(ListaProdutosCalculados.reverse(), 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
-    if(ListaProdutosCalculados.length > 5){
-        $('#paginationListaProdutosCalculados').slideDown()
-    }else{
-        $('#paginationListaProdutosCalculados').hide()
-    }
+    Swal.fire({
+        title:  DadosProduto.ProdutoNome +'<br> Precificado Com Sucesso!',
+        text: 'Você consultar o produto na sessão de Produtos Precificados',
+        icon: 'success',
+        confirmButtonText: 'OK',
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+        }
+    });
 
     DadosProduto = [];
     $("#tableListaInsumos tbody").empty();
     $('#TituloCriadorDeProdutos').html('Criar Novo Produto');
     FechaInsumos();
-
+    CarregaProdutosCalculados();
+    $('#toggle-h3').removeClass('inactive')
+    $('#toggle-h3').addClass('active')
+    $('#btnIniciarCriacaoProduto').removeClass('active');
+    $('#btnIniciarCriacaoProduto').addClass('inactive');
     ProdutoEmAberto = false;
-
-    AbreSessao('collapseListaProdutosPrecificados','collapseProdutosCalculadosLista', true, 1000);
-    AbreSessao('collapseCriadorDeProdutos','CriadorDeProdutos', true, 1500);
-
+    CriacaoEtapa1 = true;
+    
    }else{
     Swal.fire({
         title: `Ops!`,
@@ -153,38 +176,41 @@ function CalcularProduto() {
    }
 }
 
-function ExcluiProdutoCalculado(idProduto){
-        var indice = ListaProdutosCalculados.findIndex(function(objeto) {
-            return objeto.ProdutoId === idProduto;
-        });
+function ExcluiProdutoCalculado(idProduto) {
+    var indice = ListaProdutosCalculados.findIndex(function(objeto) {
+        return objeto.ProdutoId === idProduto;
+    });
 
-        if (indice !== -1) {
-            ListaProdutosCalculados.splice(indice, 1);
-        } else {
-            console.log('Objeto com id ' + idProduto + ' não encontrado.');
-        }
-         
-        if(ListaProdutosCalculados.length == 0){
-            FechaSessaoComSlide('collapseListaProdutosPrecificados', 'collapseProdutosCalculadosLista', 'btnCloseHeaderCalculadosDown', 'btnCloseHeaderCalculadosDown', 1000)
-            if(!ProdutoEmAberto){
-                AbreSessao('collapseCriadorDeProdutos','CriadorDeProdutos', true, 2000);
-            }
-        }
+    if (indice !== -1) {
+        ListaProdutosCalculados.splice(indice, 1);
+        localStorage.setItem('userArray', JSON.stringify(ListaProdutosCalculados));
+    } else {
+        console.log('Objeto com id ' + idProduto + ' não encontrado.');
+    }
 
-        if(ListaProdutosCalculados.length > 5){
-            $('#paginationListParodutosCalculados').slideDown()
-        }else{
+    if (ListaProdutosCalculados.length > 5) {
+        $('#paginationListParodutosCalculados').slideDown();
+    } else {
+        $('#paginationListaProdutosCalculados').hide();
+    }
 
-            $('#paginationListaProdutosCalculados').hide()
-        }
+    if (ListaProdutosCalculados.length == 0) {
+        CarregaProdutosCalculados();
+        localStorage.setItem('userArray', chave, JSON.stringify([]))
 
-        CriaListagem(ListaProdutosCalculados, 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
-        
+    }else{
+        CriaListagem(ListaProdutosCalculados.Reverse(), 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
+    } 
+
 }
+
 //==================== Modal Produto Calculado ===============================//
 
 function PreencheModalProdutoCalculado(produtoId){
-     const ProdutoSelecionado = ListaProdutosCalculados.find(item => item.ProdutoId === produtoId);
+    let data = localStorage.getItem('userArray')
+    var ListaCalculados = JSON.parse(data)
+
+     const ProdutoSelecionado = ListaCalculados.find(item => item.ProdutoId === produtoId);
      
      if(ProdutoSelecionado.ListaInsumos.length > 5){
         $('#paginationModalInsumos').slideDown()
@@ -202,7 +228,7 @@ function PreencheModalProdutoCalculado(produtoId){
     $('#modalValorSugerido').val(formatarNumeroModal(ProdutoSelecionado.ProdutoCalculado[0].ValorSugerido));
 
 
-    CriaListagem(ProdutoSelecionado.ListaInsumos, 'paginationModalInsumos', '#tbModalListaInsumos')
+    CriaListagem(ProdutoSelecionado.ListaInsumos.reverse(), 'paginationModalInsumos', '#tbModalListaInsumos')
     
 }
 
@@ -211,6 +237,42 @@ function FechaModalProdutoCalculado() {
     $("#tableModalListaInsumos tbody").empty();
 }
 
+function CarregaTelaCriaProdutos(){
+    $('#inputProdutoNome').val(DadosProduto.ProdutoNome)
+    $('#inputProdutoMargemImposto').val(DadosProduto.ProdutoMargemImposto ? formatarNumeroDecimal(DadosProduto.ProdutoMargemImposto) : '')
+    $('#inputProdutoMargemLucro').val(formatarNumeroDecimal(DadosProduto.ProdutoMargemLucro))
+    ProdutoEmAberto = true;
+}
+
+function CarregaProdutosCalculados(){
+    
+    let data = localStorage.getItem('userArray')
+    var ListaCalculados = JSON.parse(data)
+    console.log(ListaCalculados)
+    if(ListaCalculados.length > 0){
+        CriaListagem(ListaCalculados.reverse(), 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
+        //IniciaTooltip();
+        AbreSessaoComSlide('collapseProdutosCalculadosLista', 'collapseListaProdutosPrecificados', 'btnCloseHeaderCalculadosDown', 'btnCloseHeaderCalculadosUp', 2000)
+        if (ListaCalculados.length > 5) {
+            $('#paginationListParodutosCalculados').show();
+        } else {
+            $('#paginationListaProdutosCalculados').hide();
+        }
+    }else{
+        FechaSessaoComSlide('collapseProdutosCalculadosLista', 'collapseListaProdutosPrecificados', 'btnCloseHeaderCalculadosDown', 'btnCloseHeaderCalculadosUp', 500)
+        AbreFechaSessaoListaVazia(true)
+    }
+}
+
+function FechaCalculados(){
+    let data = localStorage.getItem('userArray')
+    var ListaCalculados = JSON.parse(data)
+    if(ListaCalculados.length > 0 ){
+        FechaSessaoComSlide('collapseProdutosCalculadosLista', 'collapseListaProdutosPrecificados', 'btnCloseHeaderCalculadosDown', 'btnCloseHeaderCalculadosUp', 500)
+    }else{
+        AbreFechaSessaoListaVazia(false)
+    }
+}
 //==========================Métodos Validate =================================//
 
 function IniciaValidateCriaProdutos(){

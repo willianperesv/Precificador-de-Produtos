@@ -7,15 +7,15 @@ html {
   height: 100%;
 }
 
-
 body {
-  /* background-image: url('../styles/background.jpg'); */
-  background-color: #0b0c0c;
+  background-color: #262f38e3;
   background-repeat:repeat;
   background-size: cover;
   background-position: center;
   max-height: 100%;
-  font-family: Arial, sans-serif;
+  font-family: "Exo 2", sans-serif !important; 
+  color:rgba(82, 78, 72, 0.822);
+  font-weight:600;
   display: flex;
   align-items: center; 
   flex-direction: column;
@@ -23,24 +23,103 @@ body {
 
 header {
   margin: auto;
-  color: rgb(197, 190, 190);
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: rgb(231, 205, 170);
+  font-weight: 900;
   text-align: start;
-  background-color: rgba(32, 79, 117, 0.158);
+  background-color: rgba(12, 11, 11, 0.452);
   padding:1rem;
-  width:100%
+  width:100%;
+  border-bottom-style: outset;
+  box-shadow:  8px 8px 8px 8px rgb(141, 110, 70);
 }
 
 header h1{
   width: 65rem;
   margin:auto;
   max-width: 93%;
+  text-shadow: 2px 1px 2px rgba(194, 189, 189, 0.89), 
+               2px 1px 2px rgb(236, 208, 208), 
+              2px 1px 2px rgba(209, 202, 202, 0.897),
+              2px 1px 2px rgb(216, 175, 63);
+}
+
+h4{
+  font-family: "Exo 2", sans-serif;
+  font-weight: 700;
+  color:rgba(141, 110, 70, 0.822);
+
+}
+
+h3{
+  font-family: "Exo 2", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  color:#fff
+}
+
+h3.inactive {
+ 
+}
+
+h3.active {
+  text-shadow: 2px 2px 2px rgb(187, 144, 25), -2px -2px 2px rgb(156, 123, 30), 2px -2px 2px rgb(151, 119, 30), -2px 2px 2px rgb(153, 120, 30);
+}
+
+h3.inactive:hover {
+  text-shadow: 2px 2px 2px rgb(187, 144, 25), -2px -2px 2px rgb(156, 123, 30), 2px -2px 2px rgb(151, 119, 30), -2px 2px 2px rgb(153, 120, 30);
+  
+}
+
+h3.active:hover {
+  text-shadow: 2px 2px 2px rgb(184, 33, 33), -2px -2px 2px rgb(184, 33, 33), 2px -2px 2px rgb(184, 33, 33), -2px 2px 2px rgb(184, 33, 33);
+  cursor:not-allowed;
+}
+
+h4.active:hover {
+  color: black;
+}
+
+#btnIniciarCriacaoProduto{
+  color: rgb(233, 231, 228);
+}
+
+#btnIniciarCriacaoProduto.inactive {
+  
+  background-color: rgba(16, 137, 236, 0.966);
+}
+
+#btnIniciarCriacaoProduto.active {
+  background-color: rgb(173, 41, 41);
+  border:none;
+}
+
+#btnIniciarCriacaoProduto.inactive:hover {
+  background-color: rgba(54, 161, 248, 0.966);
+  border: 1px solid white;
+}
+#btnIniciarCriacaoProduto.active:hover {
+  background-color: rgb(248, 80, 80);
+  border: 1px solid white;
+  cursor:not-allowed;
+}
+
+
+
+
+#headerInsumosNomeProduto{
+  overflow:auto;
+}
+
+#divHeaderInsumos{
+  width: 92.8%;;
+  overflow-wrap: break-word;
 }
 
 main{
   display:flex;
   justify-content: center;
   align-items: center;
+  margin-top: 2rem;
   width: 70rem;
   max-width: 90%;
   padding-top:1rem;
@@ -48,8 +127,8 @@ main{
 }
 
 article{
-  background-color: rgba(255, 255, 255, 0.856);
-  padding:0rem 1.1rem;
+  background-color: rgba(141, 110, 70, 0.836);
+  padding:0.5rem 1.5rem;
   border-radius: 10px; 
   display:flex;
   justify-content: baseline;
@@ -60,6 +139,7 @@ article{
   max-height: 42rem; 
   overflow-x: auto;
   overflow-y: auto;
+  box-shadow:  10px 12px 11px rgba(13, 14, 20, 1.5);
 }
 
 .container-criador-de-produto{
@@ -70,7 +150,8 @@ article{
   padding:1rem;
   margin:1rem 0rem;
   border-radius: 10px; 
-  background-color: rgba(147, 149, 150, 0.164); 
+  background-color: rgba(236, 240, 241, 0.747); 
+  box-shadow:  8px 8px 8px  rgba(13, 14, 20, 1.5);
 
 }
 
@@ -82,15 +163,32 @@ article{
   max-height: 2.2rem;
 }
 
+#btnCalcularProduto{
+  min-width: 10rem;
+}
+#btnVoltarTelaInicial{
+  font-weight: 500;
+  color:rgb(255, 251, 251);
+  font-family: "Exo 2", sans-serif !important; 
+  background-color: rgb(58, 57, 57);
+
+} 
+#btnVoltarTelaInicial:hover{
+  color:rgb(238, 228, 228);
+  
+  background-color: rgb(31, 30, 29);
+}
+
+#btnIniciarCriacaoProduto{
+  height: 4rem;
+  font-weight: 900;
+  cursor: pointer;
+}
 .header-listaInsumos{
   width: 61rem;
   display:flex;
   justify-content: space-between;
   align-items: center;
-}
-
-#h4TextoAddInsumos{
-   display:flex;
 }
 
 .header-listaInsumos button{
@@ -130,6 +228,7 @@ article{
   max-width: -webkit-fill-available;
 }
 
+
 .divInsumosLista{
   overflow-x: auto;
   max-width: 97.2%;
@@ -143,7 +242,7 @@ article{
 }
 
 .ajuste-table-adicionados{
-  width: 100%;
+  width: 56.9rem;
 } 
 
 .ajuste-table-calculados{
@@ -168,6 +267,8 @@ article{
 .footer {
   background-color: #f8f9fa71; 
   color: #0b0c0c; 
+  border-bottom-style: outset;
+  box-shadow:  12px 12px 12px 12px rgb(141, 110, 70), 12px 12px 12px 12px rgb(141, 110, 70), 12px 12px 12px 12px rgb(141, 110, 70);
 }
 
 .AjusteValor{
@@ -191,6 +292,33 @@ article{
   justify-content: end;
 
 
+}
+
+.tooltip {
+  z-index: 10000; /* Certifique-se de que o z-index esteja correto */
+}
+
+#tableListaInsumos thead tr th{
+  color:rgba(61, 58, 54, 0.884);
+}
+
+#tableListaInsumos tbody tr td{
+  color:rgba(82, 78, 72, 0.822);
+}
+
+#tabListaValoresProduto thead tr th{
+  color:rgba(61, 58, 54, 0.884);
+}
+
+#tabListaValoresProduto tbody tr td{
+  color:rgba(82, 78, 72, 0.822);
+}
+#tableModalListaInsumos thead tr th{
+  color:rgba(61, 58, 54, 0.884);
+}
+
+#tableModalListaInsumos tbody tr td{
+  color:rgba(82, 78, 72, 0.822);
 }
 table tr:last-child td:last-child {
   border-bottom: none; 
@@ -248,15 +376,15 @@ table tr:last-child td:first-child {
 
 
 label.error {
-  color: red;
+  color: rgba(230, 92, 92, 0.849);
 }
 input.error {
-  border: 1px solid red;
+  border: 1px solid rgba(230, 92, 92, 0.849);
   border-top-right-radius:8px !important;
   border-bottom-right-radius:8px !important;
 }
 .error-message {
-  color: red;
+  color: rgba(230, 92, 92, 0.849);
   margin-top: 5px;
 }
 
@@ -317,7 +445,18 @@ input[type="number"]::-webkit-inner-spin-button {
   overflow-x: auto;
 }
 #tableModalListaInsumos{
-  width: 51.9rem;
+  width: 50.9rem;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(12, 11, 11, 0.452);;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
 }
 
 
