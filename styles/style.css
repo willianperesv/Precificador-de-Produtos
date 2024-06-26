@@ -124,6 +124,7 @@ main{
   max-width: 90%;
   padding-top:1rem;
   padding-bottom:1rem;
+  z-index: 999;
 }
 
 article{
@@ -449,6 +450,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .footer {
+  z-index: 1;
   position: fixed;
   bottom: 0;
   left: 0;
