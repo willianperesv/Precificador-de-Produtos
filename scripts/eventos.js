@@ -81,16 +81,26 @@ function IniciaEventos() {
 
 
 function IniciaMascaras() {
-    $("#inputInsumoValor").maskMoney({
-        allowNegative: true,
-        thousands: '.',
-        decimal: ',',
-        affixesStay: false
-    }).trigger('mask.maskMoney');
+    $('#inputInsumoValor').mask('#.###,00', {reverse: true});
     //$("#inputInsumoValor").maskMoney()
 
     //===============Inputs Criação de Produtos==================//
 
+    $("#inputInsumoValor").on("blur", function () {
+        var value = $(this).val();
+        if (value && !value.includes(',')) {
+            $(this).val(value + ',00');
+        }
+        if (value && value.includes(',')) {
+            if (value.split(',')[1].length === 0) {
+                $(this).val(value + '00');
+            }
+            if (value.split(',')[1].length === 1) {
+                $(this).val(value + '0');
+            }
+        }
+
+    });
     $("#inputProdutoMargemLucro").on("blur", function () {
         var value = $(this).val();
         if (value && !value.includes(',')) {
