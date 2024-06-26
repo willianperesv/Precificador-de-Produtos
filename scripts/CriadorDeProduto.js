@@ -247,7 +247,7 @@ function CarregaTelaCriaProdutos(){
 function CarregaProdutosCalculados(){
     
     let data = localStorage.getItem('userArray')
-    var ListaCalculados = JSON.parse(data) ?? []
+    var ListaCalculados = data ? JSON.parse(data) : []
     console.log(ListaCalculados)
     if(ListaCalculados.length > 0){
         CriaListagem(ListaCalculados.reverse(), 'paginationListaProdutosCalculados', '#tbListaProdutosCalculados');
