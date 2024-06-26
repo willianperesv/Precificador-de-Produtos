@@ -1,5 +1,5 @@
 var data = localStorage.getItem('userArray')
-var ListaCalculadosStorage = JSON.parse(data)
+var ListaCalculadosStorage = JSON.parse(data) || [];
 var DadosProduto = { ListaInsumos: [], ProdutoCalculado:[] };
 var ListaProdutosCalculados = ListaCalculadosStorage;
 var ProdutoEmAberto = false;
